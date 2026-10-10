@@ -1,0 +1,29 @@
+Kaleidoscope Grilling – Server-Resourcepack (Addon zu Kaleidoscope Cookery)
+==========================================================================
+
+Dieses Resourcepack ist nicht-kommerziell. Es enthält veränderte Assets aus dem Minecraft-Mod Kaleidoscope Grilling.
+This resource pack is non-commercial. It contains modified assets from the Minecraft mod Kaleidoscope Grilling.
+
+Kaleidoscope Grilling (森罗物语：烟火)
+  Copyright (c) 2026, breezeth
+  https://github.com/breezeth-CN/KaleidoscopeGrilling (Ordner common/ und neoforge-1.21.1/)
+  Lizenz der Assets: CC BY-NC-SA 4.0 – siehe LICENSE-ASSETS.txt
+
+  Enthält nach dessen Lizenz angepasste Assets aus Kaleidoscope Cookery,
+  Copyright (c) 2025, Kaleidoscope Official Production Team (CC BY-NC-SA 4.0).
+
+Lizenztext: https://creativecommons.org/licenses/by-nc-sa/4.0/
+
+Änderungen / Changes
+--------------------
+* Modelle auf das Format von Minecraft 26.3 konvertiert: NeoForge-Felder (render_type, loader) entfernt,
+  "neoforge:separate_transforms" als Item-Model-Definition mit select auf display_context aufgelöst,
+  Item-Overrides in range_dispatch-Definitionen auf custom_model_data umgewandelt.
+* Item-Model-Definitionen (assets/<namespace>/items/) für alle Modelle ergänzt.
+* Atlas-Einträge für zusätzliche Textur-Ordner ergänzt.
+* Deutsche Übersetzungen und zusätzliche Texte für das Server-Plugin ergänzt.
+* Bilder der Items für das Kochbuch aus den Modellen gerendert.
+
+Das Pack wird unter derselben Lizenz (CC BY-NC-SA 4.0) weitergegeben.
+Die Urheber des Mods unterstützen oder empfehlen dieses Projekt nicht.
+No endorsement by the original authors is implied.

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>de.emrion</groupId>
+    <artifactId>KaleidoscopeGrilling</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <name>KaleidoscopeGrilling</name>
+    <description>Grill, Spieße, Gewürze und Öle nach Kaleidoscope Grilling – Addon für KaleidoscopeCookery mit eigenem Resourcepack</description>
+
+    <properties>
+        <java.version>25</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <!-- Repo KaleidoscopeCookery: liefert die Pack-Werkzeuge (tools/) und das Basis-Pack für die Prüfung.
+             Vorher dort "mvn install" ausführen, damit die Core-API im lokalen Maven-Repo liegt. -->
+        <cookery.dir>${project.basedir}/../KaleidoscopeCookery</cookery.dir>
+        <pack.output>${project.build.directory}/generated-resources/pack</pack.output>
+    </properties>
+
+    <build>
+        <defaultGoal>clean package</defaultGoal>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <configuration>
+                    <source>${java.version}</source>
+                    <target>${java.version}</target>
+                </configuration>
+            </plugin>
+            <!-- Eigenes Resourcepack (nur Grilling-Assets) prüfen und zippen; landet im Jar -->
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <executions>
+                    <execution>
+                        <id>build-resourcepack</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>exec</goal>
+                        </goals>
+                        <configuration>
+                            <executable>python3</executable>
+                            <arguments>
+                                <argument>-I</argument>
+                                <argument>${cookery.dir}/tools/build_pack.py</argument>
+                                <argument>--root</argument>
+                                <argument>${project.basedir}</argument>
+                                <argument>--base</argument>
+                                <argument>${cookery.dir}</argument>
+                                <argument>--zip-name</argument>
+                                <argument>KaleidoscopeGrilling-Pack.zip</argument>
+                                <argument>--icon-font</argument>
+                                <argument>kaleidoscope_grilling:icons</argument>
+                                <argument>--out</argument>
+                                <argument>${pack.output}</argument>
+                            </arguments>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+                <includes>
+                    <include>paper-plugin.yml</include>
+                </includes>
+            </resource>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>false</filtering>
+                <excludes>
+                    <exclude>paper-plugin.yml</exclude>
+                </excludes>
+            </resource>
+            <resource>
+                <directory>${pack.output}</directory>
+                <filtering>false</filtering>
+            </resource>
+            <resource>
+                <directory>licenses</directory>
+                <targetPath>licenses</targetPath>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
+    </build>
+
+    <repositories>
+        <repository>
+            <id>papermc-repo</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>brokkonaut</id>
+            <url>https://www.iani.de/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
+
+    <dependencies>
+        <dependency>
+            <groupId>de.emrion</groupId>
+            <artifactId>KaleidoscopeCookery</artifactId>
+            <version>1.0-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.papermc.paper</groupId>
+            <artifactId>paper-api</artifactId>
+            <version>26.3.build.166-beta</version>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>de.iani.cubeside</groupId>
+            <artifactId>CubesideUtilsBukkit</artifactId>
+            <version>1.16-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+</project>

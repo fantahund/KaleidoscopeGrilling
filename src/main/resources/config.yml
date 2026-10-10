@@ -1,0 +1,6 @@
+# KaleidoscopeGrilling – Einstellungen
+
+resource-pack:
+  # Externe Download-URL des Grilling-Packs (KaleidoscopeGrilling-Pack.zip aus plugins/KaleidoscopeGrilling).
+  # Leer = der eingebaute Webserver von KaleidoscopeCookery liefert es aus (Einstellungen dort).
+  external-url: ""
