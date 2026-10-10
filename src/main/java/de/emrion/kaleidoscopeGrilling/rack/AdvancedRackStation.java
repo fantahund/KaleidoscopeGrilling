@@ -34,9 +34,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Erweitertes Küchenregal (AdvancedRackBlock/-BlockEntity): 9 Fächer – 5 für Gewürzflaschen und Ölkannen, 4 Haken
- * für Werkzeuge (Küchenmesser, Pfannenwender, Feuerzeug). Rechtsklick öffnet das Regal als Kisten-Menü. Die
- * Tastenkürzel des Mods (Fach in die Hand tauschen) brauchen Client-Code und fehlen. Abgebaut behält es den Inhalt.
+ * Advanced kitchen rack (AdvancedRackBlock/-BlockEntity): 9 slots - 5 for seasoning bottles and oil pots, 4 hooks
+ * for tools (kitchen knife, spatula, flint and steel). Right-click opens the rack as a chest menu. The
+ * mod's hotkeys (swap a slot into the hand) need client code and are missing. When broken it keeps its contents.
  */
 public class AdvancedRackStation extends Station implements PlacedFromItem, InventoryHolder {
 
@@ -60,7 +60,7 @@ public class AdvancedRackStation extends Station implements PlacedFromItem, Inve
         return new StationType("advanced_rack", ITEM, false, 1f, 1f, false, AdvancedRackStation::new);
     }
 
-    /** AdvancedRackCompatApi#canPlace: Fächer 0–4 Gewürze/Ölkanne, 5–8 Werkzeuge */
+    /** AdvancedRackCompatApi#canPlace: slots 0-4 seasonings/oil pot, 5-8 tools */
     public static boolean canPlace(int slot, @Nullable ItemStack stack) {
         if (stack == null || stack.isEmpty()) {
             return true;
@@ -125,7 +125,7 @@ public class AdvancedRackStation extends Station implements PlacedFromItem, Inve
 
     @Override
     public List<ItemStack> contents() {
-        return List.of(); // bleibt im Regal-Item
+        return List.of(); // stays in the rack item
     }
 
     @Override
@@ -137,7 +137,7 @@ public class AdvancedRackStation extends Station implements PlacedFromItem, Inve
         }
     }
 
-    // ---- Menü ----
+    // ---- Menu ----
 
     @Override
     public Inventory getInventory() {
@@ -160,7 +160,7 @@ public class AdvancedRackStation extends Station implements PlacedFromItem, Inve
         return onInteract(player, EquipmentSlot.HAND);
     }
 
-    /** Menü geändert: Inhalt übernehmen und Anzeige anpassen */
+    /** Menu changed: take over the contents and update the display */
     void sync() {
         if (inventory == null) {
             return;
@@ -173,7 +173,7 @@ public class AdvancedRackStation extends Station implements PlacedFromItem, Inve
         updateDisplay();
     }
 
-    // ---- Darstellung ----
+    // ---- Display ----
 
     @Override
     @SuppressWarnings("UnstableApiUsage")
@@ -185,7 +185,7 @@ public class AdvancedRackStation extends Station implements PlacedFromItem, Inve
             }
         }
         showPart("body", Key.key("kaleidoscope_grilling", "block/advanced_rack_" + Math.min(4, filled)), blockTransform(0));
-        // AdvancedRackRenderer: Werkzeuge an bis zu 3 Haken
+        // AdvancedRackRenderer: tools on up to 3 hooks
         float facing = facing().dataValue() * 90f;
         int hook = 0;
         for (int slot = SEASONING_SLOTS; slot < SLOTS && hook < HOOK_X.length; slot++) {

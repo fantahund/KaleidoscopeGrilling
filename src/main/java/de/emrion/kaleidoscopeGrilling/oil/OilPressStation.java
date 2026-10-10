@@ -34,9 +34,9 @@ import java.util.UUID;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Ölpresse (OilPressBlock/-BlockEntity): 4 Ölkuchen hinein, mit einem Amboss (+4) oder Pressstein (+1) bis 16 pressen
- * (je Spieler 0,5 s Pause). Fertig: 4 Eimer Rapsöl in ein großes Fass in der Nähe (±4 Blöcke, ±2 hoch), 4 Ölrückstände
- * fallen vorne heraus. Ohne passendes Fass wartet die Presse; ein Klick prüft erneut.
+ * Oil press (OilPressBlock/-BlockEntity): 4 oil cakes in, press up to 16 with an anvil (+4) or press stone (+1)
+ * (0.5 s pause per player). Done: 4 buckets of canola oil into a big vat nearby (±4 blocks, ±2 high), 4 oil residues
+ * drop out at the front. Without a suitable vat the press waits; a click checks again.
  */
 public class OilPressStation extends Station {
 
@@ -158,7 +158,7 @@ public class OilPressStation extends Station {
         return true;
     }
 
-    /** OilPressBlockEntity#tryFinish: Rapsöl ins Fass, Rückstände nach vorne */
+    /** OilPressBlockEntity#tryFinish: canola oil into the vat, residues to the front */
     private void tryFinish(@Nullable Player player) {
         BigVatStation vat = null;
         String failure = "message.kaleidoscope_grilling.press_no_vat";

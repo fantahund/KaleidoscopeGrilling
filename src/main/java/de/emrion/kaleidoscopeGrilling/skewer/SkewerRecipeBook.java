@@ -34,11 +34,11 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Spieß-Rezeptbuch (SkewerRecipeBookItem, SkewerRecipeCraftingRecipe, clear_skewer_recipe_book):
+ * Skewer recipe book (SkewerRecipeBookItem, SkewerRecipeCraftingRecipe, clear_skewer_recipe_book):
  * <ul>
- *     <li>Werkbank: leeres Rezept + roher Spieß (oder Geheimspieß mit 3 Zutaten) = beschriebenes Buch, der Spieß bleibt</li>
- *     <li>Werkbank: Buch allein = wieder ein leeres Rezept</li>
- *     <li>Buch in der Hand, Stock in der Nebenhand, Rechtsklick: Spieß aus den Zutaten im Inventar</li>
+ *     <li>Crafting table: empty recipe + raw skewer (or secret skewer with 3 ingredients) = written book, the skewer stays</li>
+ *     <li>Crafting table: book alone = an empty recipe again</li>
+ *     <li>Book in hand, stick in the off hand, right-click: skewer from the ingredients in the inventory</li>
  * </ul>
  */
 @SuppressWarnings("UnstableApiUsage")
@@ -61,7 +61,7 @@ public class SkewerRecipeBook implements Listener {
         vanilla.addResolver(this::resolve);
     }
 
-    // ---- Werkbank ----
+    // ---- Crafting table ----
 
     private @Nullable ItemStack resolve(List<ItemStack> inputs) {
         if (inputs.size() == 1 && Skewers.is(inputs.getFirst(), BOOK)) {
@@ -116,7 +116,7 @@ public class SkewerRecipeBook implements Listener {
         return book;
     }
 
-    /** Der Spieß bleibt beim Aufzeichnen in der Werkbank (getRemainingItems) – Mehrfach-Herstellung per Shift aus */
+    /** The skewer stays in the crafting table when recording (getRemainingItems) - shift-crafting several is disabled */
     @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onCraft(CraftItemEvent event) {
         if (!VanillaRecipes.isAnyItemsRecipe(event.getRecipe()) || !Skewers.is(event.getCurrentItem(), BOOK)) {
@@ -133,7 +133,7 @@ public class SkewerRecipeBook implements Listener {
         }
     }
 
-    // ---- Benutzen ----
+    // ---- Use ----
 
     private List<Set<Key>> slots(ItemStack book) {
         byte[] stored = book.getPersistentDataContainer().get(stackKey, PersistentDataType.BYTE_ARRAY);
@@ -170,7 +170,7 @@ public class SkewerRecipeBook implements Listener {
         craft(player, book, stick, slots);
     }
 
-    /** SkewerRecipeBookItem#craft: je Platz eine passende Zutat aus dem Inventar (nicht Hand und Nebenhand) */
+    /** SkewerRecipeBookItem#craft: one matching ingredient per slot from the inventory (not main and off hand) */
     private void craft(Player player, ItemStack book, ItemStack stick, List<Set<Key>> slots) {
         PlayerInventory inventory = player.getInventory();
         Map<Integer, Integer> consumption = new HashMap<>();
@@ -219,7 +219,7 @@ public class SkewerRecipeBook implements Listener {
         player.getWorld().playSound(player.getLocation(), "kaleidoscope_grilling:action_success", SoundCategory.PLAYERS, 0.7f, 1.0f);
     }
 
-    /** Mit einem Stock aufspießen (auch vom Rezept an der Wand) */
+    /** Skewer with a stick (also from the recipe on the wall) */
     void craftFrom(Player player, ItemStack book, ItemStack stick) {
         List<Set<Key>> slots = slots(book);
         if (!slots.isEmpty()) {
@@ -227,7 +227,7 @@ public class SkewerRecipeBook implements Listener {
         }
     }
 
-    /** Aufgezeichneter Spieß zum Anzeigen (roher Spieß bzw. Geheimspieß), sonst null */
+    /** Recorded skewer for display (raw skewer or secret skewer), otherwise null */
     @Nullable ItemStack recordedStack(ItemStack book) {
         byte[] stored = book.getPersistentDataContainer().get(stackKey, PersistentDataType.BYTE_ARRAY);
         if (stored != null) {
@@ -237,7 +237,7 @@ public class SkewerRecipeBook implements Listener {
         return result == null ? null : create(Key.key(result));
     }
 
-    /** SkewerRecipeBookItem#useOn: beschriebenes Rezept seitlich an einen Block hängen */
+    /** SkewerRecipeBookItem#useOn: hang a written recipe on the side of a block */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onHang(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getHand() != EquipmentSlot.HAND || event.getClickedBlock() == null

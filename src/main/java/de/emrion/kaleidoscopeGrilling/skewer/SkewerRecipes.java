@@ -16,19 +16,19 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * Spieß-Rezepte aus grilling/skewers.json (generated/skewers.yml, Tags schon aufgelöst): je Rezept die erlaubten
- * Zutaten pro Platz. Ablauf wie SkewerRecipes im Mod.
+ * Skewer recipes from grilling/skewers.json (generated/skewers.yml, tags already resolved): the allowed ingredients
+ * per slot for each recipe. Flow like SkewerRecipes in the mod.
  *
- * @param skewerable   Tag skewerable_ingredients (zusätzlich zu allem Essbaren)
+ * @param skewerable   tag skewerable_ingredients (in addition to everything edible)
  * @param unskewerable Tag unskewerable_ingredients
  */
 public record SkewerRecipes(List<Recipe> recipes, Set<Key> skewerable, Set<Key> unskewerable, Map<Key, Effect> effects) {
 
-    /** Ein festes Spieß-Rezept: roher Spieß, gegrillter Spieß (null = keiner), Zutaten pro Platz */
+    /** A fixed skewer recipe: raw skewer, grilled skewer (null = none), ingredients per slot */
     public record Recipe(Key raw, @Nullable Key cooked, List<Set<Key>> ingredients) {
     }
 
-    /** Effekt beim Essen eines gegrillten Spießes */
+    /** Effect when eating a grilled skewer */
     public record Effect(Key effect, int seconds) {
     }
 
@@ -37,7 +37,7 @@ public record SkewerRecipes(List<Recipe> recipes, Set<Key> skewerable, Set<Key> 
     }
 
     /**
-     * @param disabled abgeschaltete Rezepte (disabled-recipes in der config.yml von KaleidoscopeCookery, ID = roher Spieß)
+     * @param disabled disabled recipes (disabled-recipes in the config.yml of KaleidoscopeCookery, id = raw skewer)
      */
     public static SkewerRecipes load(Plugin plugin, java.util.function.Predicate<String> disabled) {
         YamlConfiguration config = new YamlConfiguration();
@@ -93,24 +93,24 @@ public record SkewerRecipes(List<Recipe> recipes, Set<Key> skewerable, Set<Key> 
         return true;
     }
 
-    /** Passt die Zutat als nächste in ein Rezept? */
+    /** Does the ingredient fit as the next one in a recipe? */
     public boolean canAppend(List<Key> inserted, Key next) {
         int slot = inserted.size();
         return recipes.stream().anyMatch(r -> slot < r.ingredients().size() && prefix(r, inserted) && r.ingredients().get(slot).contains(next));
     }
 
-    /** Kommt die Zutat überhaupt in einem Rezept vor? */
+    /** Does the ingredient appear in any recipe at all? */
     public boolean isConfiguredIngredient(Key item) {
         return recipes.stream().anyMatch(r -> r.ingredients().stream().anyMatch(slot -> slot.contains(item)));
     }
 
-    /** Fertiger roher Spieß, wenn die Zutaten genau ein Rezept ergeben */
+    /** Finished raw skewer if the ingredients make exactly one recipe */
     public @Nullable Key completedResult(List<Key> inserted) {
         return recipes.stream().filter(r -> r.ingredients().size() == inserted.size() && prefix(r, inserted))
                 .map(Recipe::raw).findFirst().orElse(null);
     }
 
-    /** Zahl der Zutaten, die ein passendes Rezept braucht (sonst 3, Geheimspieß) */
+    /** Number of ingredients a matching recipe needs (otherwise 3, secret skewer) */
     public int expectedSize(List<Key> inserted) {
         return recipes.stream().filter(r -> prefix(r, inserted)).mapToInt(r -> r.ingredients().size()).max().orElse(3);
     }

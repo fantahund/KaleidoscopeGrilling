@@ -28,14 +28,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Hingestellter Spießteller (SkewerPlateBlock/-BlockEntity): bis zu 5 Spieße. Rechtsklick mit einem Spieß legt ihn
- * dazu, mit leerer Hand nimmt man den letzten. Abgebaut wird er zum Teller-Item mit allen Spießen.
+ * Placed skewer plate (SkewerPlateBlock/-BlockEntity): up to 5 skewers. Right-clicking with a skewer adds it,
+ * with an empty hand you take the last one. When broken it becomes the plate item with all skewers.
  */
 public class SkewerPlateStation extends Station implements PlacedFromItem {
 
     public static final Key ITEM = Key.key("kaleidoscope_grilling", "skewer_plate");
     public static final int CAPACITY = 5;
-    /** SkewerPlateRenderer#LAYOUTS: x, y, z (Pixel) und Drehung je Anzahl */
+    /** SkewerPlateRenderer#LAYOUTS: x, y, z (pixels) and rotation per count */
     private static final float[][][] LAYOUTS = {
             {},
             {{8f, 4f, 6.3f, 0f}},
@@ -95,7 +95,7 @@ public class SkewerPlateStation extends Station implements PlacedFromItem {
             return true;
         }
         if (!plates.isSkewer(held)) {
-            return true; // andere Items nicht benutzen (sonst würde z. B. gegessen)
+            return true; // do not use other items (otherwise e.g. they would be eaten)
         }
         if (skewers.size() < CAPACITY) {
             skewers.add(held.asOne());
@@ -123,7 +123,7 @@ public class SkewerPlateStation extends Station implements PlacedFromItem {
         return List.of();
     }
 
-    /** Blickrichtung beim Hinstellen (Mod: FACING = Spielerrichtung); facing() zeigt zum Spieler */
+    /** View direction when placed (mod: FACING = player direction); facing() points towards the player */
     private Facing look() {
         return Facing.byDataValue((facing().dataValue() + 2) % 4);
     }

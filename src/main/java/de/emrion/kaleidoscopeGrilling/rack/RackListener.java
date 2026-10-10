@@ -11,7 +11,7 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.Plugin;
 
 /**
- * Kisten-Menü des Regals: nur passende Items je Fach, Änderungen gehen sofort ins Regal.
+ * The rack's chest menu: only suitable items per slot, changes go into the rack immediately.
  */
 public class RackListener implements Listener {
 
@@ -35,7 +35,7 @@ public class RackListener implements Listener {
                 return;
             }
         } else if (event.isShiftClick()) {
-            // Shift-Klick aus dem Inventar: in das erste passende Fach
+            // Shift-click from the inventory: into the first suitable slot
             event.setCancelled(true);
             ItemStack moving = event.getCurrentItem();
             if (moving == null || moving.isEmpty()) {

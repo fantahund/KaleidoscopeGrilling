@@ -20,8 +20,8 @@ import org.bukkit.plugin.Plugin;
 import java.util.List;
 
 /**
- * Spezialgewürz in Wok und Suppentopf (PotBlockEntityMixin/StockpotBlockEntityMixin): ein Klick würzt (1 Anwendung),
- * alle Gerichte dieser Runde bekommen das Gewürz. Gemerkt wird es an der Klick-Entity der Station.
+ * Special seasoning in wok and stockpot (PotBlockEntityMixin/StockpotBlockEntityMixin): one click seasons (1 use),
+ * all dishes of this round get the seasoning. It is remembered on the station's click entity.
  */
 public class PotSeasoning implements Listener {
 
@@ -76,7 +76,7 @@ public class PotSeasoning implements Listener {
             return;
         }
         event.getDish().editPersistentDataContainer(pdc -> pdc.set(seasonings.ingredientsKey(), PersistentDataType.LIST.strings(), ingredients));
-        // Nach dem letzten Teller ist der Topf leer: Gewürz vergessen (reset im Mod)
+        // After the last plate the pot is empty: forget the seasoning (reset in the mod)
         plugin.getServer().getScheduler().runTask(plugin, () -> {
             boolean dishLeft = station instanceof PotStation pot ? pot.hasDish() : ((StockpotStation) station).hasDish();
             if (!dishLeft && station.root().isValid()) {

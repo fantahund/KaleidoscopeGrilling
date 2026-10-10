@@ -14,8 +14,8 @@ import org.bukkit.event.player.PlayerItemConsumeEvent;
 import org.bukkit.inventory.ItemStack;
 
 /**
- * Unfertige Mischung 4 s schütteln (PendingSeasoningItem), Flaschen in der Werkbank leeren
- * (ClearSeasoningCraftingRecipe) und Gewürz-Wirkung beim Essen.
+ * Shaking an unfinished mix for 4 s (PendingSeasoningItem), emptying bottles in the crafting table
+ * (ClearSeasoningCraftingRecipe) and the seasoning effect on eating.
  */
 public class SeasoningListener implements Listener {
 
@@ -49,7 +49,7 @@ public class SeasoningListener implements Listener {
         if (Skewers.is(event.getItem(), Seasonings.PENDING)) {
             ItemStack result = seasonings.finish(event.getItem());
             if (result != null) {
-                event.setItem(event.getItem()); // nichts verzehren: Ergebnis ersetzen
+                event.setItem(event.getItem()); // consume nothing: replace the result
                 event.setCancelled(true);
                 player.getInventory().setItem(event.getHand(), result);
                 player.getWorld().spawnParticle(Particle.HAPPY_VILLAGER, player.getLocation().add(0, 1, 0), 12, 0.25, 0.35, 0.25, 0.05);

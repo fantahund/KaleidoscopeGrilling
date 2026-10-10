@@ -6,8 +6,8 @@ import org.joml.Quaternionf;
 import org.joml.Vector3f;
 
 /**
- * Umrechnung aus den Block-Entity-Renderern des Mods: deren Pose beginnt an der Blockecke, ein Display steht in der
- * Blockmitte. Rotation und Skalierung werden mitgeführt, die Position ergibt sich aus der Matrix.
+ * Conversion from the mod's block entity renderers: their pose starts at the block corner, a display stands in the
+ * block centre. Rotation and scale are carried along, the position follows from the matrix.
  */
 public final class Ber {
 
@@ -15,9 +15,9 @@ public final class Ber {
     }
 
     /**
-     * @param pose     Pose wie im Renderer (ab Blockecke), inklusive aller Rotationen und Skalierungen
-     * @param rotation alle Rotationen der Pose in derselben Reihenfolge
-     * @param scale    Skalierung nach den Rotationen (Achsen des gedrehten Modells)
+     * @param pose     pose as in the renderer (from the block corner), including all rotations and scales
+     * @param rotation all rotations of the pose in the same order
+     * @param scale    scale after the rotations (axes of the rotated model)
      */
     public static Transformation transformation(Matrix4f pose, Quaternionf rotation, Vector3f scale) {
         Matrix4f display = new Matrix4f().translation(-0.5f, -0.5f, -0.5f).mul(pose);
@@ -25,7 +25,7 @@ public final class Ber {
         return new Transformation(translation, rotation, scale, new Quaternionf());
     }
 
-    /** Drehung um die Y-Achse wie Axis.YP.rotationDegrees */
+    /** Rotation around the Y axis like Axis.YP.rotationDegrees */
     public static Quaternionf y(float degrees) {
         return new Quaternionf().rotationY((float) Math.toRadians(degrees));
     }

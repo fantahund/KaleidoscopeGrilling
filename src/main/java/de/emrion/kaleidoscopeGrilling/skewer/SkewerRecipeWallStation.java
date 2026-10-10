@@ -27,8 +27,8 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 
 /**
- * Spieß-Rezept an der Wand (SkewerRecipeBlock): Rechtsklick mit einem Stock spießt aus dem Inventar auf,
- * mit leerer Hand nimmt man das Rezept wieder ab. Hängt an der Wand und fällt ab, wenn sie fehlt.
+ * Skewer recipe on the wall (SkewerRecipeBlock): right-clicking with a stick skewers from the inventory,
+ * with an empty hand you take the recipe off again. Hangs on the wall and drops when the wall is gone.
  */
 public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
 
@@ -37,7 +37,7 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
     static NamespacedKey faceKey;
 
     private @Nullable ItemStack book;
-    /** Wand-Richtung (BlockFace, von der Wand weg) */
+    /** Wall direction (BlockFace, pointing away from the wall) */
     private BlockFace face = BlockFace.NORTH;
 
     public SkewerRecipeWallStation(StationContext context) {
@@ -48,8 +48,8 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
         SkewerRecipeWallStation.books = books;
         bookKey = new NamespacedKey(plugin, "wall_book");
         faceKey = new NamespacedKey(plugin, "wall_face");
-        // Eigener Schlüssel statt des Buchs: das Buch selbst setzt der Rechtsklick auf eine Wand (SkewerRecipeBook)
-        // Haupt-Hitbox wird an die Wand geschoben (Mitte des Rezepts), dazu je eine links und rechts (updateDisplay)
+        // Own key instead of the book: the book itself is placed by right-clicking a wall (SkewerRecipeBook)
+        // The main hitbox is moved to the wall (centre of the recipe), plus one each on the left and right (updateDisplay)
         return new StationType("skewer_recipe", Key.key("kaleidoscope_grilling", "skewer_recipe"), false, DEPTH, HEIGHT, false,
                 SkewerRecipeWallStation::new);
     }
@@ -76,7 +76,7 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
         markDirty();
     }
 
-    /** SkewerRecipeBlock#canSurvive: fester Block hinter dem Rezept */
+    /** SkewerRecipeBlock#canSurvive: solid block behind the recipe */
     @Override
     public boolean canSurvive() {
         Block support = world().getBlockAt(position().x() - face.getModX(), position().y(), position().z() - face.getModZ());
@@ -126,8 +126,8 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
     private static final float HEIGHT = 0.88f;
 
     /**
-     * Hitbox: drei 0,25 breite Würfel nebeneinander, 0,25 tief an der Wand (Rezept 10 × 13 Pixel).
-     * Die mittlere ist die Haupt-Hitbox der Station, an die Wand verschoben.
+     * Hitbox: three 0.25 wide cubes next to each other, 0.25 deep at the wall (recipe 10 × 13 pixels).
+     * The middle one is the main hitbox of the station, moved to the wall.
      */
     private void showHitboxes() {
         double toWall = 0.5 - DEPTH / 2;
@@ -136,9 +136,9 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
         if (root().getLocation().distanceSquared(center) > 1.0e-4) {
             root().teleport(center);
         }
-        hideHitbox("wall_1"); // erste Version: mittlere Zusatz-Hitbox
+        hideHitbox("wall_1"); // first version: middle extra hitbox
         for (int i : new int[]{-1, 1}) {
-            // entlang der Wand: senkrecht zur Wand-Richtung
+            // along the wall: perpendicular to the wall direction
             double along = i * 0.25;
             org.bukkit.util.Vector offset = new org.bukkit.util.Vector(-face.getModX() * toWall + face.getModZ() * along, 0.05,
                     -face.getModZ() * toWall + face.getModX() * along);
@@ -150,7 +150,7 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
     @SuppressWarnings("UnstableApiUsage")
     public void updateDisplay() {
         showHitboxes();
-        // Blockstate skewer_recipe: Rezept-Zettel aus Cookery, x 90 und nach der Wand gedreht
+        // Blockstate skewer_recipe: recipe note from Cookery, x 90 and rotated towards the wall
         Quaternionf paper = Ber.y(-wallYaw()).mul(Ber.x(-90));
         showPart("paper", Key.key("kaleidoscope_cookery", "block/recipe_block"),
                 new org.bukkit.util.Transformation(new Vector3f(), paper, new Vector3f(1, 1, 1), new Quaternionf()));
@@ -159,7 +159,7 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
             hidePart("result");
             return;
         }
-        // SkewerRecipeBlockRenderer: Spieß flach auf das Blatt, um -55° gedreht
+        // SkewerRecipeBlockRenderer: skewer lying flat on the sheet, rotated by -55°
         int facing2d = switch (face) {
             case WEST -> 1;
             case NORTH -> 2;

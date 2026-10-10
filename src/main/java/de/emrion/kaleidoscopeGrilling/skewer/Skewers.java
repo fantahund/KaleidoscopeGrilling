@@ -28,10 +28,10 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Daten und Aussehen der Spieße (SkeweringHandler, SecretSkewerItem, SkewerColorProvider im Mod):
- * Zutaten (ganze Item-Stacks), Modell-Varianten je Platz, gegart, Garstufe und Ersteller im PDC.
- * Das Modell wählt die Platz-Varianten über skewer_state, die Zutaten-Farben kommen als custom_model_data-Farben
- * (Tint-Index = Platz * 128 + Seite * 16 + Feld).
+ * Data and look of the skewers (SkeweringHandler, SecretSkewerItem, SkewerColorProvider in the mod):
+ * ingredients (whole item stacks), model variants per slot, cooked, cooking stage and creator in the PDC.
+ * The model picks the slot variants via skewer_state, the ingredient colours come as custom_model_data colours
+ * (tint index = slot * 128 + side * 16 + cell).
  */
 @SuppressWarnings("UnstableApiUsage")
 public final class Skewers {
@@ -53,7 +53,7 @@ public final class Skewers {
     private final NamespacedKey cookedKey;
     private final NamespacedKey stageKey;
     private final NamespacedKey creatorKey;
-    /** Item -> 4x4-Farbraster seiner Textur (skewer_palettes.txt, beim Bauen erzeugt) */
+    /** Item -> 4x4 colour grid of its texture (skewer_palettes.txt, created during the build) */
     private final Map<Key, int[]> palettes = new HashMap<>();
 
     public Skewers(Plugin plugin, KaleidoscopeCookery cookery) {
@@ -87,14 +87,14 @@ public final class Skewers {
     }
 
     /**
-     * Zwei Farben einer Zutat für die Schichten der Gewürzflasche (SeasoningColorProvider), sonst Ersatzfarben.
+     * Two colours of an ingredient for the layers of the seasoning bottle (SeasoningColorProvider), otherwise fallback colours.
      */
     public int[] layerColors(Key item) {
         int[] colors = palettes.get(item);
         return colors != null && colors.length >= CELLS + 2 ? new int[]{colors[CELLS], colors[CELLS + 1]} : new int[]{0xB86B45, 0xE0A56A};
     }
 
-    /** Item-ID eines Stacks (Mod-Item oder Vanilla-Material) */
+    /** Item id of a stack (mod item or vanilla material) */
     public static Key idOf(ItemStack stack) {
         Key id = CookeryItems.idOf(stack);
         return id != null ? id : stack.getType().key();
@@ -104,7 +104,7 @@ public final class Skewers {
         return stack != null && !stack.isEmpty() && idOf(stack).equals(id);
     }
 
-    // ---- Daten ----
+    // ---- Data ----
 
     public List<ItemStack> ingredients(ItemStack skewer) {
         List<byte[]> raw = skewer.getPersistentDataContainer().get(ingredientsKey, PersistentDataType.LIST.byteArrays());
@@ -114,7 +114,7 @@ public final class Skewers {
                 try {
                     result.add(ItemStack.deserializeBytes(bytes));
                 } catch (RuntimeException ignored) {
-                    // Zutat aus einer anderen Version: weglassen
+                    // Ingredient from another version: leave it out
                 }
             }
         }
@@ -157,7 +157,7 @@ public final class Skewers {
         refresh(skewer);
     }
 
-    /** Garstufe beim Grillen (0 roh … 4 gar, 5 verbrannt) */
+    /** Cooking stage on the grill (0 raw ... 4 cooked, 5 burnt) */
     public int stage(ItemStack skewer) {
         return skewer.getPersistentDataContainer().getOrDefault(stageKey, PersistentDataType.INTEGER, 0);
     }
@@ -176,9 +176,9 @@ public final class Skewers {
         return skewer.getPersistentDataContainer().get(creatorKey, PersistentDataType.STRING);
     }
 
-    // ---- Aussehen ----
+    // ---- Look ----
 
-    /** SkeweringHandler#modelState: Variante (1–3) je Platz, als skewer_state = Wert / 64 */
+    /** SkeweringHandler#modelState: variant (1-3) per slot, as skewer_state = value / 64 */
     private int modelState(List<Integer> variants) {
         int state = 0;
         for (int slot = 0; slot < 3; slot++) {
@@ -191,7 +191,7 @@ public final class Skewers {
     }
 
     /**
-     * Modell-Properties, Farben und Beschreibung nach einer Änderung neu setzen.
+     * Set model properties, colours and description again after a change.
      */
     public void refresh(ItemStack skewer) {
         Key id = idOf(skewer);
@@ -223,8 +223,8 @@ public final class Skewers {
     }
 
     /**
-     * SecretSkewerItem#getFoodProperties: 60 % der Nährwerte der Zutaten (doppelte Zutaten nochmals 80 %),
-     * Sättigung nach deren Mittel; roh nur die Hälfte.
+     * SecretSkewerItem#getFoodProperties: 60% of the ingredients' nutrition (duplicate ingredients another 80%),
+     * saturation by their average; raw only half.
      */
     private void secretFood(ItemStack skewer, List<ItemStack> ingredients) {
         int totalNutrition = 0;
@@ -284,7 +284,7 @@ public final class Skewers {
         this.recipes = recipes;
     }
 
-    // ---- Farben (SkewerColorProvider) ----
+    // ---- Colours (SkewerColorProvider) ----
 
     private static int luminance(int rgb) {
         return Math.round(((rgb >>> 16) & 0xFF) * 0.2126f + ((rgb >>> 8) & 0xFF) * 0.7152f + (rgb & 0xFF) * 0.0722f);

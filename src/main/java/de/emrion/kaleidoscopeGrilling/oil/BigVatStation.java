@@ -26,11 +26,11 @@ import org.joml.Vector3f;
 import org.jspecify.annotations.Nullable;
 
 /**
- * Großes Fass (BigVatBlock/-BlockEntity): 8 Eimer einer Flüssigkeit (Wasser oder eine Ölsorte).
+ * Big vat (BigVatBlock/-BlockEntity): 8 buckets of one liquid (water or an oil type).
  * <ul>
- *     <li>Öl- oder Wassereimer hinein, leeren Eimer heraus</li>
- *     <li>Ölkanne füllen: 8 Öl pro Eimer, bis die Kanne voll ist</li>
- *     <li>Die Ölpresse füllt ihr Rapsöl in ein Fass in der Nähe</li>
+ *     <li>Oil or water bucket in, empty bucket out</li>
+ *     <li>Fill an oil pot: 8 oil per bucket until the pot is full</li>
+ *     <li>The oil press fills its canola oil into a vat nearby</li>
  * </ul>
  */
 public class BigVatStation extends Station {
@@ -42,7 +42,7 @@ public class BigVatStation extends Station {
     static NamespacedKey contentKey;
     static NamespacedKey bucketsKey;
 
-    /** "", "water" oder eine Ölsorte */
+    /** "", "water" or an oil type */
     private String content = "";
     private int buckets;
 
@@ -162,7 +162,7 @@ public class BigVatStation extends Station {
             hidePart("fluid");
             return;
         }
-        // BigVatRenderer: Oberfläche in 4 Stufen, Lava-Chiliöl leuchtet
+        // BigVatRenderer: surface in 4 stages, magma chili oil glows
         int level = Math.min(4, Math.max(1, (buckets * 4 + CAPACITY - 1) / CAPACITY));
         float y = (2f + level * 3f) / 16f + 0.001f;
         Transformation transformation = new Transformation(new Vector3f(0, y, 0), new Quaternionf(), new Vector3f(1, 1, 1), new Quaternionf());

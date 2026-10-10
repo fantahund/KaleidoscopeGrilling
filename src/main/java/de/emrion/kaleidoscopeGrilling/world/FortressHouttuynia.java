@@ -18,8 +18,8 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.util.BoundingBox;
 
 /**
- * FortressWartReplacementHandler: in neu erzeugten Netherfestungen wird ein Viertel des Netherwarzen-Bewuchses zu
- * roter Fischminze (Stufe 0/3/7 je nach Warzen-Stufe). Auswahl über einen Koordinaten-Hash wie im Mod.
+ * FortressWartReplacementHandler: in newly generated Nether fortresses a quarter of the nether wart growth becomes
+ * red houttuynia (stage 0/3/7 depending on the wart stage). Chosen via a coordinate hash as in the mod.
  */
 public class FortressHouttuynia implements Listener {
 
@@ -45,7 +45,7 @@ public class FortressHouttuynia implements Listener {
         }
         if (bounds != null) {
             BoundingBox area = bounds;
-            // Stationen (Entities) erst nach dem Laden setzen
+            // Place stations (entities) only after loading
             plugin.getServer().getScheduler().runTask(plugin, () -> replace(chunk, area));
         }
     }

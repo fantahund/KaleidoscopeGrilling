@@ -20,10 +20,10 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Aufspießen (SkeweringHandler#onRightClickItem): Stock, unfertiger oder roher Geheimspieß in der Nebenhand,
- * Rechtsklick mit einer Zutat in der Haupthand steckt sie auf. Passt die Folge zu einem Rezept, entsteht der
- * feste rohe Spieß, sonst nach 3 Zutaten ein Geheimspieß. Schleichen + Rechtsklick nimmt den Spieß in der Nebenhand
- * (oder einen unfertigen Spieß in der Hand) wieder auseinander.
+ * Skewering (SkeweringHandler#onRightClickItem): stick, unfinished or raw secret skewer in the off hand,
+ * right-clicking with an ingredient in the main hand puts it on. If the sequence matches a recipe, the
+ * fixed raw skewer is created, otherwise a secret skewer after 3 ingredients. Sneak + right-click takes the skewer in the off hand
+ * (or an unfinished skewer in the hand) apart again.
  */
 public class SkeweringListener implements Listener {
 
@@ -43,7 +43,7 @@ public class SkeweringListener implements Listener {
     public void onInteract(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK
                 || event.useItemInHand() == org.bukkit.event.Event.Result.DENY) {
-            return; // z. B. Spieß auf einen Teller gestellt
+            return; // e.g. a skewer put onto a plate
         }
         Player player = event.getPlayer();
         PlayerInventory inventory = player.getInventory();
@@ -54,7 +54,7 @@ public class SkeweringListener implements Listener {
                 disassemble(player, EquipmentSlot.HAND);
             } else if (canDisassemble(offhand)) {
                 event.setCancelled(true);
-                // Mit leerer Haupthand schickt der Client nur den Klick der Nebenhand
+                // With an empty main hand the client only sends the off hand click
                 if (event.getHand() == EquipmentSlot.HAND || inventory.getItemInMainHand().isEmpty()) {
                     disassemble(player, EquipmentSlot.OFF_HAND);
                 }
@@ -68,7 +68,7 @@ public class SkeweringListener implements Listener {
         if (food.isEmpty() || isSkewerBase(food)) {
             return;
         }
-        // Wie RightClickItem im Mod: Klicks auf bedienbare Blöcke und Setzen (Samen, Blöcke) gehen vor
+        // Like RightClickItem in the mod: clicks on usable blocks and placing (seeds, blocks) take precedence
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK && (event.getClickedBlock().getType().isInteractable()
                 || food.getType().isBlock() || de.emrion.kaleidoscopeCookery.station.crop.CropKind.bySeed(Skewers.idOf(food)) != null)) {
             return;
@@ -100,7 +100,7 @@ public class SkeweringListener implements Listener {
             return;
         }
         boolean creative = player.getGameMode() == GameMode.CREATIVE;
-        // Übrige Stöcke bzw. weitere gleiche Spieße aus der Nebenhand kommen ins Inventar zurück
+        // Remaining sticks or further identical skewers from the off hand go back into the inventory
         ItemStack remainingSticks = offhand.clone();
         if (!creative || !Skewers.is(offhand, Skewers.STICK)) {
             remainingSticks.subtract();
@@ -115,7 +115,7 @@ public class SkeweringListener implements Listener {
         player.getWorld().playSound(player.getLocation(), SUCCESS_SOUND, SoundCategory.PLAYERS, 0.7f, 1.0f);
     }
 
-    /** Stock, unfertiger Spieß oder roher Geheimspieß */
+    /** Stick, unfinished skewer or raw secret skewer */
     private boolean isSkewerBase(ItemStack stack) {
         if (stack == null || stack.isEmpty()) {
             return false;
@@ -124,7 +124,7 @@ public class SkeweringListener implements Listener {
         return id.equals(Skewers.STICK) || id.equals(Skewers.UNFINISHED) || id.equals(Skewers.SECRET) && !skewers.isCooked(stack);
     }
 
-    /** SkewerRecipes#canAppend, isConfiguredIngredient oder SkewerCompatApi#canSkewer (alles Essbare) */
+    /** SkewerRecipes#canAppend, isConfiguredIngredient or SkewerCompatApi#canSkewer (everything edible) */
     @SuppressWarnings("UnstableApiUsage")
     private boolean canSkewer(ItemStack food, Key id, List<Key> inserted) {
         if (recipes.canAppend(inserted, id) || recipes.isConfiguredIngredient(id)) {
@@ -144,13 +144,13 @@ public class SkeweringListener implements Listener {
         return id.equals(Skewers.UNFINISHED) || recipes.isRawSkewer(id) || id.equals(Skewers.SECRET) && !skewers.isCooked(stack);
     }
 
-    /** SkeweringHandler#disassemble: alle Zutaten und den Stock zurück */
+    /** SkeweringHandler#disassemble: return all ingredients and the stick */
     private void disassemble(Player player, EquipmentSlot hand) {
         ItemStack stack = player.getInventory().getItem(hand);
         Key id = Skewers.idOf(stack);
         List<ItemStack> ingredients = skewers.ingredients(stack);
         if (ingredients.isEmpty()) {
-            // Feste rohe Spieße tragen keine Zutaten: die erste Möglichkeit je Platz zurückgeben
+            // Fixed raw skewers carry no ingredients: return the first option per slot
             SkewerRecipes.Recipe recipe = recipes.byRaw(id);
             if (recipe == null) {
                 return;

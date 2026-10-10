@@ -15,7 +15,7 @@
     <properties>
         <java.version>25</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <!-- Repo KaleidoscopeCookery: liefert die Pack-Werkzeuge (tools/) und das Basis-Pack für die Prüfung.
+        <!-- Repo KaleidoscopeCookery: provides the pack tools (tools/) and the base pack for the checks.
              Vorher dort "mvn install" ausführen, damit die Core-API im lokalen Maven-Repo liegt. -->
         <cookery.dir>${project.basedir}/../KaleidoscopeCookery</cookery.dir>
         <pack.output>${project.build.directory}/generated-resources/pack</pack.output>
@@ -33,7 +33,7 @@
                     <target>${java.version}</target>
                 </configuration>
             </plugin>
-            <!-- Eigenes Resourcepack (nur Grilling-Assets) prüfen und zippen; landet im Jar -->
+            <!-- Validate and zip the own resource pack (Grilling assets only); ends up in the jar -->
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>exec-maven-plugin</artifactId>

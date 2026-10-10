@@ -21,13 +21,13 @@ import org.bukkit.loot.LootTables;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Zusätzliche Beute aus Kaleidoscope Grilling:
+ * Additional loot from Kaleidoscope Grilling:
  * <ul>
- *     <li>CropDropHandler: Gras abbauen mit Strohhut – je 12,5 % Rapssamen, Süßkartoffel, Zwiebel, Sichuanpfeffer-Samen</li>
- *     <li>KnifeDropHandler: mit Küchenmesser getötet – Huhn: Hähnchenflügel, Kuh: Rinderinnereien, Tintenfisch (50 %): Tentakel</li>
- *     <li>FortressHouttuyniaHandler: Netherfestungs-Truhen zu 65 % 1–2 × 1–3 Fischminze</li>
- *     <li>VillagePepperLootHandler: Dorf-Truhen zu 40 % 3–10 Sichuanpfeffer und zu 20 % Pfeffer-Samen
- *     (im Mod ein Setzling, hier ist der Pfefferbaum ein Strauch aus Samen)</li>
+ *     <li>CropDropHandler: breaking grass with a straw hat - 12.5% each for canola seeds, sweet potato, onion, Sichuan pepper seeds</li>
+ *     <li>KnifeDropHandler: killed with a kitchen knife - chicken: chicken wings, cow: beef offal, squid (50%): tentacles</li>
+ *     <li>FortressHouttuyniaHandler: Nether fortress chests with 65% 1-2 × 1-3 houttuynia</li>
+ *     <li>VillagePepperLootHandler: village chests with 40% 3-10 Sichuan pepper and with 20% pepper seeds
+ *     (a sapling in the mod, here the pepper tree is a bush grown from seeds)</li>
  * </ul>
  */
 public class GrillingDrops implements Listener {

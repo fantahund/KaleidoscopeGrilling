@@ -24,12 +24,12 @@ import org.bukkit.plugin.Plugin;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Effekte aus Kaleidoscope Grilling (ModEffects), verwaltet vom Effekt-System des Core (Seitenleiste, Speichern):
+ * Effects from Kaleidoscope Grilling (ModEffects), managed by the core's effect system (sidebar, saving):
  * <ul>
- *     <li>unverwundbar: kein Schaden (außer /kill), Funken (InvincibleHandler)</li>
- *     <li>Schwermetall: einmal den Tod verhindern, danach 10 min Schwermetallvergiftung (Totem-Pulver)</li>
- *     <li>Drachenblut: +3 bzw. +5 Herzen maximale Gesundheit (Drachenei-Pulver)</li>
- *     <li>taub: im Mod nur Wackeln des Fadenkreuzes (Client) – hier nur angezeigt</li>
+ *     <li>invulnerable: no damage (except /kill), sparks (InvincibleHandler)</li>
+ *     <li>heavy metal: prevents death once, then 10 min of heavy metal poisoning (totem powder)</li>
+ *     <li>Dragon blood: +3 or +5 hearts of max health (dragon egg powder)</li>
+ *     <li>numb: in the mod only a wobbling crosshair (client) - only displayed here</li>
  * </ul>
  */
 public class GrillingEffects implements Listener {
@@ -83,7 +83,7 @@ public class GrillingEffects implements Listener {
         }
     }
 
-    /** AdvancedSeasoningHandler#onEntityTick: maximale Gesundheit solange Drachenblut wirkt */
+    /** AdvancedSeasoningHandler#onEntityTick: max health while dragon blood is active */
     private void dragonBlood(Player player) {
         AttributeInstance health = player.getAttribute(Attribute.MAX_HEALTH);
         if (health == null) {
@@ -121,7 +121,7 @@ public class GrillingEffects implements Listener {
             player.getWorld().spawnParticle(Particle.ELECTRIC_SPARK, player.getLocation().add(0, player.getHeight() * 0.55, 0), 8, 0.35, 0.45, 0.35, 0.08);
             return;
         }
-        // Schwermetall: tödlicher Schaden wird einmal abgefangen (wie ein Totem)
+        // Heavy metal: fatal damage is absorbed once (like a totem)
         if (effects.has(player, HEAVY_METAL) && !effects.has(player, HEAVY_METAL_POISONING)
                 && event.getFinalDamage() >= player.getHealth() && event.getCause() != EntityDamageEvent.DamageCause.KILL) {
             event.setCancelled(true);

@@ -16,8 +16,8 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Seiten von Kaleidoscope Grilling im Kochbuch (wie die JEI-Kategorien des Mods): Grillen, feste Spieße aufspießen,
- * Rapsöl pressen und Gewürz mischen. Abgeschaltete Rezepte (disabled-recipes) fehlen auch hier.
+ * Pages of Kaleidoscope Grilling in the cookbook (like the mod's JEI categories): grilling, threading fixed skewers,
+ * pressing canola oil and mixing seasoning. Disabled recipes (disabled-recipes) are missing here as well.
  */
 public final class GrillingCookbook {
 
@@ -40,7 +40,7 @@ public final class GrillingCookbook {
                 if (cookery.getCookeryConfig().isRecipeDisabled(id)) {
                     continue;
                 }
-                // Aufspießen: Stock in der Nebenhand, Zutaten der Reihe nach
+                // Skewering: stick in the off hand, ingredients in order
                 List<CookbookEntry.Input> inputs = new ArrayList<>();
                 inputs.add(new CookbookEntry.Input(new Ingredient(Set.of(Key.key("minecraft", "stick"))), 1));
                 for (Set<Key> slot : recipe.ingredients()) {

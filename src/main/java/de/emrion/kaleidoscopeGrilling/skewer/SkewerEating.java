@@ -18,9 +18,9 @@ import org.bukkit.inventory.ItemStack;
 import java.util.List;
 
 /**
- * Spieße essen (MultiBiteSkewerItem): eigenes Ess-Geräusch je Animationsprofil, Schleichen isst nicht,
- * nach 1,25 s (25 Ticks) darf man loslassen und hat trotzdem gegessen. Der Geheimspieß wirkt zusätzlich wie
- * seine Zutaten (nur deren Effekte).
+ * Eating skewers (MultiBiteSkewerItem): own eating sound per animation profile, sneaking does not eat,
+ * after 1.25 s (25 ticks) you may let go and have still eaten. The secret skewer additionally acts like
+ * its ingredients (only their effects).
  */
 public class SkewerEating implements Listener {
 
@@ -47,7 +47,7 @@ public class SkewerEating implements Listener {
                 && item.food().sound().asString().equals("minecraft:intentionally_empty");
     }
 
-    /** ModItems#animationProfile: Zahl der Bissen-Stücke für das Geräusch */
+    /** ModItems#animationProfile: number of bite pieces for the sound */
     static int pieces(Key id) {
         String name = id.value().replace("raw_", "").replace("grilled_", "");
         return switch (name) {
@@ -73,7 +73,7 @@ public class SkewerEating implements Listener {
             return;
         }
         if (player.isSneaking()) {
-            event.setUseItemInHand(org.bukkit.event.Event.Result.DENY); // SkewerItem#use: Schleichen isst nicht
+            event.setUseItemInHand(org.bukkit.event.Event.Result.DENY); // SkewerItem#use: sneaking does not eat
             return;
         }
         if (event.useItemInHand() != org.bukkit.event.Event.Result.DENY && !player.hasActiveItem()) {
@@ -81,7 +81,7 @@ public class SkewerEating implements Listener {
         }
     }
 
-    /** Nach dem Checkpoint losgelassen: trotzdem gegessen (MultiBiteSkewerItem#settleIfEligible) */
+    /** Released after the checkpoint: eaten anyway (MultiBiteSkewerItem#settleIfEligible) */
     @EventHandler
     public void onStop(PlayerStopUsingItemEvent event) {
         ItemStack stack = event.getItem();
@@ -113,9 +113,9 @@ public class SkewerEating implements Listener {
         }
     }
 
-    /** SecretSkewerItem#finishFoodAndEffect: die Zutaten wirken mit (Hunger/Sättigung bleiben wie beim Spieß) */
+    /** SecretSkewerItem#finishFoodAndEffect: the ingredients take effect too (hunger/saturation stay like the skewer's) */
     /**
-     * Spieß ohne Animation essen (Spießteller, frühes Loslassen): Nährwert, Effekte, Zutaten und Gewürz.
+     * Eat a skewer without animation (skewer plate, early release): nutrition, effects, ingredients and seasoning.
      */
     public void eatNow(Player player, ItemStack skewer) {
         skewers.cookery().getFoodService().eatFromBag(player, skewer);

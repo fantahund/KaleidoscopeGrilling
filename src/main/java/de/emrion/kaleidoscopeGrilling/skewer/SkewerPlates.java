@@ -34,8 +34,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Spießteller als Item (SkewerPlateItem, SkewerPlatePlacement): Schleichen + Rechtsklick mit einem Spieß auf einen
- * festen Block stellt einen Teller hin. Das Teller-Item isst man Spieß für Spieß (immer den nahrhaftesten).
+ * Skewer plate as an item (SkewerPlateItem, SkewerPlatePlacement): sneak + right-click with a skewer on a
+ * solid block places a plate. The plate item is eaten skewer by skewer (always the most nutritious one).
  */
 @SuppressWarnings("UnstableApiUsage")
 public class SkewerPlates implements Listener {
@@ -77,7 +77,7 @@ public class SkewerPlates implements Listener {
     private void write(ItemStack plate, List<ItemStack> skewers) {
         plate.editPersistentDataContainer(pdc -> pdc.set(key, PersistentDataType.LIST.byteArrays(),
                 skewers.stream().limit(SkewerPlateStation.CAPACITY).map(s -> s.asOne().serializeAsBytes()).toList()));
-        // Essen wie der nahrhafteste Spieß, kurz (16 Ticks)
+        // Eat like the most nutritious skewer, briefly (16 ticks)
         ItemStack best = best(skewers);
         io.papermc.paper.datacomponent.item.FoodProperties food = best == null ? null : best.getData(DataComponentTypes.FOOD);
         plate.setData(DataComponentTypes.FOOD, food != null ? food : io.papermc.paper.datacomponent.item.FoodProperties.food().nutrition(1).saturation(0).canAlwaysEat(true).build());
@@ -109,7 +109,7 @@ public class SkewerPlates implements Listener {
         return best;
     }
 
-    /** SkewerPlateItem#finishUsingItem: den nahrhaftesten Spieß essen, der Teller bleibt mit dem Rest */
+    /** SkewerPlateItem#finishUsingItem: eat the most nutritious skewer, the plate remains with the rest */
     @EventHandler(ignoreCancelled = true)
     public void onEat(PlayerItemConsumeEvent event) {
         if (!Skewers.is(event.getItem(), SkewerPlateStation.ITEM)) {
@@ -133,7 +133,7 @@ public class SkewerPlates implements Listener {
         }
     }
 
-    /** SkewerPlatePlacement: Schleichen + Rechtsklick mit einem Spieß auf die Oberseite eines festen Blocks */
+    /** SkewerPlatePlacement: sneak + right-click with a skewer on the top face of a solid block */
     @EventHandler(priority = EventPriority.LOWEST)
     public void onPlace(PlayerInteractEvent event) {
         if (event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getHand() != EquipmentSlot.HAND || event.getBlockFace() != BlockFace.UP) {
@@ -165,7 +165,7 @@ public class SkewerPlates implements Listener {
         player.swingMainHand();
     }
 
-    /** Teller beim Erschaffen (z. B. /kc give) mit Beschreibung versehen */
+    /** Give the plate its description when created (e.g. /kc give) */
     public void refresh(ItemStack plate) {
         write(plate, read(plate));
     }

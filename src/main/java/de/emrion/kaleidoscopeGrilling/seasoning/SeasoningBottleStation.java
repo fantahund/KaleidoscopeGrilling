@@ -26,17 +26,17 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Hingestellte Gewürzflaschen (SeasoningBottleBlock/-BlockEntity): bis zu 4 Flaschen auf einem Block.
+ * Placed seasoning bottles (SeasoningBottleBlock/-BlockEntity): up to 4 bottles on one block.
  * <ul>
- *     <li>Rechtsklick mit einer Flasche: dazustellen</li>
- *     <li>Rechtsklick mit einer Gewürz-Zutat: in die oberste Flasche (höchstens 8)</li>
- *     <li>Rechtsklick mit leerer Hand: oberste Flasche nehmen</li>
+ *     <li>Right-click with a bottle: add it</li>
+ *     <li>Right-click with a seasoning ingredient: into the top bottle (at most 8)</li>
+ *     <li>Right-click with an empty hand: take the top bottle</li>
  * </ul>
  */
 public class SeasoningBottleStation extends Station implements PlacedFromItem {
 
     private static final int MAX_BOTTLES = 4;
-    /** SeasoningBottleRenderer#OFFSETS (Pixel) je Anzahl */
+    /** SeasoningBottleRenderer#OFFSETS (pixels) per count */
     private static final float[][][] OFFSETS = {
             {{0, 0}},
             {{4, 3}, {-3, -1}},
@@ -83,7 +83,7 @@ public class SeasoningBottleStation extends Station implements PlacedFromItem {
         return bottles.getLast();
     }
 
-    // ---- Bedienung ----
+    // ---- Handling ----
 
     @Override
     public boolean interceptPlacement(Player player, ItemStack held) {
@@ -169,16 +169,16 @@ public class SeasoningBottleStation extends Station implements PlacedFromItem {
 
     @Override
     public org.bukkit.inventory.@org.jspecify.annotations.Nullable ItemStack selfDrop() {
-        return null; // die Flaschen selbst sind der Inhalt
+        return null; // the bottles themselves are the contents
     }
 
-    // ---- Darstellung ----
+    // ---- Display ----
 
     @Override
     @SuppressWarnings("UnstableApiUsage")
     public void updateDisplay() {
         hidePartsStartingWith("bottle_", bottles.size());
-        // SeasoningBottleBlock#SHAPES: eine Flasche schmal, ab zwei fast der ganze Block
+        // SeasoningBottleBlock#SHAPES: one bottle narrow, from two almost the whole block
         float width = bottles.size() > 1 ? 0.95f : 0.5f;
         if (Math.abs(root().getInteractionWidth() - width) > 0.001f) {
             root().setInteractionWidth(width);
@@ -187,7 +187,7 @@ public class SeasoningBottleStation extends Station implements PlacedFromItem {
             return;
         }
         float[][] offsets = OFFSETS[bottles.size() - 1];
-        // SeasoningBottleRenderer: um 180° - Blickrichtung gedreht, dann je Flasche versetzt
+        // SeasoningBottleRenderer: rotated by 180° - view direction, then offset per bottle
         Quaternionf rotation = new Quaternionf().rotationY((float) Math.toRadians(180 - facing().dataValue() * 90));
         for (int i = 0; i < bottles.size(); i++) {
             ItemStack stack = bottles.get(i);

@@ -23,9 +23,9 @@ import org.bukkit.inventory.ItemStack;
 import org.jspecify.annotations.Nullable;
 
 /**
- * OilFillingHandler#onRightClickItem: Öleimer in der Hand, Ölkanne in der Nebenhand – 8 Öl in die Kanne.
- * ColdHouttuyniaCraftingRecipe: 3 Fischminze + Ölkanne mit mindestens 2 Lava-Chiliöl (genau 4 Felder) = kalte
- * Fischminze, die Kanne bleibt mit 2 Öl weniger im Raster.
+ * OilFillingHandler#onRightClickItem: oil bucket in the main hand, oil pot in the off hand - 8 oil into the pot.
+ * ColdHouttuyniaCraftingRecipe: 3 houttuynia + oil pot with at least 2 magma chili oil (exactly 4 slots) = dressed
+ * houttuynia, the pot stays in the grid with 2 oil less.
  */
 public class OilListener implements Listener {
 
@@ -54,7 +54,7 @@ public class OilListener implements Listener {
             return;
         }
         if (event.isShiftClick()) {
-            event.setCancelled(true); // Rest-Kanne passt nur bei einzelnem Herstellen
+            event.setCancelled(true); // the remaining pot only fits when crafting one at a time
             return;
         }
         ItemStack[] matrix = event.getInventory().getMatrix();
@@ -64,7 +64,7 @@ public class OilListener implements Listener {
                 oils.consume(rest, COLD_HOUTTUYNIA_OIL);
                 int index = slot;
                 CraftingInventory inventory = event.getInventory();
-                // nach dem Verbrauchen der Zutaten wieder ins Feld (wie getRemainingItems), sonst ins Inventar
+                // back into the slot after the ingredients are consumed (like getRemainingItems), otherwise into the inventory
                 oils.cookery().getServer().getScheduler().runTask(oils.cookery(), () -> {
                     ItemStack[] now = inventory.getMatrix();
                     if (now[index] == null || now[index].isEmpty()) {

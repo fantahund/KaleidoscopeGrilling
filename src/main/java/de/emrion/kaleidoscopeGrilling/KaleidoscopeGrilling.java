@@ -4,9 +4,9 @@ import de.emrion.kaleidoscopeCookery.KaleidoscopeCookery;
 import org.bukkit.plugin.java.JavaPlugin;
 
 /**
- * Kaleidoscope Grilling als eigenes Plugin: baut auf KaleidoscopeCookery auf (Stationen, Kochbuch) und bringt
- * eigene Items, Rezepte und ein eigenes Resourcepack mit.
- * Das Hitze-System (烟火气) des Mods ist bewusst nicht enthalten.
+ * Kaleidoscope Grilling as a separate plugin: builds on KaleidoscopeCookery (stations, cookbook) and ships
+ * its own items, recipes and resource pack.
+ * The mod's heat system (烟火气) is deliberately not included.
  */
 public class KaleidoscopeGrilling extends JavaPlugin {
 
@@ -18,7 +18,7 @@ public class KaleidoscopeGrilling extends JavaPlugin {
     public void onEnable() {
         saveDefaultConfig();
         cookery = KaleidoscopeCookery.getInstance();
-        // Items, Rezepte (inkl. Änderungen an Cookery-Rezepten), Resourcepack, Übersetzungen und Kochbuch-Bilder beim Core anmelden
+        // Register items, recipes (including changes to Cookery recipes), resource pack, translations and cookbook images with the core
         cookery.registerAddon(this);
         de.emrion.kaleidoscopeGrilling.world.GrillingCrops.register(cookery);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.world.GrillingDrops(cookery), this);
@@ -58,7 +58,7 @@ public class KaleidoscopeGrilling extends JavaPlugin {
         getLogger().info("Grilling-Addon für KaleidoscopeCookery " + cookery.getPluginMeta().getVersion() + " geladen");
     }
 
-    /** Gewürz-Zutat -> Wirkung (grilling/skewers.json, seasoning_effects) */
+    /** Seasoning ingredient -> effect (grilling/skewers.json, seasoning_effects) */
     private java.util.Map<String, String> seasoningKinds() {
         java.util.Map<String, String> kinds = new java.util.HashMap<>();
         try (var reader = new java.io.InputStreamReader(getResource("generated/skewers.yml"), java.nio.charset.StandardCharsets.UTF_8)) {

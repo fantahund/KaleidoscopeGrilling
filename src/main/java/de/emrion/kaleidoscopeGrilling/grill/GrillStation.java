@@ -37,13 +37,13 @@ import java.util.List;
 import java.util.concurrent.ThreadLocalRandom;
 
 /**
- * Grill (GrillBlock/GrillBlockEntity aus Kaleidoscope Grilling):
+ * Grill (GrillBlock/GrillBlockEntity from Kaleidoscope Grilling):
  * <ul>
- *     <li>Anzünden mit Feuerzeug, Löschen mit einer Schaufel</li>
- *     <li>Bis zu 3 rohe Spieße (oder Geheimspieße mit 3 Zutaten) auf den brennenden Grill legen</li>
- *     <li>Mit der Ölkanne bestreichen (1 Öl pro Spieß), dann 4× mit leerer Hand wenden (je 1 s Pause)</li>
- *     <li>Gar: mit Spezialgewürz würzen, dann mit leerer Hand herunternehmen (Schleichen: alle)</li>
- *     <li>800 Ticks ohne Fortschritt: angebrannt (verkohlter Spieß), nach weiteren 400 Ticks verbrannt (Holzkohle)</li>
+ *     <li>Light it with flint and steel, extinguish it with a shovel</li>
+ *     <li>Put up to 3 raw skewers (or secret skewers with 3 ingredients) on the burning grill</li>
+ *     <li>Brush with the oil pot (1 oil per skewer), then turn 4× with an empty hand (1 s pause each)</li>
+ *     <li>Cooked: season with special seasoning, then take it off with an empty hand (sneaking: all)</li>
+ *     <li>800 ticks without progress: burnt (charred skewer), after another 400 ticks burnt to charcoal</li>
  * </ul>
  */
 public class GrillStation extends Station {
@@ -57,12 +57,12 @@ public class GrillStation extends Station {
     private static final int FINISHED_TICKS = 800;
     private static final int BURNT_TICKS = 400;
     private static final int FLIPS = 4;
-    /** Länge von grill_loop.ogg (28,4 s) */
+    /** Length of grill_loop.ogg (28.4 s) */
     private static final int LOOP_TICKS = 568;
     public static final int SEASONING_MAX_USES = 16;
     private static final String LOOP_SOUND = "kaleidoscope_grilling:grill_loop";
 
-    /** Zugriff auf Spieß-Daten und Rezepte (vom Plugin gesetzt) */
+    /** Access to skewer data and recipes (set by the plugin) */
     static Skewers skewers;
     static SkewerRecipes recipes;
     static NamespacedKey seasoningUsesKey;
@@ -80,14 +80,14 @@ public class GrillStation extends Station {
 
     private boolean lit;
     private final ItemStack[] items = new ItemStack[SLOTS];
-    /** 0 = roh, 1 = geölt (wenden), 2 = gar, 3 = angebrannt */
+    /** 0 = raw, 1 = oiled (turning), 2 = cooked, 3 = burnt */
     private int phase;
     private int phaseTicks;
     private int flips;
     private int flipCooldown;
     private boolean seasoned;
     private List<String> seasoning = new ArrayList<>();
-    /** Wende-Animation: Server-Tick des letzten Wendens */
+    /** Turning animation: server tick of the last turn */
     private long flipTick = -100;
     private long nextLoop;
 
@@ -117,7 +117,7 @@ public class GrillStation extends Station {
         return new StationType("grill", ITEM, false, 1f, 0.5f, false, GrillStation::new);
     }
 
-    // ---- Zustand ----
+    // ---- State ----
 
     @Override
     protected void load(PersistentDataContainer state) {
@@ -180,7 +180,7 @@ public class GrillStation extends Station {
         seasoning = new ArrayList<>();
     }
 
-    // ---- Ablauf ----
+    // ---- Flow ----
 
     @Override
     public boolean isTicking() {
@@ -218,11 +218,11 @@ public class GrillStation extends Station {
             stopLoop();
             changed();
         } else if (world().getGameTime() - flipTick <= 14) {
-            updateDisplay(); // Wende-Animation
+            updateDisplay(); // turning animation
         }
     }
 
-    /** animateTick: Rauch und Flammen über der Glut */
+    /** animateTick: smoke and flames above the embers */
     private void particles(long serverTick) {
         ThreadLocalRandom random = ThreadLocalRandom.current();
         double x = position().x();
@@ -245,9 +245,9 @@ public class GrillStation extends Station {
         }
     }
 
-    // ---- Bedienung ----
+    // ---- Handling ----
 
-    /** Ölkanne und Gewürzflasche sind Stations-Items: am Grill benutzen statt daraufstellen */
+    /** Oil pot and seasoning bottle are station items: use them on the grill instead of placing them on top */
     @Override
     public boolean interceptPlacement(Player player, ItemStack held) {
         if (OilItems.isOilPot(held) || Skewers.is(held, SEASONING)) {
@@ -442,7 +442,7 @@ public class GrillStation extends Station {
         return output;
     }
 
-    /** FailedSkewerData: das Aussehen folgt dem Ausgangs-Spieß (failed_skewer_source = Index / 32) */
+    /** FailedSkewerData: the look follows the original skewer (failed_skewer_source = index / 32) */
     private ItemStack failed(ItemStack input, Key result) {
         ItemStack output = skewers.cookery().getItems().create(result, 1);
         if (output == null) {
@@ -458,7 +458,7 @@ public class GrillStation extends Station {
         return output;
     }
 
-    // ---- Abbauen ----
+    // ---- Breaking ----
 
     @Override
     public List<ItemStack> contents() {
@@ -483,9 +483,9 @@ public class GrillStation extends Station {
         stopLoop();
     }
 
-    // ---- Darstellung ----
+    // ---- Display ----
 
-    /** GrillBlock#getStateForPlacement/updateShape: Beine, wenn darunter kein fester Block ist */
+    /** GrillBlock#getStateForPlacement/updateShape: legs if there is no solid block below */
     private boolean legged() {
         Block below = world().getBlockAt(position().x(), position().y() - 1, position().z());
         return !below.getType().isSolid();
@@ -507,7 +507,7 @@ public class GrillStation extends Station {
                 continue;
             }
             ItemStack shown = shownSkewer(items[i]);
-            // GrillRenderer: Platz i, beim Wenden kurz anheben und um 180° um die Längsachse drehen
+            // GrillRenderer: slot i, when turning lift it briefly and rotate it by 180° around its long axis
             float height = 0.28f + new java.util.Random(position().hashCode() ^ (flips * 341873128712L) ^ i).nextFloat() * 0.10f;
             float lift = animating ? height * (float) Math.sin(Math.PI * progress) : 0f;
             float rotation = (float) Math.toRadians((animating ? flips - 1 + progress : flips) * 180f);
@@ -520,7 +520,7 @@ public class GrillStation extends Station {
         }
     }
 
-    /** Spieß, wie er auf dem Grill liegt: Garstufe 0 roh … 4 gar, 5 verkohlt; gare feste Spieße als gegrilltes Item */
+    /** Skewer as it lies on the grill: cooking stage 0 raw ... 4 cooked, 5 charred; cooked fixed skewers as the grilled item */
     @SuppressWarnings("UnstableApiUsage")
     private ItemStack shownSkewer(ItemStack input) {
         int stage = phase == 0 ? 0 : phase == 1 ? Math.min(4, 1 + flips) : phase == 2 ? 4 : 5;
@@ -537,7 +537,7 @@ public class GrillStation extends Station {
         } else {
             ModelProperties.set(copy, "kaleidoscope_grilling:skewer_cooking_stage", stage / 5.0f);
         }
-        // Nur Aussehen: Modell und Modell-Daten
+        // Look only: model and model data
         ItemStack display = modelStack(copy.getData(DataComponentTypes.ITEM_MODEL));
         if (copy.hasData(DataComponentTypes.CUSTOM_MODEL_DATA)) {
             display.setData(DataComponentTypes.CUSTOM_MODEL_DATA, copy.getData(DataComponentTypes.CUSTOM_MODEL_DATA));

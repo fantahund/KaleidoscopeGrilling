@@ -24,9 +24,9 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Gewürzflaschen (SeasoningData, SeasoningItem, PendingSeasoningItem): bis zu 8 Zutaten. Sobald grünes Chilipulver,
- * Sichuanpfeffer und Zwiebelpulver drin sind, wird die leere Flasche zur unfertigen Mischung; 4 s schütteln macht
- * daraus Spezialgewürz mit 16 Anwendungen.
+ * Seasoning bottles (SeasoningData, SeasoningItem, PendingSeasoningItem): up to 8 ingredients. As soon as green chili powder,
+ * Sichuan pepper and onion powder are in, the empty bottle becomes an unfinished mix; shaking it for 4 s turns
+ * it into special seasoning with 16 uses.
  */
 @SuppressWarnings("UnstableApiUsage")
 public final class Seasonings {
@@ -41,7 +41,7 @@ public final class Seasonings {
 
     private final KaleidoscopeCookery cookery;
     private final Skewers skewers;
-    /** Zutat -> Wirkung (speed, strength, duration, totem, vitality, numbness) aus grilling/skewers.json */
+    /** Ingredient -> effect (speed, strength, duration, totem, vitality, numbness) from grilling/skewers.json */
     private final Map<String, String> kinds;
     private final NamespacedKey ingredientsKey;
     private final NamespacedKey usesKey;
@@ -51,7 +51,7 @@ public final class Seasonings {
         this.cookery = cookery;
         this.skewers = skewers;
         this.kinds = Map.copyOf(kinds);
-        // Gleiche Schlüssel wie der Grill (GrillStation)
+        // Same keys as the grill (GrillStation)
         ingredientsKey = new NamespacedKey(plugin, "seasoning");
         usesKey = new NamespacedKey(plugin, "seasoning_uses");
         variantKey = new NamespacedKey(plugin, "seasoning_variant");
@@ -82,7 +82,7 @@ public final class Seasonings {
         return ingredients.containsAll(BASE);
     }
 
-    /** Neue Flasche mit diesen Zutaten (leer bzw. unfertig, je nach Grundzutaten) */
+    /** New bottle with these ingredients (empty or unfinished, depending on the base ingredients) */
     public @Nullable ItemStack bottle(List<String> ingredients) {
         ItemStack stack = cookery.getItems().create(hasBase(ingredients) ? PENDING : EMPTY, 1);
         if (stack != null) {
@@ -92,7 +92,7 @@ public final class Seasonings {
         return stack;
     }
 
-    /** PendingSeasoningItem#finishUsingItem: fertiges Spezialgewürz mit zufälliger Farbvariante */
+    /** PendingSeasoningItem#finishUsingItem: finished special seasoning with a random colour variant */
     public @Nullable ItemStack finish(ItemStack pending) {
         ItemStack stack = cookery.getItems().create(SPECIAL, 1);
         if (stack != null) {
@@ -112,7 +112,7 @@ public final class Seasonings {
     }
 
     /**
-     * Aussehen und Beschreibung: Füllstand und Schicht-Farben (leer/unfertig), Rest und Farbvariante (fertig).
+     * Look and description: fill level and layer colours (empty/unfinished), remaining uses and colour variant (finished).
      */
     public void refresh(ItemStack stack) {
         List<String> ingredients = ingredients(stack);
@@ -121,7 +121,7 @@ public final class Seasonings {
             ModelProperties.set(stack, "kaleidoscope_grilling:seasoning_remaining", Math.min(8, (MAX_USES - uses + 1) / 2) / 8.0f);
             ModelProperties.set(stack, "kaleidoscope_grilling:seasoning_variant",
                     stack.getPersistentDataContainer().getOrDefault(variantKey, PersistentDataType.INTEGER, 0) / 7.0f);
-            // Haltbarkeitsbalken wie SeasoningItem#getBarWidth
+            // Durability bar like SeasoningItem#getBarWidth
             stack.setData(DataComponentTypes.MAX_DAMAGE, MAX_USES);
             stack.setData(DataComponentTypes.DAMAGE, uses);
         } else {
@@ -134,7 +134,7 @@ public final class Seasonings {
             }
             ModelProperties.setColors(stack, colors);
             if (Skewers.is(stack, PENDING)) {
-                // Schütteln: 4 s gedrückt halten (getUseDuration 80), ohne Animation
+                // Shaking: hold for 4 s (getUseDuration 80), without animation
                 stack.setData(DataComponentTypes.CONSUMABLE, Consumable.consumable().consumeSeconds(4).animation(ItemUseAnimation.NONE)
                         .sound(Key.key("minecraft", "intentionally_empty")).hasConsumeParticles(false).build());
             }
@@ -183,8 +183,8 @@ public final class Seasonings {
     }
 
     /**
-     * FoodState#applySeasoning beim Essen gewürzter Speisen. Im Mod nur, solange das Essen heiß ist – ohne das
-     * Hitze-System wirkt das Gewürz immer.
+     * FoodState#applySeasoning when eating seasoned food. In the mod only while the food is hot - without the
+     * heat system the seasoning always works.
      */
     public void applyEffects(org.bukkit.entity.Player player, ItemStack food,
                              de.emrion.kaleidoscopeGrilling.effect.GrillingEffects effects) {

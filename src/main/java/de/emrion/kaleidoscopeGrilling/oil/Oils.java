@@ -14,9 +14,9 @@ import org.jspecify.annotations.Nullable;
 import java.util.List;
 
 /**
- * Ölsorten aus Grilling (OilPotCompat): Rapsöl, Chiliöl, Lava-Chiliöl als Eimer und in der Ölkanne.
- * Eine Ölkanne mit Ölsorte fasst 64 (8 pro Eimer), mit Fett wie in Cookery 256. Ohne das Hitze-System
- * unterscheiden sich die Sorten nur im Aussehen.
+ * Oil types from Grilling (OilPotCompat): canola oil, chili oil, magma chili oil as buckets and in the oil pot.
+ * An oil pot with an oil type holds 64 (8 per bucket), with fat 256 as in Cookery. Without the heat system
+ * the types only differ in their look.
  */
 public final class Oils {
 
@@ -30,7 +30,7 @@ public final class Oils {
     public Oils(Plugin plugin, KaleidoscopeCookery cookery) {
         this.cookery = cookery;
         this.typeKey = new NamespacedKey(plugin, "oil_type");
-        // HotFoodHandler#onTooltip: Sorte und Menge statt "Anzahl" (ohne die Wärme-Zeile, Heißessen gibt es hier nicht)
+        // HotFoodHandler#onTooltip: type and amount instead of "Count" (without the warmth line, there is no hot food here)
         OilItems.addLoreProvider((pot, count) -> {
             String type = type(pot);
             return type.isEmpty() || count <= 0 ? null : de.emrion.kaleidoscopeCookery.util.Lang.raw("tooltip.kaleidoscope_grilling.oil_pot." + type, count);
@@ -45,7 +45,7 @@ public final class Oils {
         return Key.key("kaleidoscope_grilling", type + "_oil_bucket");
     }
 
-    /** Ölsorte eines Eimers (OilFillingHandler#type), sonst null */
+    /** Oil type of a bucket (OilFillingHandler#type), otherwise null */
     public static @Nullable String bucketType(@Nullable ItemStack stack) {
         if (stack == null || stack.isEmpty()) {
             return null;
@@ -64,7 +64,7 @@ public final class Oils {
     }
 
     /**
-     * Ölsorte setzen (leer = Fett) und das Modell der Kanne anpassen (oil_type: 0,25 Raps, 0,5 Chili, 0,75 Lava-Chili).
+     * Set the oil type (empty = fat) and adjust the model of the pot (oil_type: 0.25 canola, 0.5 chili, 0.75 magma chili).
      */
     public void setType(ItemStack pot, String type) {
         if (type.isEmpty()) {
@@ -73,14 +73,14 @@ public final class Oils {
             pot.editPersistentDataContainer(pdc -> pdc.set(typeKey, PersistentDataType.STRING, type));
         }
         ModelProperties.set(pot, "kaleidoscope_grilling:oil_type", (TYPES.indexOf(type) + 1) * 0.25f);
-        OilItems.setOilCount(pot, OilItems.oilCount(pot)); // Lore mit der Sorte
+        OilItems.setOilCount(pot, OilItems.oilCount(pot)); // lore with the type
     }
 
     public int capacity(ItemStack pot) {
         return type(pot).isEmpty() ? OilItems.OIL_POT_MAX : FLUID_CAPACITY;
     }
 
-    /** OilPotCompat#fill: nur gleiche Sorte, leere Kanne nimmt jede */
+    /** OilPotCompat#fill: only the same type, an empty pot takes any */
     public boolean fill(ItemStack pot, String type, int amount) {
         String current = type(pot);
         int count = OilItems.oilCount(pot);
@@ -93,7 +93,7 @@ public final class Oils {
     }
 
     /**
-     * Ölsorten in der hingestellten Kanne (OilFillingHandler#onRightClickBlock): Öleimer gibt 8 Öl derselben Sorte.
+     * Oil types in the placed pot (OilFillingHandler#onRightClickBlock): an oil bucket gives 8 oil of the same type.
      */
     public de.emrion.kaleidoscopeCookery.station.oil.OilPotStation.Variants variants() {
         return new de.emrion.kaleidoscopeCookery.station.oil.OilPotStation.Variants() {
@@ -135,7 +135,7 @@ public final class Oils {
         };
     }
 
-    /** Öl verbrauchen; leer wird die Kanne wieder zur Fett-Kanne */
+    /** Use oil; when empty the pot becomes a fat pot again */
     public void consume(ItemStack pot, int amount) {
         int left = Math.max(0, OilItems.oilCount(pot) - amount);
         OilItems.setOilCount(pot, left);
