@@ -1,29 +1,32 @@
-Kaleidoscope Grilling – Server-Resourcepack (Addon zu Kaleidoscope Cookery)
+Kaleidoscope Grilling - server resource pack (addon to Kaleidoscope Cookery)
 ==========================================================================
 
-Dieses Resourcepack ist nicht-kommerziell. Es enthält veränderte Assets aus dem Minecraft-Mod Kaleidoscope Grilling.
 This resource pack is non-commercial. It contains modified assets from the Minecraft mod Kaleidoscope Grilling.
 
 Kaleidoscope Grilling (森罗物语：烟火)
   Copyright (c) 2026, breezeth
-  https://github.com/breezeth-CN/KaleidoscopeGrilling (Ordner common/ und neoforge-1.21.1/)
-  Lizenz der Assets: CC BY-NC-SA 4.0 – siehe LICENSE-ASSETS.txt
+  https://github.com/breezeth-CN/KaleidoscopeGrilling
+  (folders common/ and neoforge-1.21.1/, commit 9a1acdab27698457bec16c9362678e574895a28c)
+  Asset license: CC BY-NC-SA 4.0 - see LICENSE-ASSETS.txt
 
-  Enthält nach dessen Lizenz angepasste Assets aus Kaleidoscope Cookery,
-  Copyright (c) 2025, Kaleidoscope Official Production Team (CC BY-NC-SA 4.0).
+  It contains assets from Kaleidoscope Cookery adapted under that mod's license,
+  Copyright (c) 2025-2026, Kaleidoscope Official Production Team (CC BY-NC-SA 4.0).
 
-Lizenztext: https://creativecommons.org/licenses/by-nc-sa/4.0/
+License text: https://creativecommons.org/licenses/by-nc-sa/4.0/
 
-Änderungen / Changes
---------------------
-* Modelle auf das Format von Minecraft 26.3 konvertiert: NeoForge-Felder (render_type, loader) entfernt,
-  "neoforge:separate_transforms" als Item-Model-Definition mit select auf display_context aufgelöst,
-  Item-Overrides in range_dispatch-Definitionen auf custom_model_data umgewandelt.
-* Item-Model-Definitionen (assets/<namespace>/items/) für alle Modelle ergänzt.
-* Atlas-Einträge für zusätzliche Textur-Ordner ergänzt.
-* Deutsche Übersetzungen und zusätzliche Texte für das Server-Plugin ergänzt.
-* Bilder der Items für das Kochbuch aus den Modellen gerendert.
+Changes
+-------
+* Models converted to the Minecraft 26.3 format: NeoForge-only fields (render_type, loader) removed,
+  "neoforge:separate_transforms" resolved into item model definitions with select on display_context,
+  item overrides converted into range_dispatch definitions on custom_model_data.
+* Item model definitions (assets/<namespace>/items/) added for all models.
+* Skewer models: ingredient colours as tint indices, bite stages mapped to minecraft:use_duration; models that
+  use textures from both the item and block atlas redirected to copies under textures/item/_block/.
+* Atlas entries added for additional texture folders.
+* German translations and additional texts for the server plugin added.
+* The pepper tree (log, leaves, sapling) is replaced by an own pixel-art Sichuan pepper bush (6 growth stages)
+  and seed item, using colours from the original pepper leaf and Sichuan pepper textures.
+* Cookbook images of the items rendered from the models.
 
-Das Pack wird unter derselben Lizenz (CC BY-NC-SA 4.0) weitergegeben.
-Die Urheber des Mods unterstützen oder empfehlen dieses Projekt nicht.
+The pack is distributed under the same license (CC BY-NC-SA 4.0).
 No endorsement by the original authors is implied.

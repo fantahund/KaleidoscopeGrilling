@@ -37,6 +37,9 @@ The data is generated with the tools from KaleidoscopeCookery:
 
 ## Licenses
 
+This project uses a dual license like the mods: the source code is licensed under the **BSD 3-Clause License**
+(`LICENSE-CODE`), the resource pack under **CC BY-NC-SA 4.0** (`LICENSE-ASSETS`).
+
 - Mod code: BSD 3-Clause (`licenses/KaleidoscopeGrilling-LICENSE-CODE.txt`, `licenses/KaleidoscopeGrilling-NOTICE.txt`).
 - Mod assets: CC BY-NC-SA 4.0 (`resourcepack/custom/LICENSE-ASSETS.txt`), notes and changes in
   `resourcepack/custom/CREDITS.txt`. The pack is non-commercial and distributed under the same license.
