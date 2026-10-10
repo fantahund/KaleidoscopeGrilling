@@ -41,8 +41,9 @@ public class SkeweringListener implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     @SuppressWarnings("UnstableApiUsage")
     public void onInteract(PlayerInteractEvent event) {
-        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK) {
-            return;
+        if (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK
+                || event.useItemInHand() == org.bukkit.event.Event.Result.DENY) {
+            return; // z. B. Spieß auf einen Teller gestellt
         }
         Player player = event.getPlayer();
         PlayerInventory inventory = player.getInventory();

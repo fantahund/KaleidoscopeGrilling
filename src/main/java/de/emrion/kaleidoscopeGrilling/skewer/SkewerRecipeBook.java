@@ -151,7 +151,8 @@ public class SkewerRecipeBook implements Listener {
 
     @EventHandler(priority = EventPriority.LOW)
     public void onUse(PlayerInteractEvent event) {
-        if (event.getHand() != EquipmentSlot.HAND || (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK)) {
+        if (event.getHand() != EquipmentSlot.HAND || (event.getAction() != Action.RIGHT_CLICK_AIR && event.getAction() != Action.RIGHT_CLICK_BLOCK)
+                || event.useItemInHand() == org.bukkit.event.Event.Result.DENY) {
             return;
         }
         Player player = event.getPlayer();
@@ -216,6 +217,55 @@ public class SkewerRecipeBook implements Listener {
             giveBack(player, output);
         }
         player.getWorld().playSound(player.getLocation(), "kaleidoscope_grilling:action_success", SoundCategory.PLAYERS, 0.7f, 1.0f);
+    }
+
+    /** Mit einem Stock aufspießen (auch vom Rezept an der Wand) */
+    void craftFrom(Player player, ItemStack book, ItemStack stick) {
+        List<Set<Key>> slots = slots(book);
+        if (!slots.isEmpty()) {
+            craft(player, book, stick, slots);
+        }
+    }
+
+    /** Aufgezeichneter Spieß zum Anzeigen (roher Spieß bzw. Geheimspieß), sonst null */
+    @Nullable ItemStack recordedStack(ItemStack book) {
+        byte[] stored = book.getPersistentDataContainer().get(stackKey, PersistentDataType.BYTE_ARRAY);
+        if (stored != null) {
+            return ItemStack.deserializeBytes(stored);
+        }
+        String result = book.getPersistentDataContainer().get(resultKey, PersistentDataType.STRING);
+        return result == null ? null : create(Key.key(result));
+    }
+
+    /** SkewerRecipeBookItem#useOn: beschriebenes Rezept seitlich an einen Block hängen */
+    @EventHandler(priority = EventPriority.LOWEST)
+    public void onHang(PlayerInteractEvent event) {
+        if (event.getAction() != Action.RIGHT_CLICK_BLOCK || event.getHand() != EquipmentSlot.HAND || event.getClickedBlock() == null
+                || !java.util.Set.of(org.bukkit.block.BlockFace.NORTH, org.bukkit.block.BlockFace.SOUTH, org.bukkit.block.BlockFace.EAST,
+                org.bukkit.block.BlockFace.WEST).contains(event.getBlockFace())) {
+            return;
+        }
+        Player player = event.getPlayer();
+        ItemStack book = player.getInventory().getItemInMainHand();
+        if (!Skewers.is(book, BOOK) || slots(book).isEmpty() || !event.getClickedBlock().getType().isOccluding()) {
+            return;
+        }
+        org.bukkit.block.Block target = event.getClickedBlock().getRelative(event.getBlockFace());
+        var type = skewers.cookery().getStations().type("skewer_recipe");
+        if (type == null || !target.isReplaceable() || skewers.cookery().getStations().at(target) != null) {
+            return;
+        }
+        event.setUseItemInHand(org.bukkit.event.Event.Result.DENY);
+        event.setUseInteractedBlock(org.bukkit.event.Event.Result.DENY);
+        ItemStack one = book.asOne();
+        org.bukkit.block.BlockFace face = event.getBlockFace();
+        skewers.cookery().getStations().place(type, target, de.emrion.kaleidoscopeCookery.station.Facing.towards(player.getYaw()),
+                s -> ((SkewerRecipeWallStation) s).initFrom(one, face));
+        if (player.getGameMode() != GameMode.CREATIVE) {
+            book.subtract();
+        }
+        target.getWorld().playSound(target.getLocation().toCenterLocation(), org.bukkit.Sound.ENTITY_ITEM_FRAME_PLACE, SoundCategory.BLOCKS, 0.8f, 1f);
+        player.swingMainHand();
     }
 
     private @Nullable ItemStack create(Key id) {

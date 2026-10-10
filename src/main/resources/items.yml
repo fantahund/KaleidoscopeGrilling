@@ -669,6 +669,8 @@ items:
     food:
       nutrition: 1
       saturation: 0.0
+    max-stack: 1
+    sneak-place: true
   "kaleidoscope_grilling:skewer_recipe_book":
     model: "kaleidoscope_grilling:skewer_recipe_book"
     name: item.kaleidoscope_grilling.skewer_recipe_book

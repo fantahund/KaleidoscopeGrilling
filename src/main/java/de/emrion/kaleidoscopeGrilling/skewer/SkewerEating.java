@@ -38,7 +38,7 @@ public class SkewerEating implements Listener {
         this.effects = effects;
     }
 
-    private boolean isSkewer(ItemStack stack) {
+    public boolean isSkewer(ItemStack stack) {
         if (stack == null || stack.isEmpty()) {
             return false;
         }
@@ -99,9 +99,7 @@ public class SkewerEating implements Listener {
             return;
         }
         ItemStack eaten = held.asOne();
-        skewers.cookery().getFoodService().eatFromBag(player, eaten);
-        ingredientEffects(player, eaten);
-        seasonings.applyEffects(player, eaten, effects);
+        eatNow(player, eaten);
         if (player.getGameMode() != GameMode.CREATIVE) {
             held.subtract();
         }
@@ -116,6 +114,15 @@ public class SkewerEating implements Listener {
     }
 
     /** SecretSkewerItem#finishFoodAndEffect: die Zutaten wirken mit (Hunger/Sättigung bleiben wie beim Spieß) */
+    /**
+     * Spieß ohne Animation essen (Spießteller, frühes Loslassen): Nährwert, Effekte, Zutaten und Gewürz.
+     */
+    public void eatNow(Player player, ItemStack skewer) {
+        skewers.cookery().getFoodService().eatFromBag(player, skewer);
+        ingredientEffects(player, skewer);
+        seasonings.applyEffects(player, skewer, effects);
+    }
+
     private void ingredientEffects(Player player, ItemStack skewer) {
         if (!Skewers.is(skewer, Skewers.SECRET)) {
             return;
