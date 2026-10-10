@@ -38,6 +38,7 @@ public class KaleidoscopeGrilling extends JavaPlugin {
         cookery.getStations().registerItem(de.emrion.kaleidoscopeGrilling.seasoning.Seasonings.SPECIAL, bottleType);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkewerEating(skewers, seasonings, effects), this);
         var oils = new de.emrion.kaleidoscopeGrilling.oil.Oils(this, cookery);
+        de.emrion.kaleidoscopeCookery.station.oil.OilPotStation.setVariants(oils.variants());
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.oil.OilListener(oils), this);
         cookery.getStations().register(de.emrion.kaleidoscopeGrilling.oil.BigVatStation.type(this, oils));
         cookery.getStations().register(de.emrion.kaleidoscopeGrilling.oil.OilPressStation.type(this, oils));

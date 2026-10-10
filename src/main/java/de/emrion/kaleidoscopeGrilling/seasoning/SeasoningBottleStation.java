@@ -178,6 +178,11 @@ public class SeasoningBottleStation extends Station implements PlacedFromItem {
     @SuppressWarnings("UnstableApiUsage")
     public void updateDisplay() {
         hidePartsStartingWith("bottle_", bottles.size());
+        // SeasoningBottleBlock#SHAPES: eine Flasche schmal, ab zwei fast der ganze Block
+        float width = bottles.size() > 1 ? 0.95f : 0.5f;
+        if (Math.abs(root().getInteractionWidth() - width) > 0.001f) {
+            root().setInteractionWidth(width);
+        }
         if (bottles.isEmpty()) {
             return;
         }

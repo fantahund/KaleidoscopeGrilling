@@ -86,6 +86,49 @@ public final class Oils {
         return true;
     }
 
+    /**
+     * Ölsorten in der hingestellten Kanne (OilFillingHandler#onRightClickBlock): Öleimer gibt 8 Öl derselben Sorte.
+     */
+    public de.emrion.kaleidoscopeCookery.station.oil.OilPotStation.Variants variants() {
+        return new de.emrion.kaleidoscopeCookery.station.oil.OilPotStation.Variants() {
+            @Override
+            public String of(ItemStack pot) {
+                return type(pot);
+            }
+
+            @Override
+            public void apply(ItemStack pot, String variant) {
+                setType(pot, variant);
+            }
+
+            @Override
+            public List<Key> models(String variant) {
+                Key model = Key.key("kaleidoscope_grilling", "block/oil_pot_" + variant);
+                return variant.equals("premium_chili") ? List.of(model, Key.key("kaleidoscope_grilling", "block/oil_pot_premium_glow")) : List.of(model);
+            }
+
+            @Override
+            public boolean interact(de.emrion.kaleidoscopeCookery.station.oil.OilPotStation pot, org.bukkit.entity.Player player, ItemStack held) {
+                String type = bucketType(held);
+                if (type == null) {
+                    return false;
+                }
+                String current = pot.variant();
+                if (pot.oil() > FLUID_CAPACITY - PER_BUCKET || (current.isEmpty() ? pot.oil() > 0 : !current.equals(type))) {
+                    player.sendActionBar(de.emrion.kaleidoscopeCookery.util.Lang.raw("message.kaleidoscope_grilling.oil_type_mismatch"));
+                    return true;
+                }
+                pot.setContent(pot.oil() + PER_BUCKET, type);
+                org.bukkit.Sound sound = type.equals("premium_chili") ? org.bukkit.Sound.ITEM_BUCKET_EMPTY_LAVA : org.bukkit.Sound.ITEM_BUCKET_EMPTY;
+                pot.world().playSound(pot.center(), sound, org.bukkit.SoundCategory.BLOCKS, 0.9f, 0.8f + 0.5f * pot.oil() / FLUID_CAPACITY);
+                if (player.getGameMode() != org.bukkit.GameMode.CREATIVE) {
+                    player.getInventory().setItemInMainHand(ItemStack.of(org.bukkit.Material.BUCKET));
+                }
+                return true;
+            }
+        };
+    }
+
     /** Öl verbrauchen; leer wird die Kanne wieder zur Fett-Kanne */
     public void consume(ItemStack pot, int amount) {
         int left = Math.max(0, OilItems.oilCount(pot) - amount);
