@@ -18,6 +18,9 @@ public class KaleidoscopeGrilling extends JavaPlugin {
         cookery = KaleidoscopeCookery.getInstance();
         // Items, Rezepte (inkl. Änderungen an Cookery-Rezepten), Resourcepack, Übersetzungen und Kochbuch-Bilder beim Core anmelden
         cookery.registerAddon(this);
+        de.emrion.kaleidoscopeGrilling.world.GrillingCrops.register(cookery);
+        getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.world.GrillingDrops(cookery), this);
+        getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.world.FortressHouttuynia(this, cookery), this);
         getLogger().info("Grilling-Addon für KaleidoscopeCookery " + cookery.getPluginMeta().getVersion() + " geladen");
     }
 
