@@ -1,18 +1,17 @@
 {
   "model": {
     "type": "minecraft:range_dispatch",
-    "property": "minecraft:custom_model_data",
-    "index": 6,
+    "property": "minecraft:use_duration",
     "entries": [
       {
-        "threshold": 0.25,
+        "threshold": 19.17,
         "model": {
           "type": "minecraft:model",
           "model": "kaleidoscope_grilling:item/fixed_skewers/fried_egg/fried_egg_skewer_bite_1"
         }
       },
       {
-        "threshold": 0.5,
+        "threshold": 80.0,
         "model": {
           "type": "minecraft:model",
           "model": "kaleidoscope_grilling:item/fixed_skewers/fried_egg/fried_egg_skewer_bite_2"

@@ -13,6 +13,9 @@ items:
     model: "kaleidoscope_grilling:braised_chicken_wings"
     name: item.kaleidoscope_grilling.braised_chicken_wings
     maxim-lines: 1
+    food:
+      nutrition: 10
+      saturation: 16.0
   "kaleidoscope_grilling:canola_oil_brush":
     model: "kaleidoscope_grilling:canola_oil_brush"
     name: item.kaleidoscope_grilling.canola_oil_brush
@@ -34,14 +37,32 @@ items:
   "kaleidoscope_grilling:chicken_wing":
     model: "kaleidoscope_grilling:chicken_wing"
     name: item.kaleidoscope_grilling.chicken_wing
+    food:
+      nutrition: 2
+      saturation: 0.24
   "kaleidoscope_grilling:cold_houttuynia":
     model: "kaleidoscope_grilling:cold_houttuynia"
     name: item.kaleidoscope_grilling.cold_houttuynia
     maxim-lines: 1
+    food:
+      nutrition: 6
+      saturation: 12.0
+      effects:
+        - effect: "minecraft:fire_resistance"
+          duration: 1200
   "kaleidoscope_grilling:dark_grilling":
     model: "kaleidoscope_grilling:dark_grilling"
     name: item.kaleidoscope_grilling.dark_grilling
     maxim-lines: 1
+    food:
+      nutrition: 1
+      saturation: 0.0
+      effects:
+        - effect: "minecraft:blindness"
+          duration: 200
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:dragon_egg_powder":
     model: "kaleidoscope_grilling:dragon_egg_powder"
     name: item.kaleidoscope_grilling.dragon_egg_powder
@@ -55,6 +76,9 @@ items:
     model: "kaleidoscope_grilling:green_pepper_squid_tentacles"
     name: item.kaleidoscope_grilling.green_pepper_squid_tentacles
     maxim-lines: 1
+    food:
+      nutrition: 8
+      saturation: 9.6
   "kaleidoscope_grilling:grill":
     model: "kaleidoscope_grilling:grill"
     name: block.kaleidoscope_grilling.grill
@@ -62,81 +86,252 @@ items:
     model: "kaleidoscope_grilling:grilled_beef_skewer"
     name: item.kaleidoscope_grilling.grilled_beef_skewer
     maxim-lines: 1
+    food:
+      nutrition: 5
+      saturation: 6.0
+      always-edible: true
+      effects:
+        - effect: "minecraft:strength"
+          duration: 200
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_bun_slice_skewer":
     model: "kaleidoscope_grilling:grilled_bun_slice_skewer"
     name: item.kaleidoscope_grilling.grilled_bun_slice_skewer
     maxim-lines: 1
+    food:
+      nutrition: 5
+      saturation: 6.0
+      always-edible: true
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_caterpillar_skewer":
     model: "kaleidoscope_grilling:grilled_caterpillar_skewer"
     name: item.kaleidoscope_grilling.grilled_caterpillar_skewer
     maxim-lines: 1
+    food:
+      nutrition: 12
+      saturation: 2.0
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:flatulence"
+          duration: 300
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_chicken_skin_skewer":
     model: "kaleidoscope_grilling:grilled_chicken_skin_skewer"
     name: item.kaleidoscope_grilling.grilled_chicken_skin_skewer
     maxim-lines: 1
+    food:
+      nutrition: 4
+      saturation: 4.0
+      always-edible: true
+      effects:
+        - effect: "minecraft:speed"
+          duration: 400
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_ender_pearl_skewer":
     model: "kaleidoscope_grilling:grilled_ender_pearl_skewer"
     name: item.kaleidoscope_grilling.grilled_ender_pearl_skewer
     maxim-lines: 1
+    food:
+      nutrition: 4
+      saturation: 0.8
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:projectile_dodge"
+          duration: 600
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_fish_skewer":
     model: "kaleidoscope_grilling:grilled_fish_skewer"
     name: item.kaleidoscope_grilling.grilled_fish_skewer
     maxim-lines: 1
+    food:
+      nutrition: 6
+      saturation: 5.4
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:tundra_strider"
+          duration: 600
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_fried_egg_skewer":
     model: "kaleidoscope_grilling:grilled_fried_egg_skewer"
     name: item.kaleidoscope_grilling.grilled_fried_egg_skewer
     maxim-lines: 1
+    food:
+      nutrition: 4
+      saturation: 3.0
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:sulfur"
+          duration: 1200
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_gluten_skewer":
     model: "kaleidoscope_grilling:grilled_gluten_skewer"
     name: item.kaleidoscope_grilling.grilled_gluten_skewer
     maxim-lines: 1
+    food:
+      nutrition: 6
+      saturation: 1.2
+      always-edible: true
+      effects:
+        - effect: "minecraft:haste"
+          duration: 600
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_golden_skewer":
     model: "kaleidoscope_grilling:grilled_golden_skewer"
     name: item.kaleidoscope_grilling.grilled_golden_skewer
     maxim-lines: 1
+    food:
+      nutrition: 12
+      saturation: 28.8
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
+      effects:
+        - effect: "kaleidoscope_grilling:invincible"
+          duration: 200
   "kaleidoscope_grilling:grilled_lamb_skewer":
     model: "kaleidoscope_grilling:grilled_lamb_skewer"
     name: item.kaleidoscope_grilling.grilled_lamb_skewer
     maxim-lines: 1
+    food:
+      nutrition: 8
+      saturation: 12.8
+      effects:
+        - effect: "kaleidoscope_cookery:warmth"
+          duration: 900
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_meat_and_bone_skewer":
     model: "kaleidoscope_grilling:grilled_meat_and_bone_skewer"
     name: item.kaleidoscope_grilling.grilled_meat_and_bone_skewer
     maxim-lines: 1
+    food:
+      nutrition: 4
+      saturation: 4.0
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:vigor"
+          duration: 400
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_meatball_skewer":
     model: "kaleidoscope_grilling:grilled_meatball_skewer"
     name: item.kaleidoscope_grilling.grilled_meatball_skewer
     maxim-lines: 1
+    food:
+      nutrition: 12
+      saturation: 21.0
+      always-edible: true
+      effects:
+        - effect: "minecraft:strength"
+          duration: 200
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_mid_wing_skewer":
     model: "kaleidoscope_grilling:grilled_mid_wing_skewer"
     name: item.kaleidoscope_grilling.grilled_mid_wing_skewer
     maxim-lines: 1
+    food:
+      nutrition: 7
+      saturation: 3.0
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:mustard"
+          duration: 900
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_mushroom_skewer":
     model: "kaleidoscope_grilling:grilled_mushroom_skewer"
     name: item.kaleidoscope_grilling.grilled_mushroom_skewer
     maxim-lines: 1
+    food:
+      nutrition: 5
+      saturation: 5.5
+      always-edible: true
+      effects:
+        - effect: "minecraft:night_vision"
+          duration: 600
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_pork_belly_skewer":
     model: "kaleidoscope_grilling:grilled_pork_belly_skewer"
     name: item.kaleidoscope_grilling.grilled_pork_belly_skewer
     maxim-lines: 1
+    food:
+      nutrition: 5
+      saturation: 6.0
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:vigor"
+          duration: 600
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_potato_slice_skewer":
     model: "kaleidoscope_grilling:grilled_potato_slice_skewer"
     name: item.kaleidoscope_grilling.grilled_potato_slice_skewer
     maxim-lines: 1
+    food:
+      nutrition: 6
+      saturation: 2.0
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:warmth"
+          duration: 600
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_slime_skewer":
     model: "kaleidoscope_grilling:grilled_slime_skewer"
     name: item.kaleidoscope_grilling.grilled_slime_skewer
     maxim-lines: 1
+    food:
+      nutrition: 4
+      saturation: 0.0
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:hinder"
+          duration: 900
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_squid_tentacle_skewer":
     model: "kaleidoscope_grilling:grilled_squid_tentacle_skewer"
     name: item.kaleidoscope_grilling.grilled_squid_tentacle_skewer
     maxim-lines: 1
+    food:
+      nutrition: 5
+      saturation: 4.0
+      always-edible: true
+      effects:
+        - effect: "minecraft:water_breathing"
+          duration: 600
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:grilled_sweet_potato_sheet_skewer":
     model: "kaleidoscope_grilling:grilled_sweet_potato_sheet_skewer"
     name: item.kaleidoscope_grilling.grilled_sweet_potato_sheet_skewer
     maxim-lines: 1
+    food:
+      nutrition: 6
+      saturation: 14.0
+      always-edible: true
+      effects:
+        - effect: "kaleidoscope_cookery:preservation"
+          duration: 900
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:houttuynia":
     model: "kaleidoscope_grilling:houttuynia"
     name: item.kaleidoscope_grilling.houttuynia
+    food:
+      nutrition: 2
+      saturation: 0.8
   "kaleidoscope_grilling:houttuynia_powder":
     model: "kaleidoscope_grilling:houttuynia_powder"
     name: item.kaleidoscope_grilling.houttuynia_powder
@@ -144,6 +339,9 @@ items:
     model: "kaleidoscope_grilling:houttuynia_stir_fried_pork"
     name: item.kaleidoscope_grilling.houttuynia_stir_fried_pork
     maxim-lines: 1
+    food:
+      nutrition: 9
+      saturation: 12.6
   "kaleidoscope_grilling:minced_houttuynia":
     model: "kaleidoscope_grilling:minced_houttuynia"
     name: item.kaleidoscope_grilling.minced_houttuynia
@@ -151,6 +349,15 @@ items:
     model: "kaleidoscope_grilling:mysterious_skewer"
     name: item.kaleidoscope_grilling.mysterious_skewer
     maxim-lines: 1
+    food:
+      nutrition: 2
+      saturation: 0.0
+      effects:
+        - effect: "minecraft:nausea"
+          duration: 100
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:oil_cake":
     model: "kaleidoscope_grilling:oil_cake"
     name: item.kaleidoscope_grilling.oil_cake
@@ -170,6 +377,12 @@ items:
     model: "kaleidoscope_grilling:ordinary_skewer"
     name: item.kaleidoscope_grilling.ordinary_skewer
     maxim-lines: 1
+    food:
+      nutrition: 5
+      saturation: 4.6
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:pending_seasoning":
     model: "kaleidoscope_grilling:pending_seasoning"
     name: item.kaleidoscope_grilling.pending_seasoning
@@ -177,6 +390,12 @@ items:
     model: "kaleidoscope_grilling:pepper_honey"
     name: item.kaleidoscope_grilling.pepper_honey
     maxim-lines: 1
+    food:
+      nutrition: 4
+      saturation: 2.0
+      effects:
+        - effect: "kaleidoscope_grilling:numb"
+          duration: 1200
   "kaleidoscope_grilling:pepper_leaves":
     model: "kaleidoscope_grilling:pepper_leaves"
     name: block.kaleidoscope_grilling.pepper_leaves
@@ -190,6 +409,9 @@ items:
     model: "kaleidoscope_grilling:potato_beef_stew"
     name: item.kaleidoscope_grilling.potato_beef_stew
     maxim-lines: 1
+    food:
+      nutrition: 12
+      saturation: 21.6
   "kaleidoscope_grilling:potato_slice":
     model: "kaleidoscope_grilling:potato_slice"
     name: item.kaleidoscope_grilling.potato_slice
@@ -202,60 +424,177 @@ items:
   "kaleidoscope_grilling:raw_beef_skewer":
     model: "kaleidoscope_grilling:raw_beef_skewer"
     name: item.kaleidoscope_grilling.raw_beef_skewer
+    food:
+      nutrition: 2
+      saturation: 1.2
+      always-edible: true
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_bun_slice_skewer":
     model: "kaleidoscope_grilling:raw_bun_slice_skewer"
     name: item.kaleidoscope_grilling.raw_bun_slice_skewer
+    food:
+      nutrition: 2
+      saturation: 1.2
+      always-edible: true
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_caterpillar_skewer":
     model: "kaleidoscope_grilling:raw_caterpillar_skewer"
     name: item.kaleidoscope_grilling.raw_caterpillar_skewer
+    food:
+      nutrition: 6
+      saturation: 0.5
+      always-edible: true
+      effects:
+        - effect: "minecraft:nausea"
+          duration: 60
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_chicken_skin_skewer":
     model: "kaleidoscope_grilling:raw_chicken_skin_skewer"
     name: item.kaleidoscope_grilling.raw_chicken_skin_skewer
+    food:
+      nutrition: 2
+      saturation: 1.0
+      always-edible: true
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_ender_pearl_skewer":
     model: "kaleidoscope_grilling:raw_ender_pearl_skewer"
     name: item.kaleidoscope_grilling.raw_ender_pearl_skewer
+    food:
+      nutrition: 2
+      saturation: 0.2
+      always-edible: true
+      effects:
+        - effect: "minecraft:nausea"
+          duration: 60
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_fish_skewer":
     model: "kaleidoscope_grilling:raw_fish_skewer"
     name: item.kaleidoscope_grilling.raw_fish_skewer
+    food:
+      nutrition: 3
+      saturation: 1.35
+      always-edible: true
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_fried_egg_skewer":
     model: "kaleidoscope_grilling:raw_fried_egg_skewer"
     name: item.kaleidoscope_grilling.raw_fried_egg_skewer
+    food:
+      nutrition: 2
+      saturation: 0.75
+      always-edible: true
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_gluten_skewer":
     model: "kaleidoscope_grilling:raw_gluten_skewer"
     name: item.kaleidoscope_grilling.raw_gluten_skewer
+    food:
+      nutrition: 3
+      saturation: 0.3
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_golden_skewer":
     model: "kaleidoscope_grilling:raw_golden_skewer"
     name: item.kaleidoscope_grilling.raw_golden_skewer
+    food:
+      nutrition: 6
+      saturation: 14.4
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_lamb_skewer":
     model: "kaleidoscope_grilling:raw_lamb_skewer"
     name: item.kaleidoscope_grilling.raw_lamb_skewer
+    food:
+      nutrition: 4
+      saturation: 6.4
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_mantou_slice":
     model: "kaleidoscope_grilling:raw_mantou_slice"
     name: item.kaleidoscope_grilling.raw_mantou_slice
   "kaleidoscope_grilling:raw_meat_and_bone_skewer":
     model: "kaleidoscope_grilling:raw_meat_and_bone_skewer"
     name: item.kaleidoscope_grilling.raw_meat_and_bone_skewer
+    food:
+      nutrition: 2
+      saturation: 1.0
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_meatball_skewer":
     model: "kaleidoscope_grilling:raw_meatball_skewer"
     name: item.kaleidoscope_grilling.raw_meatball_skewer
+    food:
+      nutrition: 4
+      saturation: 3.5
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_mid_wing_skewer":
     model: "kaleidoscope_grilling:raw_mid_wing_skewer"
     name: item.kaleidoscope_grilling.raw_mid_wing_skewer
+    food:
+      nutrition: 3
+      saturation: 0.64
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_mushroom_skewer":
     model: "kaleidoscope_grilling:raw_mushroom_skewer"
     name: item.kaleidoscope_grilling.raw_mushroom_skewer
+    food:
+      nutrition: 2
+      saturation: 1.1
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_pork_belly_skewer":
     model: "kaleidoscope_grilling:raw_pork_belly_skewer"
     name: item.kaleidoscope_grilling.raw_pork_belly_skewer
+    food:
+      nutrition: 2
+      saturation: 1.2
+      always-edible: true
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_potato_slice_skewer":
     model: "kaleidoscope_grilling:raw_potato_slice_skewer"
     name: item.kaleidoscope_grilling.raw_potato_slice_skewer
+    food:
+      nutrition: 3
+      saturation: 0.5
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_slime_skewer":
     model: "kaleidoscope_grilling:raw_slime_skewer"
     name: item.kaleidoscope_grilling.raw_slime_skewer
+    food:
+      nutrition: 2
+      saturation: 0.0
+      always-edible: true
+      effects:
+        - effect: "minecraft:nausea"
+          duration: 60
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_squid_tentacle_skewer":
     model: "kaleidoscope_grilling:raw_squid_tentacle_skewer"
     name: item.kaleidoscope_grilling.raw_squid_tentacle_skewer
+    food:
+      nutrition: 2
+      saturation: 0.8
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:raw_sweet_potato_sheet":
     model: "kaleidoscope_grilling:raw_sweet_potato_sheet"
     name: item.kaleidoscope_grilling.raw_sweet_potato_sheet
@@ -263,6 +602,12 @@ items:
   "kaleidoscope_grilling:raw_sweet_potato_sheet_skewer":
     model: "kaleidoscope_grilling:raw_sweet_potato_sheet_skewer"
     name: item.kaleidoscope_grilling.raw_sweet_potato_sheet_skewer
+    food:
+      nutrition: 3
+      saturation: 3.5
+      always-edible: true
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:red_chili_powder":
     model: "kaleidoscope_grilling:red_chili_powder"
     name: item.kaleidoscope_grilling.red_chili_powder
@@ -270,14 +615,31 @@ items:
     model: "kaleidoscope_grilling:red_sweet_potato_porridge"
     name: item.kaleidoscope_grilling.red_sweet_potato_porridge
     maxim-lines: 1
+    food:
+      nutrition: 14
+      saturation: 2.0
+      effects:
+        - effect: "kaleidoscope_cookery:flatulence"
+          duration: 900
+        - effect: "kaleidoscope_cookery:warmth"
+          duration: 900
   "kaleidoscope_grilling:roasted_chicken_wing":
     model: "kaleidoscope_grilling:roasted_chicken_wing"
     name: item.kaleidoscope_grilling.roasted_chicken_wing
     maxim-lines: 1
+    food:
+      nutrition: 5
+      saturation: 1.2
   "kaleidoscope_grilling:roasted_sweet_potato":
     model: "kaleidoscope_grilling:roasted_sweet_potato"
     name: item.kaleidoscope_grilling.roasted_sweet_potato
     maxim-lines: 1
+    food:
+      nutrition: 6
+      saturation: 2.4
+      effects:
+        - effect: "kaleidoscope_cookery:warmth"
+          duration: 600
   "kaleidoscope_grilling:secret_chili_oil_brush":
     model: "kaleidoscope_grilling:secret_chili_oil_brush"
     name: item.kaleidoscope_grilling.secret_chili_oil_brush
@@ -287,13 +649,28 @@ items:
   "kaleidoscope_grilling:secret_skewer":
     model: "kaleidoscope_grilling:secret_skewer"
     name: item.kaleidoscope_grilling.secret_skewer
+    food:
+      nutrition: 1
+      saturation: 0.0
+      always-edible: true
+      eat-seconds: 5.0
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:sichuan_pepper":
     model: "kaleidoscope_grilling:sichuan_pepper"
     name: item.kaleidoscope_grilling.sichuan_pepper
     tooltip: tooltip.kaleidoscope_grilling.sichuan_pepper
+    food:
+      nutrition: 1
+      saturation: 0.5
+      effects:
+        - effect: "kaleidoscope_grilling:numb"
+          duration: 200
   "kaleidoscope_grilling:skewer_plate":
     model: "kaleidoscope_grilling:skewer_plate"
     name: item.kaleidoscope_grilling.skewer_plate
+    food:
+      nutrition: 1
+      saturation: 0.0
   "kaleidoscope_grilling:skewer_recipe_book":
     model: "kaleidoscope_grilling:skewer_recipe_book"
     name: item.kaleidoscope_grilling.skewer_recipe_book
@@ -301,6 +678,47 @@ items:
     model: "kaleidoscope_grilling:sour_spicy_noodles"
     name: item.kaleidoscope_grilling.sour_spicy_noodles
     maxim-lines: 1
+    food:
+      nutrition: 10
+      saturation: 12.0
+      effects:
+        - effect: "kaleidoscope_cookery:warmth"
+          duration: 900
+        - effect: "minecraft:strength"
+          duration: 10
+        - effect: "kaleidoscope_cookery:vigor"
+          duration: 30
+        - effect: "minecraft:speed"
+          duration: 20
+        - effect: "kaleidoscope_cookery:mustard"
+          duration: 45
+        - effect: "minecraft:water_breathing"
+          duration: 30
+        - effect: "kaleidoscope_cookery:tundra_strider"
+          duration: 30
+        - effect: "kaleidoscope_cookery:preservation"
+          duration: 45
+        - effect: "kaleidoscope_cookery:warmth"
+          duration: 30
+        - effect: "kaleidoscope_cookery:flatulence"
+          duration: 15
+        - effect: "minecraft:night_vision"
+          duration: 30
+        - effect: "kaleidoscope_cookery:projectile_dodge"
+          duration: 30
+        - effect: "minecraft:strength"
+          duration: 10
+        - effect: "kaleidoscope_cookery:hinder"
+          duration: 45
+        - effect: "kaleidoscope_cookery:vigor"
+          duration: 20
+        - effect: "kaleidoscope_cookery:sulfur"
+          duration: 60
+        - effect: "minecraft:haste"
+          duration: 30
+      always-edible: true
+      eat-seconds: 4.5
+      eat-sound: "minecraft:intentionally_empty"
   "kaleidoscope_grilling:special_seasoning":
     model: "kaleidoscope_grilling:special_seasoning"
     name: item.kaleidoscope_grilling.special_seasoning
@@ -311,9 +729,15 @@ items:
     model: "kaleidoscope_grilling:sugared_tomato"
     name: item.kaleidoscope_grilling.sugared_tomato
     maxim-lines: 1
+    food:
+      nutrition: 6
+      saturation: 7.8
   "kaleidoscope_grilling:sweet_potato":
     model: "kaleidoscope_grilling:sweet_potato"
     name: item.kaleidoscope_grilling.sweet_potato
+    food:
+      nutrition: 3
+      saturation: 0.6
   "kaleidoscope_grilling:sweet_potato_powder":
     model: "kaleidoscope_grilling:sweet_potato_powder"
     name: item.kaleidoscope_grilling.sweet_potato_powder
@@ -326,3 +750,7 @@ items:
   "kaleidoscope_grilling:wedding_candy":
     model: "kaleidoscope_grilling:wedding_candy"
     name: item.kaleidoscope_grilling.wedding_candy
+    food:
+      nutrition: 20
+      saturation: 20.0
+      always-edible: true

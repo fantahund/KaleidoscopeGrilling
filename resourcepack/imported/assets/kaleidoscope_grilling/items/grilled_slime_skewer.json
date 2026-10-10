@@ -8,18 +8,17 @@
         "threshold": 0.2,
         "model": {
           "type": "minecraft:range_dispatch",
-          "property": "minecraft:custom_model_data",
-          "index": 6,
+          "property": "minecraft:use_duration",
           "entries": [
             {
-              "threshold": 0.25,
+              "threshold": 19.17,
               "model": {
                 "type": "minecraft:model",
                 "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_1_bite_1"
               }
             },
             {
-              "threshold": 0.5,
+              "threshold": 80.0,
               "model": {
                 "type": "minecraft:model",
                 "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_1_bite_2"
@@ -36,18 +35,17 @@
         "threshold": 0.4,
         "model": {
           "type": "minecraft:range_dispatch",
-          "property": "minecraft:custom_model_data",
-          "index": 6,
+          "property": "minecraft:use_duration",
           "entries": [
             {
-              "threshold": 0.25,
+              "threshold": 19.17,
               "model": {
                 "type": "minecraft:model",
                 "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_2_bite_1"
               }
             },
             {
-              "threshold": 0.5,
+              "threshold": 80.0,
               "model": {
                 "type": "minecraft:model",
                 "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_2_bite_2"
@@ -64,18 +62,17 @@
         "threshold": 0.6,
         "model": {
           "type": "minecraft:range_dispatch",
-          "property": "minecraft:custom_model_data",
-          "index": 6,
+          "property": "minecraft:use_duration",
           "entries": [
             {
-              "threshold": 0.25,
+              "threshold": 19.17,
               "model": {
                 "type": "minecraft:model",
                 "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_3_bite_1"
               }
             },
             {
-              "threshold": 0.5,
+              "threshold": 80.0,
               "model": {
                 "type": "minecraft:model",
                 "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_3_bite_2"
@@ -92,18 +89,17 @@
         "threshold": 0.8,
         "model": {
           "type": "minecraft:range_dispatch",
-          "property": "minecraft:custom_model_data",
-          "index": 6,
+          "property": "minecraft:use_duration",
           "entries": [
             {
-              "threshold": 0.25,
+              "threshold": 19.17,
               "model": {
                 "type": "minecraft:model",
                 "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_4_bite_1"
               }
             },
             {
-              "threshold": 0.5,
+              "threshold": 80.0,
               "model": {
                 "type": "minecraft:model",
                 "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_4_bite_2"
@@ -119,18 +115,17 @@
     ],
     "fallback": {
       "type": "minecraft:range_dispatch",
-      "property": "minecraft:custom_model_data",
-      "index": 6,
+      "property": "minecraft:use_duration",
       "entries": [
         {
-          "threshold": 0.25,
+          "threshold": 19.17,
           "model": {
             "type": "minecraft:model",
             "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_bite_1"
           }
         },
         {
-          "threshold": 0.5,
+          "threshold": 80.0,
           "model": {
             "type": "minecraft:model",
             "model": "kaleidoscope_grilling:item/fixed_skewers/slime/slime_skewer_bite_2"

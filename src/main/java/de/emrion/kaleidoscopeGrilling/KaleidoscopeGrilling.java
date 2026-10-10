@@ -28,6 +28,9 @@ public class KaleidoscopeGrilling extends JavaPlugin {
         skewers.setRecipes(skewerRecipes);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkeweringListener(skewers, skewerRecipes), this);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkewerRecipeBook(this, skewers, skewerRecipes), this);
+        getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkewerEating(skewers), this);
+        de.emrion.kaleidoscopeGrilling.grill.GrillStation.init(this, skewers, skewerRecipes);
+        cookery.getStations().register(de.emrion.kaleidoscopeGrilling.grill.GrillStation.type());
         getLogger().info(skewerRecipes.recipes().size() + " Spieß-Rezepte geladen");
         getLogger().info("Grilling-Addon für KaleidoscopeCookery " + cookery.getPluginMeta().getVersion() + " geladen");
     }

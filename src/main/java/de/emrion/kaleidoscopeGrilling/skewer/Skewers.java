@@ -209,6 +209,38 @@ public final class Skewers {
         }
         ModelProperties.setColors(skewer, colors);
         skewer.setData(DataComponentTypes.LORE, ItemLore.lore(lore(skewer, id, ingredients)));
+        if (id.equals(SECRET)) {
+            secretFood(skewer, ingredients);
+        }
+    }
+
+    /**
+     * SecretSkewerItem#getFoodProperties: 60 % der Nährwerte der Zutaten (doppelte Zutaten nochmals 80 %),
+     * Sättigung nach deren Mittel; roh nur die Hälfte.
+     */
+    private void secretFood(ItemStack skewer, List<ItemStack> ingredients) {
+        int totalNutrition = 0;
+        float weightedSaturation = 0;
+        for (ItemStack ingredient : ingredients) {
+            io.papermc.paper.datacomponent.item.FoodProperties food = ingredient.getData(DataComponentTypes.FOOD);
+            if (food != null) {
+                totalNutrition += food.nutrition();
+                weightedSaturation += food.saturation() * 0.5f;
+            }
+        }
+        int nutrition = 1;
+        float modifier = 0;
+        if (totalNutrition > 0) {
+            boolean duplicates = ingredients.stream().map(Skewers::idOf).distinct().count() < ingredients.size();
+            nutrition = Math.max(1, (int) Math.floor(totalNutrition * 0.6f * (duplicates ? 0.8f : 1f)));
+            modifier = Math.max(0, weightedSaturation / totalNutrition);
+            if (!isCooked(skewer)) {
+                nutrition = Math.max(1, (int) Math.floor(nutrition * 0.5f));
+                modifier *= 0.5f;
+            }
+        }
+        skewer.setData(DataComponentTypes.FOOD, io.papermc.paper.datacomponent.item.FoodProperties.food()
+                .nutrition(nutrition).saturation(nutrition * modifier * 2).canAlwaysEat(true).build());
     }
 
     private List<Component> lore(ItemStack skewer, Key id, List<ItemStack> ingredients) {
