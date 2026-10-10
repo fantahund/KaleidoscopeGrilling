@@ -26,6 +26,8 @@ import java.util.concurrent.ThreadLocalRandom;
  *     <li>CropDropHandler: Gras abbauen mit Strohhut – je 12,5 % Rapssamen, Süßkartoffel, Zwiebel, Sichuanpfeffer-Samen</li>
  *     <li>KnifeDropHandler: mit Küchenmesser getötet – Huhn: Hähnchenflügel, Kuh: Rinderinnereien, Tintenfisch (50 %): Tentakel</li>
  *     <li>FortressHouttuyniaHandler: Netherfestungs-Truhen zu 65 % 1–2 × 1–3 Fischminze</li>
+ *     <li>VillagePepperLootHandler: Dorf-Truhen zu 40 % 3–10 Sichuanpfeffer und zu 20 % Pfeffer-Samen
+ *     (im Mod ein Setzling, hier ist der Pfefferbaum ein Strauch aus Samen)</li>
  * </ul>
  */
 public class GrillingDrops implements Listener {
@@ -95,19 +97,32 @@ public class GrillingDrops implements Listener {
 
     @EventHandler(ignoreCancelled = true)
     public void onLoot(LootGenerateEvent event) {
+        ThreadLocalRandom random = ThreadLocalRandom.current();
+        if (event.getLootTable().key().value().startsWith("chests/village/") && event.getLootTable().key().namespace().equals("minecraft")) {
+            if (random.nextFloat() < 0.4f) {
+                add(event, "sichuan_pepper", random.nextInt(3, 11));
+            }
+            if (random.nextFloat() < 0.2f) {
+                add(event, "sichuan_pepper_seeds", 1);
+            }
+            return;
+        }
         if (!event.getLootTable().equals(LootTables.NETHER_BRIDGE.getLootTable())) {
             return;
         }
-        ThreadLocalRandom random = ThreadLocalRandom.current();
         if (random.nextFloat() >= 0.65f) {
             return;
         }
         int rolls = random.nextInt(1, 3);
         for (int i = 0; i < rolls; i++) {
-            ItemStack stack = cookery.getItems().create(grilling("houttuynia"), random.nextInt(1, 4));
-            if (stack != null) {
-                event.getLoot().add(stack);
-            }
+            add(event, "houttuynia", random.nextInt(1, 4));
+        }
+    }
+
+    private void add(LootGenerateEvent event, String id, int amount) {
+        ItemStack stack = cookery.getItems().create(grilling(id), amount);
+        if (stack != null) {
+            event.getLoot().add(stack);
         }
     }
 }
