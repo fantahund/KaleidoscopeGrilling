@@ -58,6 +58,7 @@
                                 <argument>KaleidoscopeGrilling-Pack.zip</argument>
                                 <argument>--icon-font</argument>
                                 <argument>kaleidoscope_grilling:icons</argument>
+                                <argument>--palettes</argument>
                                 <argument>--out</argument>
                                 <argument>${pack.output}</argument>
                             </arguments>

@@ -11,6 +11,8 @@ import org.bukkit.plugin.java.JavaPlugin;
 public class KaleidoscopeGrilling extends JavaPlugin {
 
     private KaleidoscopeCookery cookery;
+    private de.emrion.kaleidoscopeGrilling.skewer.SkewerRecipes skewerRecipes;
+    private de.emrion.kaleidoscopeGrilling.skewer.Skewers skewers;
 
     @Override
     public void onEnable() {
@@ -21,6 +23,12 @@ public class KaleidoscopeGrilling extends JavaPlugin {
         de.emrion.kaleidoscopeGrilling.world.GrillingCrops.register(cookery);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.world.GrillingDrops(cookery), this);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.world.FortressHouttuynia(this, cookery), this);
+        skewerRecipes = de.emrion.kaleidoscopeGrilling.skewer.SkewerRecipes.load(this);
+        skewers = new de.emrion.kaleidoscopeGrilling.skewer.Skewers(this, cookery);
+        skewers.setRecipes(skewerRecipes);
+        getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkeweringListener(skewers, skewerRecipes), this);
+        getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkewerRecipeBook(this, skewers, skewerRecipes), this);
+        getLogger().info(skewerRecipes.recipes().size() + " Spieß-Rezepte geladen");
         getLogger().info("Grilling-Addon für KaleidoscopeCookery " + cookery.getPluginMeta().getVersion() + " geladen");
     }
 

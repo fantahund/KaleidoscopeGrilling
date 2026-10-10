@@ -1,6 +1,28 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "kaleidoscope_grilling:item/seasoning_states/pending_2"
+    "model": "kaleidoscope_grilling:item/seasoning_states/pending_2",
+    "tints": [
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 0,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 1,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 2,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 3,
+        "default": -1
+      }
+    ]
   }
 }

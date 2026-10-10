@@ -1,6 +1,488 @@
 {
   "model": {
     "type": "minecraft:model",
-    "model": "kaleidoscope_grilling:item/bite_stages/skewer_states_state_46_bite_2"
+    "model": "kaleidoscope_grilling:item/bite_stages/skewer_states_state_46_bite_2",
+    "tints": [
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 0,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 1,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 2,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 3,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 4,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 5,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 6,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 7,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 8,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 9,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 10,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 11,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 12,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 13,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 14,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 15,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 16,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 17,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 18,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 19,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 20,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 21,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 22,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 23,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 24,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 25,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 26,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 27,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 28,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 29,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 30,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 31,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 32,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 33,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 34,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 35,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 36,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 37,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 38,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 39,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 40,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 41,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 42,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 43,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 44,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 45,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 46,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 47,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 48,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 49,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 50,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 51,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 52,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 53,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 54,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 55,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 56,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 57,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 58,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 59,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 60,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 61,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 62,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 63,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 64,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 65,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 66,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 67,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 68,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 69,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 70,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 71,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 72,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 73,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 74,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 75,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 76,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 77,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 78,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 79,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 80,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 81,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 82,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 83,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 84,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 85,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 86,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 87,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 88,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 89,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 90,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 91,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 92,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 93,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 94,
+        "default": -1
+      },
+      {
+        "type": "minecraft:custom_model_data",
+        "index": 95,
+        "default": -1
+      }
+    ]
   }
 }

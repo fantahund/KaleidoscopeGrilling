@@ -1,0 +1,186 @@
+# Generiert von tools/gen_data.py aus grilling/skewers.json - nicht von Hand bearbeiten.
+recipes:
+  "kaleidoscope_grilling:raw_beef_skewer":
+    ingredients:
+      - - "kaleidoscope_grilling:beef_chunks"
+      - - "kaleidoscope_cookery:red_chili"
+      - - "kaleidoscope_grilling:beef_chunks"
+    cooked: "kaleidoscope_grilling:grilled_beef_skewer"
+  "kaleidoscope_grilling:raw_pork_belly_skewer":
+    ingredients:
+      - - "kaleidoscope_cookery:raw_pork_belly"
+      - - "kaleidoscope_cookery:green_chili"
+      - - "kaleidoscope_cookery:raw_pork_belly"
+    cooked: "kaleidoscope_grilling:grilled_pork_belly_skewer"
+  "kaleidoscope_grilling:raw_chicken_skin_skewer":
+    ingredients:
+      - - "kaleidoscope_grilling:chicken_skin"
+      - - "kaleidoscope_grilling:chicken_skin"
+    cooked: "kaleidoscope_grilling:grilled_chicken_skin_skewer"
+  "kaleidoscope_grilling:raw_mid_wing_skewer":
+    ingredients:
+      - - "kaleidoscope_grilling:chicken_wing"
+      - - "kaleidoscope_cookery:red_chili"
+      - - "kaleidoscope_grilling:chicken_wing"
+    cooked: "kaleidoscope_grilling:grilled_mid_wing_skewer"
+  "kaleidoscope_grilling:raw_squid_tentacle_skewer":
+    ingredients:
+      - - "kaleidoscope_grilling:squid_tentacle"
+      - - "kaleidoscope_grilling:squid_tentacle"
+      - - "kaleidoscope_grilling:squid_tentacle"
+    cooked: "kaleidoscope_grilling:grilled_squid_tentacle_skewer"
+  "kaleidoscope_grilling:raw_fish_skewer":
+    ingredients:
+      - - "minecraft:cod"
+        - "minecraft:salmon"
+        - "minecraft:tropical_fish"
+        - "minecraft:pufferfish"
+    cooked: "kaleidoscope_grilling:grilled_fish_skewer"
+  "kaleidoscope_grilling:raw_sweet_potato_sheet_skewer":
+    ingredients:
+      - - "kaleidoscope_grilling:raw_sweet_potato_sheet"
+      - - "kaleidoscope_grilling:minced_houttuynia"
+      - - "kaleidoscope_grilling:minced_houttuynia"
+    cooked: "kaleidoscope_grilling:grilled_sweet_potato_sheet_skewer"
+  "kaleidoscope_grilling:raw_potato_slice_skewer":
+    ingredients:
+      - - "kaleidoscope_grilling:potato_slice"
+      - - "kaleidoscope_grilling:potato_slice"
+      - - "kaleidoscope_grilling:potato_slice"
+    cooked: "kaleidoscope_grilling:grilled_potato_slice_skewer"
+  "kaleidoscope_grilling:raw_caterpillar_skewer":
+    ingredients:
+      - - "kaleidoscope_cookery:caterpillar"
+    cooked: "kaleidoscope_grilling:grilled_caterpillar_skewer"
+  "kaleidoscope_grilling:raw_mushroom_skewer":
+    ingredients:
+      - - "minecraft:brown_mushroom"
+        - "minecraft:red_mushroom"
+      - - "kaleidoscope_grilling:carrot_dice"
+      - - "minecraft:brown_mushroom"
+        - "minecraft:red_mushroom"
+    cooked: "kaleidoscope_grilling:grilled_mushroom_skewer"
+  "kaleidoscope_grilling:raw_bun_slice_skewer":
+    ingredients:
+      - - "kaleidoscope_grilling:raw_mantou_slice"
+      - - "kaleidoscope_grilling:raw_mantou_slice"
+      - - "kaleidoscope_grilling:raw_mantou_slice"
+    cooked: "kaleidoscope_grilling:grilled_bun_slice_skewer"
+  "kaleidoscope_grilling:raw_ender_pearl_skewer":
+    ingredients:
+      - - "minecraft:ender_pearl"
+      - - "minecraft:beetroot"
+      - - "minecraft:ender_pearl"
+    cooked: "kaleidoscope_grilling:grilled_ender_pearl_skewer"
+  "kaleidoscope_grilling:raw_meatball_skewer":
+    ingredients:
+      - - "kaleidoscope_cookery:raw_meatball"
+      - - "kaleidoscope_cookery:raw_meatball"
+      - - "kaleidoscope_cookery:raw_meatball"
+    cooked: "kaleidoscope_grilling:grilled_meatball_skewer"
+  "kaleidoscope_grilling:raw_slime_skewer":
+    ingredients:
+      - - "minecraft:slime_ball"
+      - - "kaleidoscope_grilling:houttuynia"
+      - - "minecraft:slime_ball"
+    cooked: "kaleidoscope_grilling:grilled_slime_skewer"
+  "kaleidoscope_grilling:raw_meat_and_bone_skewer":
+    ingredients:
+      - - "kaleidoscope_cookery:raw_cut_small_meats"
+      - - "minecraft:bone"
+      - - "kaleidoscope_cookery:raw_cut_small_meats"
+    cooked: "kaleidoscope_grilling:grilled_meat_and_bone_skewer"
+  "kaleidoscope_grilling:raw_fried_egg_skewer":
+    ingredients:
+      - - "kaleidoscope_cookery:fried_egg"
+      - - "kaleidoscope_cookery:fried_egg"
+    cooked: "kaleidoscope_grilling:grilled_fried_egg_skewer"
+  "kaleidoscope_grilling:raw_gluten_skewer":
+    ingredients:
+      - - "kaleidoscope_cookery:raw_dough"
+      - - "kaleidoscope_cookery:raw_dough"
+    cooked: "kaleidoscope_grilling:grilled_gluten_skewer"
+  "kaleidoscope_grilling:raw_lamb_skewer":
+    ingredients:
+      - - "kaleidoscope_cookery:raw_lamb_chops"
+      - - "kaleidoscope_cookery:oil"
+      - - "kaleidoscope_cookery:raw_lamb_chops"
+    cooked: "kaleidoscope_grilling:grilled_lamb_skewer"
+  "kaleidoscope_grilling:raw_golden_skewer":
+    ingredients:
+      - - "minecraft:golden_apple"
+      - - "minecraft:totem_of_undying"
+      - - "minecraft:golden_carrot"
+    cooked: "kaleidoscope_grilling:grilled_golden_skewer"
+  "kaleidoscope_grilling:ordinary_skewer":
+    ingredients:
+      - - "minecraft:poisonous_potato"
+      - - "minecraft:spider_eye"
+      - - "minecraft:pufferfish"
+effects:
+  "kaleidoscope_grilling:grilled_beef_skewer":
+    effect: "minecraft:strength"
+    seconds: 10
+  "kaleidoscope_grilling:grilled_pork_belly_skewer":
+    effect: "kaleidoscope_cookery:vigor"
+    seconds: 30
+  "kaleidoscope_grilling:grilled_chicken_skin_skewer":
+    effect: "minecraft:speed"
+    seconds: 20
+  "kaleidoscope_grilling:grilled_mid_wing_skewer":
+    effect: "kaleidoscope_cookery:mustard"
+    seconds: 45
+  "kaleidoscope_grilling:grilled_squid_tentacle_skewer":
+    effect: "minecraft:water_breathing"
+    seconds: 30
+  "kaleidoscope_grilling:grilled_fish_skewer":
+    effect: "kaleidoscope_cookery:tundra_strider"
+    seconds: 30
+  "kaleidoscope_grilling:grilled_sweet_potato_sheet_skewer":
+    effect: "kaleidoscope_cookery:preservation"
+    seconds: 45
+  "kaleidoscope_grilling:grilled_potato_slice_skewer":
+    effect: "kaleidoscope_cookery:warmth"
+    seconds: 30
+  "kaleidoscope_grilling:grilled_caterpillar_skewer":
+    effect: "kaleidoscope_cookery:flatulence"
+    seconds: 15
+  "kaleidoscope_grilling:grilled_mushroom_skewer":
+    effect: "minecraft:night_vision"
+    seconds: 30
+  "kaleidoscope_grilling:grilled_ender_pearl_skewer":
+    effect: "kaleidoscope_cookery:projectile_dodge"
+    seconds: 30
+  "kaleidoscope_grilling:grilled_meatball_skewer":
+    effect: "minecraft:strength"
+    seconds: 10
+  "kaleidoscope_grilling:grilled_slime_skewer":
+    effect: "kaleidoscope_cookery:hinder"
+    seconds: 45
+  "kaleidoscope_grilling:grilled_meat_and_bone_skewer":
+    effect: "kaleidoscope_cookery:vigor"
+    seconds: 20
+  "kaleidoscope_grilling:grilled_fried_egg_skewer":
+    effect: "kaleidoscope_cookery:sulfur"
+    seconds: 60
+  "kaleidoscope_grilling:grilled_gluten_skewer":
+    effect: "minecraft:haste"
+    seconds: 30
+  "kaleidoscope_grilling:grilled_lamb_skewer":
+    effect: "kaleidoscope_cookery:warmth"
+    seconds: 45
+  "kaleidoscope_grilling:grilled_golden_skewer":
+    effect: "kaleidoscope_grilling:invincible"
+    seconds: 10
+skewerable:
+  - "minecraft:bone"
+  - "minecraft:ender_pearl"
+  - "minecraft:slime_ball"
+unskewerable: []
+seasoning-effects:
+  "minecraft:redstone": speed
+  "minecraft:gunpowder": strength
+  "kaleidoscope_grilling:houttuynia_powder": duration
+  "kaleidoscope_grilling:totem_powder": totem
+  "kaleidoscope_grilling:dragon_egg_powder": vitality
+  "kaleidoscope_grilling:sichuan_pepper": numbness
