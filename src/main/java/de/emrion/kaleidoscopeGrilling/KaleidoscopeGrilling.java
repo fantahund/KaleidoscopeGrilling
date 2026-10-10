@@ -28,11 +28,35 @@ public class KaleidoscopeGrilling extends JavaPlugin {
         skewers.setRecipes(skewerRecipes);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkeweringListener(skewers, skewerRecipes), this);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkewerRecipeBook(this, skewers, skewerRecipes), this);
-        getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkewerEating(skewers), this);
-        de.emrion.kaleidoscopeGrilling.grill.GrillStation.init(this, skewers, skewerRecipes);
+        var effects = new de.emrion.kaleidoscopeGrilling.effect.GrillingEffects(this, cookery);
+        getServer().getPluginManager().registerEvents(effects, this);
+        var seasonings = new de.emrion.kaleidoscopeGrilling.seasoning.Seasonings(this, cookery, skewers, seasoningKinds());
+        getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.seasoning.SeasoningListener(seasonings, effects), this);
+        var bottleType = de.emrion.kaleidoscopeGrilling.seasoning.SeasoningBottleStation.type(this, seasonings);
+        cookery.getStations().register(bottleType);
+        cookery.getStations().registerItem(de.emrion.kaleidoscopeGrilling.seasoning.Seasonings.PENDING, bottleType);
+        cookery.getStations().registerItem(de.emrion.kaleidoscopeGrilling.seasoning.Seasonings.SPECIAL, bottleType);
+        getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkewerEating(skewers, seasonings, effects), this);
+        de.emrion.kaleidoscopeGrilling.grill.GrillStation.init(this, skewers, skewerRecipes, seasonings);
         cookery.getStations().register(de.emrion.kaleidoscopeGrilling.grill.GrillStation.type());
         getLogger().info(skewerRecipes.recipes().size() + " Spieß-Rezepte geladen");
         getLogger().info("Grilling-Addon für KaleidoscopeCookery " + cookery.getPluginMeta().getVersion() + " geladen");
+    }
+
+    /** Gewürz-Zutat -> Wirkung (grilling/skewers.json, seasoning_effects) */
+    private java.util.Map<String, String> seasoningKinds() {
+        java.util.Map<String, String> kinds = new java.util.HashMap<>();
+        try (var reader = new java.io.InputStreamReader(getResource("generated/skewers.yml"), java.nio.charset.StandardCharsets.UTF_8)) {
+            var section = org.bukkit.configuration.file.YamlConfiguration.loadConfiguration(reader).getConfigurationSection("seasoning-effects");
+            if (section != null) {
+                for (String key : section.getKeys(false)) {
+                    kinds.put(key, section.getString(key));
+                }
+            }
+        } catch (java.io.IOException | NullPointerException e) {
+            getLogger().warning("Gewürz-Wirkungen nicht lesbar: " + e.getMessage());
+        }
+        return kinds;
     }
 
     public KaleidoscopeCookery getCookery() {

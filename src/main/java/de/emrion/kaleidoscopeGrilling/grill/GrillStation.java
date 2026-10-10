@@ -66,6 +66,7 @@ public class GrillStation extends Station {
     static Skewers skewers;
     static SkewerRecipes recipes;
     static NamespacedKey seasoningUsesKey;
+    static de.emrion.kaleidoscopeGrilling.seasoning.Seasonings seasonings;
     static NamespacedKey seasoningKey;
 
     private final NamespacedKey litKey;
@@ -101,7 +102,9 @@ public class GrillStation extends Station {
         ingredientsKey = new NamespacedKey(base.getNamespace(), "grill_seasoning");
     }
 
-    public static void init(org.bukkit.plugin.Plugin plugin, Skewers skewers, SkewerRecipes recipes) {
+    public static void init(org.bukkit.plugin.Plugin plugin, Skewers skewers, SkewerRecipes recipes,
+                            de.emrion.kaleidoscopeGrilling.seasoning.Seasonings seasonings) {
+        GrillStation.seasonings = seasonings;
         GrillStation.skewers = skewers;
         GrillStation.recipes = recipes;
         seasoningUsesKey = new NamespacedKey(plugin, "seasoning_uses");
@@ -242,6 +245,15 @@ public class GrillStation extends Station {
 
     // ---- Bedienung ----
 
+    /** Ölkanne und Gewürzflasche sind Stations-Items: am Grill benutzen statt daraufstellen */
+    @Override
+    public boolean interceptPlacement(Player player, ItemStack held) {
+        if (OilItems.isOilPot(held) || Skewers.is(held, SEASONING)) {
+            return onInteract(player, EquipmentSlot.HAND);
+        }
+        return false;
+    }
+
     @Override
     public boolean onInteract(Player player, EquipmentSlot hand) {
         ItemStack held = player.getInventory().getItem(hand);
@@ -342,7 +354,7 @@ public class GrillStation extends Station {
                 ItemStack empty = skewers.cookery().getItems().create(EMPTY_SEASONING, 1);
                 player.getInventory().setItem(hand, empty);
             } else {
-                bottle.editPersistentDataContainer(pdc -> pdc.set(seasoningUsesKey, PersistentDataType.INTEGER, uses + needed));
+                seasonings.setUses(bottle, uses + needed);
             }
         }
         world().playSound(center(), "kaleidoscope_grilling:season", SoundCategory.BLOCKS, 0.85f, 1f);

@@ -71,11 +71,11 @@ public final class Skewers {
                         continue;
                     }
                     String[] hex = line.substring(equals + 1).trim().split(",");
-                    if (hex.length != CELLS) {
+                    if (hex.length < CELLS) {
                         continue;
                     }
-                    int[] colors = new int[CELLS];
-                    for (int i = 0; i < CELLS; i++) {
+                    int[] colors = new int[hex.length];
+                    for (int i = 0; i < hex.length; i++) {
                         colors[i] = Integer.parseInt(hex[i], 16);
                     }
                     palettes.put(Key.key(line.substring(0, equals)), colors);
@@ -84,6 +84,14 @@ public final class Skewers {
         } catch (IOException e) {
             plugin.getLogger().warning("skewer_palettes.txt nicht lesbar: " + e.getMessage());
         }
+    }
+
+    /**
+     * Zwei Farben einer Zutat für die Schichten der Gewürzflasche (SeasoningColorProvider), sonst Ersatzfarben.
+     */
+    public int[] layerColors(Key item) {
+        int[] colors = palettes.get(item);
+        return colors != null && colors.length >= CELLS + 2 ? new int[]{colors[CELLS], colors[CELLS + 1]} : new int[]{0xB86B45, 0xE0A56A};
     }
 
     /** Item-ID eines Stacks (Mod-Item oder Vanilla-Material) */

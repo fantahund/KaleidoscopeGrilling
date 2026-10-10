@@ -1,0 +1,49 @@
+{
+  "providers": [
+    {
+      "type": "bitmap",
+      "file": "kaleidoscope_grilling:mob_effect/heavy_metal.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue100"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "kaleidoscope_grilling:mob_effect/heavy_metal_poisoning.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue101"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "kaleidoscope_grilling:mob_effect/dragon_blood.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue102"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "kaleidoscope_grilling:mob_effect/numb.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue103"
+      ]
+    },
+    {
+      "type": "bitmap",
+      "file": "kaleidoscope_grilling:mob_effect/invincible.png",
+      "ascent": 8,
+      "height": 9,
+      "chars": [
+        "\ue104"
+      ]
+    }
+  ]
+}

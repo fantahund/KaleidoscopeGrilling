@@ -28,9 +28,14 @@ public class SkewerEating implements Listener {
     private static final List<String> SOUNDS = List.of("one", "two", "three", "four");
 
     private final Skewers skewers;
+    private final de.emrion.kaleidoscopeGrilling.seasoning.Seasonings seasonings;
+    private final de.emrion.kaleidoscopeGrilling.effect.GrillingEffects effects;
 
-    public SkewerEating(Skewers skewers) {
+    public SkewerEating(Skewers skewers, de.emrion.kaleidoscopeGrilling.seasoning.Seasonings seasonings,
+                        de.emrion.kaleidoscopeGrilling.effect.GrillingEffects effects) {
         this.skewers = skewers;
+        this.seasonings = seasonings;
+        this.effects = effects;
     }
 
     private boolean isSkewer(ItemStack stack) {
@@ -96,6 +101,7 @@ public class SkewerEating implements Listener {
         ItemStack eaten = held.asOne();
         skewers.cookery().getFoodService().eatFromBag(player, eaten);
         ingredientEffects(player, eaten);
+        seasonings.applyEffects(player, eaten, effects);
         if (player.getGameMode() != GameMode.CREATIVE) {
             held.subtract();
         }

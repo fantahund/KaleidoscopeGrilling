@@ -69,6 +69,7 @@ items:
   "kaleidoscope_grilling:empty_seasoning_bottle":
     model: "kaleidoscope_grilling:empty_seasoning_bottle"
     name: item.kaleidoscope_grilling.empty_seasoning_bottle
+    max-stack: 1
   "kaleidoscope_grilling:green_chili_powder":
     model: "kaleidoscope_grilling:green_chili_powder"
     name: item.kaleidoscope_grilling.green_chili_powder
@@ -386,6 +387,8 @@ items:
   "kaleidoscope_grilling:pending_seasoning":
     model: "kaleidoscope_grilling:pending_seasoning"
     name: item.kaleidoscope_grilling.pending_seasoning
+    max-stack: 1
+    sneak-place: true
   "kaleidoscope_grilling:pepper_honey":
     model: "kaleidoscope_grilling:pepper_honey"
     name: item.kaleidoscope_grilling.pepper_honey
@@ -674,6 +677,7 @@ items:
   "kaleidoscope_grilling:skewer_recipe_book":
     model: "kaleidoscope_grilling:skewer_recipe_book"
     name: item.kaleidoscope_grilling.skewer_recipe_book
+    max-stack: 1
   "kaleidoscope_grilling:sour_spicy_noodles":
     model: "kaleidoscope_grilling:sour_spicy_noodles"
     name: item.kaleidoscope_grilling.sour_spicy_noodles
@@ -722,6 +726,7 @@ items:
   "kaleidoscope_grilling:special_seasoning":
     model: "kaleidoscope_grilling:special_seasoning"
     name: item.kaleidoscope_grilling.special_seasoning
+    max-stack: 1
   "kaleidoscope_grilling:squid_tentacle":
     model: "kaleidoscope_grilling:squid_tentacle"
     name: item.kaleidoscope_grilling.squid_tentacle
