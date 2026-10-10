@@ -57,7 +57,7 @@ public class AdvancedRackStation extends Station implements PlacedFromItem, Inve
 
     public static StationType type(org.bukkit.plugin.Plugin plugin) {
         itemsKey = new NamespacedKey(plugin, "rack_items");
-        return new StationType("advanced_rack", ITEM, true, 1f, 1f, false, AdvancedRackStation::new);
+        return new StationType("advanced_rack", ITEM, false, 1f, 1f, false, AdvancedRackStation::new);
     }
 
     /** AdvancedRackCompatApi#canPlace: Fächer 0–4 Gewürze/Ölkanne, 5–8 Werkzeuge */

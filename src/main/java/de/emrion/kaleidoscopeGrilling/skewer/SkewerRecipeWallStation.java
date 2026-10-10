@@ -49,7 +49,8 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
         bookKey = new NamespacedKey(plugin, "wall_book");
         faceKey = new NamespacedKey(plugin, "wall_face");
         // Eigener Schlüssel statt des Buchs: das Buch selbst setzt der Rechtsklick auf eine Wand (SkewerRecipeBook)
-        return new StationType("skewer_recipe", Key.key("kaleidoscope_grilling", "skewer_recipe"), false, 0.7f, 0.85f, false,
+        // Haupt-Hitbox winzig: geklickt wird auf drei flache Hitboxen an der Wand (updateDisplay)
+        return new StationType("skewer_recipe", Key.key("kaleidoscope_grilling", "skewer_recipe"), false, 0.01f, 0.01f, false,
                 SkewerRecipeWallStation::new);
     }
 
@@ -121,9 +122,23 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
         };
     }
 
+    /** Hitbox: drei 0,25 breite Würfel nebeneinander, 0,25 tief an der Wand (Rezept 10 × 13 Pixel) */
+    private void showHitboxes() {
+        float depth = 0.25f;
+        double toWall = 0.5 - depth / 2;
+        for (int i = -1; i <= 1; i++) {
+            // entlang der Wand: senkrecht zur Wand-Richtung
+            double along = i * 0.25;
+            org.bukkit.util.Vector offset = new org.bukkit.util.Vector(-face.getModX() * toWall + face.getModZ() * along, 0.05,
+                    -face.getModZ() * toWall + face.getModX() * along);
+            showHitbox("wall_" + (i + 1), offset, depth, 0.88f);
+        }
+    }
+
     @Override
     @SuppressWarnings("UnstableApiUsage")
     public void updateDisplay() {
+        showHitboxes();
         // Blockstate skewer_recipe: Rezept-Zettel aus Cookery, x 90 und nach der Wand gedreht
         Quaternionf paper = Ber.y(-wallYaw()).mul(Ber.x(-90));
         showPart("paper", Key.key("kaleidoscope_cookery", "block/recipe_block"),
