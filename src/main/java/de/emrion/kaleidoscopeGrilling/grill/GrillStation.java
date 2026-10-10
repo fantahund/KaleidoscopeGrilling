@@ -67,6 +67,7 @@ public class GrillStation extends Station {
     static SkewerRecipes recipes;
     static NamespacedKey seasoningUsesKey;
     static de.emrion.kaleidoscopeGrilling.seasoning.Seasonings seasonings;
+    static de.emrion.kaleidoscopeGrilling.oil.Oils oils;
     static NamespacedKey seasoningKey;
 
     private final NamespacedKey litKey;
@@ -103,7 +104,8 @@ public class GrillStation extends Station {
     }
 
     public static void init(org.bukkit.plugin.Plugin plugin, Skewers skewers, SkewerRecipes recipes,
-                            de.emrion.kaleidoscopeGrilling.seasoning.Seasonings seasonings) {
+                            de.emrion.kaleidoscopeGrilling.seasoning.Seasonings seasonings, de.emrion.kaleidoscopeGrilling.oil.Oils oils) {
+        GrillStation.oils = oils;
         GrillStation.seasonings = seasonings;
         GrillStation.skewers = skewers;
         GrillStation.recipes = recipes;
@@ -326,7 +328,7 @@ public class GrillStation extends Station {
             return true;
         }
         if (player.getGameMode() != GameMode.CREATIVE) {
-            OilItems.setOilCount(pot, OilItems.oilCount(pot) - needed);
+            oils.consume(pot, needed);
         }
         phase = 1;
         phaseTicks = 0;
