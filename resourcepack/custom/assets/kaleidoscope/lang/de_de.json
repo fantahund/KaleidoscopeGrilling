@@ -1,3 +1,9 @@
 {
-  "kaleidoscope.menu.tab.grilling": "Grillen"
+  "kaleidoscope.menu.tab.grilling": "Grillen",
+  "kaleidoscope.cookbook.info.grill_oil": "Auf den brennenden Grill legen, mit Öl bestreichen",
+  "kaleidoscope.cookbook.info.grill_flip": "4× mit leerer Hand wenden",
+  "kaleidoscope.cookbook.info.grill_season": "Mit Spezialgewürz würzen, dann herunternehmen",
+  "kaleidoscope.cookbook.info.press_tools": "Pressen: Amboss +4, Stein +1 (bis 16)",
+  "kaleidoscope.cookbook.info.press_vat": "Rapsöl fließt in ein großes Fass in der Nähe",
+  "kaleidoscope.cookbook.info.seasoning_shake": "In die Gewürzflasche füllen, dann 4 s schütteln"
 }

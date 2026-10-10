@@ -2,5 +2,11 @@
   "kaleidoscope.menu.tab.grilling": "Grilling",
   "item.kaleidoscope_grilling.sichuan_pepper_seeds": "Sichuan Pepper Seeds",
   "block.kaleidoscope_grilling.sichuan_pepper_crop": "Sichuan Pepper Bush",
-  "tooltip.kaleidoscope_grilling.sichuan_pepper_seeds": "May drop when breaking grass while wearing a straw hat; plant on farmland"
+  "tooltip.kaleidoscope_grilling.sichuan_pepper_seeds": "May drop when breaking grass while wearing a straw hat; plant on farmland",
+  "kaleidoscope.cookbook.info.grill_oil": "Place on a lit grill, brush with oil",
+  "kaleidoscope.cookbook.info.grill_flip": "Flip 4× with an empty hand",
+  "kaleidoscope.cookbook.info.grill_season": "Season with special seasoning, then take out",
+  "kaleidoscope.cookbook.info.press_tools": "Press: anvil +4, stone +1 (up to 16)",
+  "kaleidoscope.cookbook.info.press_vat": "Canola oil flows into a nearby big vat",
+  "kaleidoscope.cookbook.info.seasoning_shake": "Fill the seasoning bottle, then shake for 4 s"
 }

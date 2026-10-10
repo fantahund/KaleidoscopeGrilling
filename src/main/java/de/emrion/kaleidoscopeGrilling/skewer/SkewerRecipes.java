@@ -33,6 +33,13 @@ public record SkewerRecipes(List<Recipe> recipes, Set<Key> skewerable, Set<Key> 
     }
 
     public static SkewerRecipes load(Plugin plugin) {
+        return load(plugin, id -> false);
+    }
+
+    /**
+     * @param disabled abgeschaltete Rezepte (disabled-recipes in der config.yml von KaleidoscopeCookery, ID = roher Spieß)
+     */
+    public static SkewerRecipes load(Plugin plugin, java.util.function.Predicate<String> disabled) {
         YamlConfiguration config = new YamlConfiguration();
         try (Reader reader = new InputStreamReader(plugin.getResource("generated/skewers.yml"), StandardCharsets.UTF_8)) {
             config = YamlConfiguration.loadConfiguration(reader);
@@ -43,6 +50,9 @@ public record SkewerRecipes(List<Recipe> recipes, Set<Key> skewerable, Set<Key> 
         ConfigurationSection section = config.getConfigurationSection("recipes");
         if (section != null) {
             for (String id : section.getKeys(false)) {
+                if (disabled.test(id)) {
+                    continue;
+                }
                 List<Set<Key>> slots = new ArrayList<>();
                 for (Object slot : section.getList(id + ".ingredients", List.of())) {
                     Set<Key> options = new HashSet<>();

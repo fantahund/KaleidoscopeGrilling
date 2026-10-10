@@ -23,7 +23,7 @@ public class KaleidoscopeGrilling extends JavaPlugin {
         de.emrion.kaleidoscopeGrilling.world.GrillingCrops.register(cookery);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.world.GrillingDrops(cookery), this);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.world.FortressHouttuynia(this, cookery), this);
-        skewerRecipes = de.emrion.kaleidoscopeGrilling.skewer.SkewerRecipes.load(this);
+        skewerRecipes = de.emrion.kaleidoscopeGrilling.skewer.SkewerRecipes.load(this, id -> cookery.getCookeryConfig().isRecipeDisabled(id));
         skewers = new de.emrion.kaleidoscopeGrilling.skewer.Skewers(this, cookery);
         skewers.setRecipes(skewerRecipes);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkeweringListener(skewers, skewerRecipes), this);
@@ -53,6 +53,7 @@ public class KaleidoscopeGrilling extends JavaPlugin {
         cookery.getStations().register(de.emrion.kaleidoscopeGrilling.oil.OilPressStation.type(this, oils));
         de.emrion.kaleidoscopeGrilling.grill.GrillStation.init(this, skewers, skewerRecipes, seasonings, oils);
         cookery.getStations().register(de.emrion.kaleidoscopeGrilling.grill.GrillStation.type());
+        GrillingCookbook.register(cookery, skewerRecipes);
         getLogger().info(skewerRecipes.recipes().size() + " Spieß-Rezepte geladen");
         getLogger().info("Grilling-Addon für KaleidoscopeCookery " + cookery.getPluginMeta().getVersion() + " geladen");
     }
