@@ -30,6 +30,11 @@ public final class Oils {
     public Oils(Plugin plugin, KaleidoscopeCookery cookery) {
         this.cookery = cookery;
         this.typeKey = new NamespacedKey(plugin, "oil_type");
+        // HotFoodHandler#onTooltip: Sorte und Menge statt "Anzahl" (ohne die Wärme-Zeile, Heißessen gibt es hier nicht)
+        OilItems.addLoreProvider((pot, count) -> {
+            String type = type(pot);
+            return type.isEmpty() || count <= 0 ? null : de.emrion.kaleidoscopeCookery.util.Lang.raw("tooltip.kaleidoscope_grilling.oil_pot." + type, count);
+        });
     }
 
     public KaleidoscopeCookery cookery() {
@@ -68,6 +73,7 @@ public final class Oils {
             pot.editPersistentDataContainer(pdc -> pdc.set(typeKey, PersistentDataType.STRING, type));
         }
         ModelProperties.set(pot, "kaleidoscope_grilling:oil_type", (TYPES.indexOf(type) + 1) * 0.25f);
+        OilItems.setOilCount(pot, OilItems.oilCount(pot)); // Lore mit der Sorte
     }
 
     public int capacity(ItemStack pot) {
