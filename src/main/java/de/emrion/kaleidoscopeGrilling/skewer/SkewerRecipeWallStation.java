@@ -49,8 +49,8 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
         bookKey = new NamespacedKey(plugin, "wall_book");
         faceKey = new NamespacedKey(plugin, "wall_face");
         // Eigener Schlüssel statt des Buchs: das Buch selbst setzt der Rechtsklick auf eine Wand (SkewerRecipeBook)
-        // Haupt-Hitbox winzig: geklickt wird auf drei flache Hitboxen an der Wand (updateDisplay)
-        return new StationType("skewer_recipe", Key.key("kaleidoscope_grilling", "skewer_recipe"), false, 0.01f, 0.01f, false,
+        // Haupt-Hitbox wird an die Wand geschoben (Mitte des Rezepts), dazu je eine links und rechts (updateDisplay)
+        return new StationType("skewer_recipe", Key.key("kaleidoscope_grilling", "skewer_recipe"), false, DEPTH, HEIGHT, false,
                 SkewerRecipeWallStation::new);
     }
 
@@ -122,16 +122,27 @@ public class SkewerRecipeWallStation extends Station implements PlacedFromItem {
         };
     }
 
-    /** Hitbox: drei 0,25 breite Würfel nebeneinander, 0,25 tief an der Wand (Rezept 10 × 13 Pixel) */
+    private static final float DEPTH = 0.25f;
+    private static final float HEIGHT = 0.88f;
+
+    /**
+     * Hitbox: drei 0,25 breite Würfel nebeneinander, 0,25 tief an der Wand (Rezept 10 × 13 Pixel).
+     * Die mittlere ist die Haupt-Hitbox der Station, an die Wand verschoben.
+     */
     private void showHitboxes() {
-        float depth = 0.25f;
-        double toWall = 0.5 - depth / 2;
-        for (int i = -1; i <= 1; i++) {
+        double toWall = 0.5 - DEPTH / 2;
+        org.bukkit.Location center = new org.bukkit.Location(world(), position().x() + 0.5 - face.getModX() * toWall, position().y() + 0.05,
+                position().z() + 0.5 - face.getModZ() * toWall);
+        if (root().getLocation().distanceSquared(center) > 1.0e-4) {
+            root().teleport(center);
+        }
+        hideHitbox("wall_1"); // erste Version: mittlere Zusatz-Hitbox
+        for (int i : new int[]{-1, 1}) {
             // entlang der Wand: senkrecht zur Wand-Richtung
             double along = i * 0.25;
             org.bukkit.util.Vector offset = new org.bukkit.util.Vector(-face.getModX() * toWall + face.getModZ() * along, 0.05,
                     -face.getModZ() * toWall + face.getModX() * along);
-            showHitbox("wall_" + (i + 1), offset, depth, 0.88f);
+            showHitbox("wall_" + (i + 1), offset, DEPTH, HEIGHT);
         }
     }
 
