@@ -9,14 +9,14 @@
         "model": {
           "type": "minecraft:range_dispatch",
           "property": "minecraft:custom_model_data",
-          "index": 4,
+          "index": 5,
           "entries": [
             {
               "threshold": 0.25,
               "model": {
                 "type": "minecraft:range_dispatch",
                 "property": "minecraft:custom_model_data",
-                "index": 3,
+                "index": 4,
                 "entries": [
                   {
                     "threshold": 0.25,
@@ -51,7 +51,7 @@
               "model": {
                 "type": "minecraft:range_dispatch",
                 "property": "minecraft:custom_model_data",
-                "index": 3,
+                "index": 4,
                 "entries": [
                   {
                     "threshold": 0.25,
@@ -86,7 +86,7 @@
               "model": {
                 "type": "minecraft:range_dispatch",
                 "property": "minecraft:custom_model_data",
-                "index": 3,
+                "index": 4,
                 "entries": [
                   {
                     "threshold": 0.25,
@@ -120,7 +120,7 @@
           "fallback": {
             "type": "minecraft:range_dispatch",
             "property": "minecraft:custom_model_data",
-            "index": 3,
+            "index": 4,
             "entries": [
               {
                 "threshold": 0.25,
@@ -156,14 +156,14 @@
         "model": {
           "type": "minecraft:range_dispatch",
           "property": "minecraft:custom_model_data",
-          "index": 4,
+          "index": 5,
           "entries": [
             {
               "threshold": 0.25,
               "model": {
                 "type": "minecraft:range_dispatch",
                 "property": "minecraft:custom_model_data",
-                "index": 3,
+                "index": 4,
                 "entries": [
                   {
                     "threshold": 0.25,
@@ -198,7 +198,7 @@
               "model": {
                 "type": "minecraft:range_dispatch",
                 "property": "minecraft:custom_model_data",
-                "index": 3,
+                "index": 4,
                 "entries": [
                   {
                     "threshold": 0.25,
@@ -233,7 +233,7 @@
               "model": {
                 "type": "minecraft:range_dispatch",
                 "property": "minecraft:custom_model_data",
-                "index": 3,
+                "index": 4,
                 "entries": [
                   {
                     "threshold": 0.25,
@@ -267,7 +267,7 @@
           "fallback": {
             "type": "minecraft:range_dispatch",
             "property": "minecraft:custom_model_data",
-            "index": 3,
+            "index": 4,
             "entries": [
               {
                 "threshold": 0.25,
@@ -302,14 +302,14 @@
     "fallback": {
       "type": "minecraft:range_dispatch",
       "property": "minecraft:custom_model_data",
-      "index": 4,
+      "index": 5,
       "entries": [
         {
           "threshold": 0.25,
           "model": {
             "type": "minecraft:range_dispatch",
             "property": "minecraft:custom_model_data",
-            "index": 3,
+            "index": 4,
             "entries": [
               {
                 "threshold": 0.25,
@@ -344,7 +344,7 @@
           "model": {
             "type": "minecraft:range_dispatch",
             "property": "minecraft:custom_model_data",
-            "index": 3,
+            "index": 4,
             "entries": [
               {
                 "threshold": 0.25,
@@ -379,7 +379,7 @@
           "model": {
             "type": "minecraft:range_dispatch",
             "property": "minecraft:custom_model_data",
-            "index": 3,
+            "index": 4,
             "entries": [
               {
                 "threshold": 0.25,
@@ -413,7 +413,7 @@
       "fallback": {
         "type": "minecraft:range_dispatch",
         "property": "minecraft:custom_model_data",
-        "index": 3,
+        "index": 4,
         "entries": [
           {
             "threshold": 0.25,
