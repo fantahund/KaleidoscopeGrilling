@@ -53,7 +53,8 @@ public class SkeweringListener implements Listener {
                 disassemble(player, EquipmentSlot.HAND);
             } else if (canDisassemble(offhand)) {
                 event.setCancelled(true);
-                if (event.getHand() == EquipmentSlot.HAND) {
+                // Mit leerer Haupthand schickt der Client nur den Klick der Nebenhand
+                if (event.getHand() == EquipmentSlot.HAND || inventory.getItemInMainHand().isEmpty()) {
                     disassemble(player, EquipmentSlot.OFF_HAND);
                 }
             }
@@ -98,12 +99,10 @@ public class SkeweringListener implements Listener {
             return;
         }
         boolean creative = player.getGameMode() == GameMode.CREATIVE;
-        ItemStack remainingSticks = null;
-        if (offhand.getType() == Material.STICK && !de.emrion.kaleidoscopeCookery.item.CookeryItems.isCustom(offhand)) {
-            remainingSticks = offhand.clone();
-            if (!creative) {
-                remainingSticks.subtract();
-            }
+        // Übrige Stöcke bzw. weitere gleiche Spieße aus der Nebenhand kommen ins Inventar zurück
+        ItemStack remainingSticks = offhand.clone();
+        if (!creative || !Skewers.is(offhand, Skewers.STICK)) {
+            remainingSticks.subtract();
         }
         if (!creative) {
             food.subtract();
