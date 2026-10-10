@@ -1,3 +1,6 @@
 {
-  "kaleidoscope.menu.tab.grilling": "Grilling"
+  "kaleidoscope.menu.tab.grilling": "Grilling",
+  "item.kaleidoscope_grilling.sichuan_pepper_seeds": "Sichuan Pepper Seeds",
+  "block.kaleidoscope_grilling.sichuan_pepper_crop": "Sichuan Pepper Bush",
+  "tooltip.kaleidoscope_grilling.sichuan_pepper_seeds": "May drop when breaking grass while wearing a straw hat; plant on farmland"
 }

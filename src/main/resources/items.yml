@@ -399,15 +399,6 @@ items:
       effects:
         - effect: "kaleidoscope_grilling:numb"
           duration: 1200
-  "kaleidoscope_grilling:pepper_leaves":
-    model: "kaleidoscope_grilling:pepper_leaves"
-    name: block.kaleidoscope_grilling.pepper_leaves
-  "kaleidoscope_grilling:pepper_log":
-    model: "kaleidoscope_grilling:pepper_log"
-    name: block.kaleidoscope_grilling.pepper_log
-  "kaleidoscope_grilling:pepper_sapling":
-    model: "kaleidoscope_grilling:pepper_sapling"
-    name: block.kaleidoscope_grilling.pepper_sapling
   "kaleidoscope_grilling:potato_beef_stew":
     model: "kaleidoscope_grilling:potato_beef_stew"
     name: item.kaleidoscope_grilling.potato_beef_stew
@@ -668,6 +659,10 @@ items:
       effects:
         - effect: "kaleidoscope_grilling:numb"
           duration: 200
+  "kaleidoscope_grilling:sichuan_pepper_seeds":
+    model: "kaleidoscope_grilling:sichuan_pepper_seeds"
+    name: item.kaleidoscope_grilling.sichuan_pepper_seeds
+    tooltip: tooltip.kaleidoscope_grilling.sichuan_pepper_seeds
   "kaleidoscope_grilling:skewer_plate":
     model: "kaleidoscope_grilling:skewer_plate"
     name: item.kaleidoscope_grilling.skewer_plate

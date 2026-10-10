@@ -279,13 +279,6 @@ vanilla:
       B: "#c:bricks/normal"
       C: "#minecraft:coals"
     result: "kaleidoscope_grilling:grill"
-  "kaleidoscope_grilling:oak_planks_from_pepper_log":
-    type: crafting_shapeless
-    ingredients:
-      - "kaleidoscope_grilling:pepper_log"
-    result:
-      item: "minecraft:oak_planks"
-      count: 4
   "kaleidoscope_grilling:oil_cake":
     type: crafting_shaped
     pattern:
@@ -374,4 +367,4 @@ vanilla:
       - "#c:crops/tomato"
       - "minecraft:sugar"
     result: "kaleidoscope_grilling:sugared_tomato"
-data-version: 1
+data-version: 2

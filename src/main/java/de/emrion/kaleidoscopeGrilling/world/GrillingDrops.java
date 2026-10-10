@@ -23,7 +23,7 @@ import java.util.concurrent.ThreadLocalRandom;
 /**
  * Zusätzliche Beute aus Kaleidoscope Grilling:
  * <ul>
- *     <li>CropDropHandler: Gras abbauen mit Strohhut – je 12,5 % Rapssamen, Süßkartoffel, Zwiebel</li>
+ *     <li>CropDropHandler: Gras abbauen mit Strohhut – je 12,5 % Rapssamen, Süßkartoffel, Zwiebel, Sichuanpfeffer-Samen</li>
  *     <li>KnifeDropHandler: mit Küchenmesser getötet – Huhn: Hähnchenflügel, Kuh: Rinderinnereien, Tintenfisch (50 %): Tentakel</li>
  *     <li>FortressHouttuyniaHandler: Netherfestungs-Truhen zu 65 % 1–2 × 1–3 Fischminze</li>
  * </ul>
@@ -52,7 +52,7 @@ public class GrillingDrops implements Listener {
         }
         int fortune = player.getInventory().getItemInMainHand().getEnchantmentLevel(Enchantment.FORTUNE);
         ThreadLocalRandom random = ThreadLocalRandom.current();
-        for (String id : new String[]{"canola_seeds", "sweet_potato", "onion"}) {
+        for (String id : new String[]{"canola_seeds", "sweet_potato", "onion", "sichuan_pepper_seeds"}) {
             if (random.nextFloat() < 0.125f) {
                 ItemStack stack = cookery.getItems().create(grilling(id), 1 + random.nextInt(1 + fortune));
                 if (stack != null) {

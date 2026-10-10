@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "kaleidoscope_grilling:block/pepper_sapling"
+    "layer0": "kaleidoscope_grilling:item/sichuan_pepper_seeds"
   }
 }

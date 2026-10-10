@@ -9,7 +9,7 @@ import java.util.List;
 
 /**
  * Pflanzen aus Kaleidoscope Grilling (CanolaCropBlock, OnionCropBlock, SweetPotatoCropBlock, HouttuyniaCropBlock):
- * Vanilla-CropBlock mit 8 Stufen, Beute wie in den Loot-Tabellen blocks/*_crop.json.
+ * Vanilla-CropBlock mit 8 Stufen, Beute wie in den Loot-Tabellen blocks/*_crop.json. Dazu der Pfefferstrauch.
  */
 public final class GrillingCrops {
 
@@ -26,10 +26,15 @@ public final class GrillingCrops {
         // Fischminze: auch auf Seelensand; dort (oder zu 30 %) rot ab Stufe 5
         cookery.registerCrop(crop("houttuynia", "houttuynia", CropKind.Soil.FARMLAND_OR_SOUL_SAND, 1, 0,
                 new CropKind.Variant(0.3, Material.SOUL_SAND, 5, "_2")));
+        // Sichuanpfeffer: Strauch statt des Pfefferbaums (eigene Stufen-Texturen, tools/gen_pepper_bush.py).
+        // Reif 1–2 Pfeffer per Rechtsklick wie von den Pfefferblättern, danach Blüte (Stufe 3) und neu reifen.
+        Key seeds = Key.key("kaleidoscope_grilling", "sichuan_pepper_seeds");
+        cookery.registerCrop(new CropKind("sichuan_pepper", List.of(seeds), Key.key("kaleidoscope_grilling", "sichuan_pepper"), seeds,
+                5, 3, CropKind.Soil.FARMLAND, 3, 0, MODELS.formatted("sichuan_pepper"), null, 2));
     }
 
     private static CropKind crop(String name, String item, CropKind.Soil soil, int seedTrials, int matureExtra, CropKind.Variant variant) {
         Key key = Key.key("kaleidoscope_grilling", item);
-        return new CropKind(name, List.of(key), key, key, 7, -1, soil, seedTrials, matureExtra, MODELS.formatted(name), variant);
+        return new CropKind(name, List.of(key), key, key, 7, -1, soil, seedTrials, matureExtra, MODELS.formatted(name), variant, 1);
     }
 }
