@@ -16,16 +16,19 @@ public class KaleidoscopeGrilling extends JavaPlugin {
 
     @Override
     public void onEnable() {
-        saveDefaultConfig();
         cookery = KaleidoscopeCookery.getInstance();
-        // Register items, recipes (including changes to Cookery recipes), resource pack, translations and cookbook images with the core
-        cookery.registerAddon(this);
+        // Register items, recipes (including changes to Cookery recipes), translations and cookbook images
+        de.emrion.kaleidoscopeCore.KaleidoscopeCore core = de.emrion.kaleidoscopeCore.KaleidoscopeCore.getInstance();
+        core.registerAddon(this, true);
+        core.registerCookingOil(net.kyori.adventure.key.Key.key("kaleidoscope_grilling", "canola_oil_bucket"), true);
         de.emrion.kaleidoscopeGrilling.world.GrillingCrops.register(cookery);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.world.GrillingDrops(cookery), this);
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.world.FortressHouttuynia(this, cookery), this);
         skewerRecipes = de.emrion.kaleidoscopeGrilling.skewer.SkewerRecipes.load(this, id -> cookery.getCookeryConfig().isRecipeDisabled(id));
         skewers = new de.emrion.kaleidoscopeGrilling.skewer.Skewers(this, cookery);
         skewers.setRecipes(skewerRecipes);
+        // Grilled skewers are cooked dishes: tiered for the cooking level with the dishes of Cookery
+        skewerRecipes.recipes().stream().filter(r -> r.cooked() != null).forEach(r -> de.emrion.kaleidoscopeCookery.skill.CookingSkill.registerDish(r.cooked()));
         getServer().getPluginManager().registerEvents(new de.emrion.kaleidoscopeGrilling.skewer.SkeweringListener(skewers, skewerRecipes), this);
         var recipeBook = new de.emrion.kaleidoscopeGrilling.skewer.SkewerRecipeBook(this, skewers, skewerRecipes);
         getServer().getPluginManager().registerEvents(recipeBook, this);

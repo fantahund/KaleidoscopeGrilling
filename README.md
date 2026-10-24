@@ -2,7 +2,7 @@
 
 Paper plugin (26.3) based on the mod [Kaleidoscope Grilling](https://github.com/breezeth-CN/KaleidoscopeGrilling)
 (folders `common/` and `neoforge-1.21.1/`): grill, skewers, seasonings and oils. It builds on **KaleidoscopeCookery**
-(stations, cookbook, pack delivery) and ships its own resource pack. The mod's heat system (烟火气) is deliberately
+(stations, cookbook) via KaleidoscopeCore and ships its own resource pack. The mod's heat system (烟火气) is deliberately
 not included.
 
 ## Features
@@ -17,12 +17,11 @@ not included.
 
 ## Installation
 
-1. Install KaleidoscopeCookery and CubesideUtils.
+1. Install KaleidoscopeCore, KaleidoscopeCookery and CubesideUtils.
 2. Run `mvn install` in the `KaleidoscopeCookery` repo (next to this one), then `mvn package` here
    (needs `python3`; the pack tools come from `../KaleidoscopeCookery/tools`, other location: `-Dcookery.dir=...`).
 3. Copy `target/KaleidoscopeGrilling-*.jar` into `plugins/`.
-4. The pack `plugins/KaleidoscopeGrilling/KaleidoscopeGrilling-Pack.zip` is served by KaleidoscopeCookery's web server,
-   or upload it and set `resource-pack.external-url` in this plugin's `config.yml`.
+4. Upload `target/generated-resources/pack/KaleidoscopeGrilling-Pack.zip` and add its URL to the KaleidoscopePack config.
 
 ## Development
 

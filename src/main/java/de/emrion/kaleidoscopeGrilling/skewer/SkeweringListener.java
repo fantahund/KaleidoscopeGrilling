@@ -88,6 +88,7 @@ public class SkeweringListener implements Listener {
         ItemStack next;
         if (result != null && skewers.cookery().getItems().get(result) != null) {
             next = skewers.cookery().getItems().create(result, 1);
+            de.emrion.kaleidoscopeCookery.skill.CookingSkill.award(player, "skewer", 1);
         } else if (inserted.size() >= 3) {
             next = skewers.cookery().getItems().create(Skewers.SECRET, 1);
             skewers.write(next, inserted, variants);

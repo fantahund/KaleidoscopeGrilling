@@ -293,6 +293,10 @@ public class GrillStation extends Station {
             if (phase != 0 || skewerCount() >= SLOTS) {
                 return false;
             }
+            SkewerRecipes.Recipe raw = recipes.byRaw(Skewers.idOf(held));
+            if (raw != null && raw.cooked() != null && !de.emrion.kaleidoscopeCookery.skill.CookingSkill.mayCook(player, raw.cooked())) {
+                return true;
+            }
             for (int i = 0; i < SLOTS; i++) {
                 if (items[i] == null) {
                     items[i] = held.asOne();
@@ -399,6 +403,10 @@ public class GrillStation extends Station {
                 ItemStack output = output(items[i]);
                 items[i] = null;
                 any = true;
+                net.kyori.adventure.key.Key outputId = de.emrion.kaleidoscopeCookery.item.CookeryItems.idOf(output);
+                if (outputId != null && !outputId.value().startsWith("dark_") && !outputId.value().startsWith("mysterious_")) {
+                    de.emrion.kaleidoscopeCookery.skill.CookingSkill.award(player, "grill", 1);
+                }
                 for (ItemStack rest : player.getInventory().addItem(output).values()) {
                     world().dropItemNaturally(center(), rest);
                 }
