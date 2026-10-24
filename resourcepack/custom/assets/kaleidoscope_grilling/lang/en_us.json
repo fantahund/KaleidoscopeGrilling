@@ -1,4 +1,5 @@
 {
+  "message.kaleidoscope_grilling.marinated": "Brushed %s skewers with %s - now turn them",
   "tooltip.kaleidoscope_grilling.braised_chicken_wings.maxim.line1": "You will not discard the bones before savoring them three times.",
   "tooltip.kaleidoscope_grilling.cold_houttuynia.maxim.line1": "One bite and the houttuynia slaps your soul awake.",
   "tooltip.kaleidoscope_grilling.dark_grilling.maxim.line1": "Oh, it tastes so good! Yuck.",
@@ -23,6 +24,7 @@
   "tooltip.kaleidoscope_grilling.grilled_squid_tentacle_skewer.maxim.line1": "The charcoal curled up the taste of the sea. A swim sounds good now.",
   "tooltip.kaleidoscope_grilling.grilled_sweet_potato_sheet_skewer.maxim.line1": "Soft, crisp-edged, and carrying the unmistakable attitude of houttuynia.",
   "tooltip.kaleidoscope_grilling.houttuynia_stir_fried_pork.maxim.line1": "Some hate its bite, others love it with rice. Houttuynia does not care.",
+  "tooltip.kaleidoscope_grilling.marinade": "Marinated: %s",
   "tooltip.kaleidoscope_grilling.mysterious_skewer.maxim.line1": "What is that, and what exactly was being grilled?",
   "tooltip.kaleidoscope_grilling.ordinary_skewer.maxim.line1": "Try it and you may die trying.",
   "tooltip.kaleidoscope_grilling.pepper_honey.maxim.line1": "Eating this... how is it different from chewing an electric wire?",

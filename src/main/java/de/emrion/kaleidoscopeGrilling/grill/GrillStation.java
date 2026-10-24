@@ -41,7 +41,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * <ul>
  *     <li>Light it with flint and steel, extinguish it with a shovel</li>
  *     <li>Put up to 3 raw skewers (or secret skewers with 3 ingredients) on the burning grill</li>
- *     <li>Brush with the oil pot (1 oil per skewer), then turn 4× with an empty hand (1 s pause each)</li>
+ *     <li>Brush with the oil pot (1 oil per skewer) or a marinade drink (1 bottle for all, see {@link Marinades}), then
+ *     turn 4× with an empty hand (1 s pause each)</li>
  *     <li>Cooked: season with special seasoning, then take it off with an empty hand (sneaking: all)</li>
  *     <li>800 ticks without progress: burnt (charred skewer), after another 400 ticks burnt to charcoal</li>
  * </ul>
@@ -77,6 +78,7 @@ public class GrillStation extends Station {
     private final NamespacedKey flipsKey;
     private final NamespacedKey seasonedKey;
     private final NamespacedKey ingredientsKey;
+    private final NamespacedKey marinadeKey;
 
     private boolean lit;
     private final ItemStack[] items = new ItemStack[SLOTS];
@@ -87,6 +89,8 @@ public class GrillStation extends Station {
     private int flipCooldown;
     private boolean seasoned;
     private List<String> seasoning = new ArrayList<>();
+    /** Drink the skewers were brushed with instead of oil, empty = oil */
+    private String marinade = "";
     /** Turning animation: server tick of the last turn */
     private long flipTick = -100;
     private long nextLoop;
@@ -101,6 +105,7 @@ public class GrillStation extends Station {
         flipsKey = new NamespacedKey(base.getNamespace(), "grill_flips");
         seasonedKey = new NamespacedKey(base.getNamespace(), "grill_seasoned");
         ingredientsKey = new NamespacedKey(base.getNamespace(), "grill_seasoning");
+        marinadeKey = new NamespacedKey(base.getNamespace(), "grill_marinade");
     }
 
     public static void init(org.bukkit.plugin.Plugin plugin, Skewers skewers, SkewerRecipes recipes,
@@ -132,6 +137,7 @@ public class GrillStation extends Station {
         flips = state.getOrDefault(flipsKey, PersistentDataType.INTEGER, 0);
         seasoned = state.getOrDefault(seasonedKey, PersistentDataType.BOOLEAN, false);
         seasoning = new ArrayList<>(state.getOrDefault(ingredientsKey, PersistentDataType.LIST.strings(), List.of()));
+        marinade = state.getOrDefault(marinadeKey, PersistentDataType.STRING, "");
     }
 
     @Override
@@ -147,6 +153,7 @@ public class GrillStation extends Station {
         state.set(flipsKey, PersistentDataType.INTEGER, flips);
         state.set(seasonedKey, PersistentDataType.BOOLEAN, seasoned);
         state.set(ingredientsKey, PersistentDataType.LIST.strings(), seasoning);
+        state.set(marinadeKey, PersistentDataType.STRING, marinade);
     }
 
     private boolean isEmpty() {
@@ -178,6 +185,7 @@ public class GrillStation extends Station {
         phase = phaseTicks = flips = flipCooldown = 0;
         seasoned = false;
         seasoning = new ArrayList<>();
+        marinade = "";
     }
 
     // ---- Flow ----
@@ -250,7 +258,7 @@ public class GrillStation extends Station {
     /** Oil pot and seasoning bottle are station items: use them on the grill instead of placing them on top */
     @Override
     public boolean interceptPlacement(Player player, ItemStack held) {
-        if (OilItems.isOilPot(held) || Skewers.is(held, SEASONING)) {
+        if (OilItems.isOilPot(held) || Skewers.is(held, SEASONING) || Marinades.is(held) && phase == 0 && !isEmpty()) {
             return onInteract(player, EquipmentSlot.HAND);
         }
         return false;
@@ -284,6 +292,9 @@ public class GrillStation extends Station {
         }
         if (Skewers.is(held, SEASONING)) {
             return season(player, hand, held);
+        }
+        if (Marinades.is(held) && phase == 0 && !isEmpty()) {
+            return brushMarinade(player, hand, held);
         }
         if (!held.isEmpty() && accepts(held)) {
             if (!lit) {
@@ -338,6 +349,30 @@ public class GrillStation extends Station {
         phaseTicks = 0;
         world().playSound(center(), "kaleidoscope_grilling:grill_flip", SoundCategory.BLOCKS, 0.75f, 1f);
         player.sendActionBar(Lang.raw("message.kaleidoscope_grilling.oiled", needed));
+        changed();
+        return true;
+    }
+
+    /** One bottle of a marinade drink covers all skewers on the grill; the empty bottle comes back */
+    private boolean brushMarinade(Player player, EquipmentSlot hand, ItemStack drink) {
+        Key id = de.emrion.kaleidoscopeCookery.item.CookeryItems.idOf(drink);
+        if (id == null) {
+            return false;
+        }
+        if (player.getGameMode() != GameMode.CREATIVE) {
+            io.papermc.paper.datacomponent.item.UseRemainder remainder = drink.getData(io.papermc.paper.datacomponent.DataComponentTypes.USE_REMAINDER);
+            drink.subtract();
+            if (remainder != null) {
+                for (ItemStack rest : player.getInventory().addItem(remainder.transformInto().clone()).values()) {
+                    world().dropItemNaturally(center(), rest);
+                }
+            }
+        }
+        marinade = id.asString();
+        phase = 1;
+        phaseTicks = 0;
+        world().playSound(center(), "kaleidoscope_grilling:grill_flip", SoundCategory.BLOCKS, 0.75f, 1f);
+        player.sendActionBar(Lang.raw("message.kaleidoscope_grilling.marinated", skewerCount(), Marinades.name(id)));
         changed();
         return true;
     }
@@ -446,6 +481,10 @@ public class GrillStation extends Station {
         }
         if (!seasoning.isEmpty()) {
             output.editPersistentDataContainer(pdc -> pdc.set(seasoningKey, PersistentDataType.LIST.strings(), seasoning));
+        }
+        if (!marinade.isEmpty()) {
+            output.editPersistentDataContainer(pdc -> pdc.set(Marinades.MARINADE, PersistentDataType.STRING, marinade));
+            skewers.cookery().getFoodService().refreshLore(output, world());
         }
         return output;
     }

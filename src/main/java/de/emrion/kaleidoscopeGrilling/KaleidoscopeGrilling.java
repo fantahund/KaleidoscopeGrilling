@@ -56,6 +56,7 @@ public class KaleidoscopeGrilling extends JavaPlugin {
         cookery.getStations().register(de.emrion.kaleidoscopeGrilling.oil.OilPressStation.type(this, oils));
         de.emrion.kaleidoscopeGrilling.grill.GrillStation.init(this, skewers, skewerRecipes, seasonings, oils);
         cookery.getStations().register(de.emrion.kaleidoscopeGrilling.grill.GrillStation.type());
+        de.emrion.kaleidoscopeGrilling.grill.Marinades.register(this, cookery);
         GrillingCookbook.register(cookery, skewerRecipes);
         getLogger().info(skewerRecipes.recipes().size() + " Spieß-Rezepte geladen");
         getLogger().info("Grilling-Addon für KaleidoscopeCookery " + cookery.getPluginMeta().getVersion() + " geladen");
