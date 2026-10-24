@@ -87,8 +87,8 @@ public class SkeweringListener implements Listener {
         Key result = recipes.completedResult(insertedIds);
         ItemStack next;
         if (result != null && skewers.cookery().getItems().get(result) != null) {
+            // No XP here: a skewer can be taken apart again for free, the grill gives the XP
             next = skewers.cookery().getItems().create(result, 1);
-            de.emrion.kaleidoscopeCookery.skill.CookingSkill.award(player, "skewer", 1);
         } else if (inserted.size() >= 3) {
             next = skewers.cookery().getItems().create(Skewers.SECRET, 1);
             skewers.write(next, inserted, variants);
@@ -128,6 +128,10 @@ public class SkeweringListener implements Listener {
     /** SkewerRecipes#canAppend, isConfiguredIngredient or SkewerCompatApi#canSkewer (everything edible) */
     @SuppressWarnings("UnstableApiUsage")
     private boolean canSkewer(ItemStack food, Key id, List<Key> inserted) {
+        // No skewer on a skewer: the ingredients are stored as whole items, nesting would grow them without limit
+        if (skewers.hasIngredients(food)) {
+            return false;
+        }
         if (recipes.canAppend(inserted, id) || recipes.isConfiguredIngredient(id)) {
             return true;
         }

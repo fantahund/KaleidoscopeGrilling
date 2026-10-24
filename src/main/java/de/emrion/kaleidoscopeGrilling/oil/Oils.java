@@ -128,11 +128,23 @@ public final class Oils {
                 org.bukkit.Sound sound = type.equals("premium_chili") ? org.bukkit.Sound.ITEM_BUCKET_EMPTY_LAVA : org.bukkit.Sound.ITEM_BUCKET_EMPTY;
                 pot.world().playSound(pot.center(), sound, org.bukkit.SoundCategory.BLOCKS, 0.9f, 0.8f + 0.5f * pot.oil() / FLUID_CAPACITY);
                 if (player.getGameMode() != org.bukkit.GameMode.CREATIVE) {
-                    player.getInventory().setItemInMainHand(ItemStack.of(org.bukkit.Material.BUCKET));
+                    emptyBucket(player, org.bukkit.inventory.EquipmentSlot.HAND);
                 }
                 return true;
             }
         };
+    }
+
+    /** One full bucket in the hand was poured out: the hand keeps the rest of the stack, the empty bucket comes back */
+    public static void emptyBucket(org.bukkit.entity.Player player, org.bukkit.inventory.EquipmentSlot hand) {
+        ItemStack held = player.getInventory().getItem(hand);
+        ItemStack empty = ItemStack.of(org.bukkit.Material.BUCKET);
+        if (held.getAmount() <= 1) {
+            player.getInventory().setItem(hand, empty);
+            return;
+        }
+        held.subtract();
+        player.getInventory().addItem(empty).values().forEach(left -> player.getWorld().dropItem(player.getLocation(), left));
     }
 
     /** Use oil; when empty the pot becomes a fat pot again */

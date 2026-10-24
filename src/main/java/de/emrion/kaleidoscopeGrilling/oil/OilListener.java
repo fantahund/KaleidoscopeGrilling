@@ -7,7 +7,6 @@ import de.emrion.kaleidoscopeCookery.util.Lang;
 import java.util.List;
 import net.kyori.adventure.key.Key;
 import org.bukkit.GameMode;
-import org.bukkit.Material;
 import org.bukkit.Sound;
 import org.bukkit.SoundCategory;
 import org.bukkit.entity.Player;
@@ -99,7 +98,7 @@ public class OilListener implements Listener {
         Sound sound = type.equals("premium_chili") ? Sound.ITEM_BUCKET_EMPTY_LAVA : Sound.ITEM_BUCKET_EMPTY;
         player.getWorld().playSound(player.getLocation(), sound, SoundCategory.PLAYERS, 0.9f, 0.8f + 0.5f * OilItems.oilCount(pot) / Oils.FLUID_CAPACITY);
         if (player.getGameMode() != GameMode.CREATIVE) {
-            player.getInventory().setItemInMainHand(ItemStack.of(Material.BUCKET));
+            Oils.emptyBucket(player, EquipmentSlot.HAND);
         }
     }
 }

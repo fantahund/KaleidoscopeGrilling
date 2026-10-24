@@ -84,7 +84,8 @@ public class SkewerRecipeBook implements Listener {
 
     private boolean isRecordable(ItemStack stack) {
         Key id = Skewers.idOf(stack);
-        return recipes.isRawSkewer(id) || id.equals(ORDINARY) || id.equals(Skewers.SECRET) && skewers.ingredients(stack).size() == 3;
+        return recipes.isRawSkewer(id) || id.equals(ORDINARY)
+                || id.equals(Skewers.SECRET) && !skewers.isCooked(stack) && skewers.ingredients(stack).size() == 3;
     }
 
     private @Nullable ItemStack record(ItemStack skewer) {
@@ -206,9 +207,13 @@ public class SkewerRecipeBook implements Listener {
         ItemStack output;
         byte[] stored = book.getPersistentDataContainer().get(stackKey, PersistentDataType.BYTE_ARRAY);
         if (stored != null) {
-            output = ItemStack.deserializeBytes(stored).asOne();
-            skewers.setCooked(output, false);
-            skewers.setCreator(output, player);
+            // A fresh raw secret skewer with only the recorded ingredients (no seasoning, marinade or other data of the original)
+            ItemStack recorded = ItemStack.deserializeBytes(stored);
+            output = create(Skewers.SECRET);
+            if (output != null) {
+                skewers.write(output, skewers.ingredients(recorded), skewers.variants(recorded));
+                skewers.setCreator(output, player);
+            }
         } else {
             String result = book.getPersistentDataContainer().get(resultKey, PersistentDataType.STRING);
             output = result == null ? null : create(Key.key(result));

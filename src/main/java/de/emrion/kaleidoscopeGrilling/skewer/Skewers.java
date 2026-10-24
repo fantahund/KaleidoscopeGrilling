@@ -106,6 +106,11 @@ public final class Skewers {
 
     // ---- Data ----
 
+    /** Carries a list of skewered ingredients (unfinished or secret skewer) */
+    public boolean hasIngredients(ItemStack stack) {
+        return stack.getPersistentDataContainer().has(ingredientsKey);
+    }
+
     public List<ItemStack> ingredients(ItemStack skewer) {
         List<byte[]> raw = skewer.getPersistentDataContainer().get(ingredientsKey, PersistentDataType.LIST.byteArrays());
         List<ItemStack> result = new ArrayList<>();

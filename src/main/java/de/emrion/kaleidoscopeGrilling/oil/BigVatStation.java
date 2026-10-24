@@ -125,7 +125,7 @@ public class BigVatStation extends Station {
             } else {
                 pour(player);
                 if (!creative) {
-                    player.getInventory().setItem(hand, ItemStack.of(Material.BUCKET));
+                    Oils.emptyBucket(player, hand);
                 }
             }
             return true;

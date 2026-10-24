@@ -88,6 +88,15 @@ public class OilPressStation extends Station {
         state.set(waitingKey, PersistentDataType.BOOLEAN, waiting);
     }
 
+    /** A press filled up right before the chunk unloaded: finish it now (the short delay is not saved) */
+    @Override
+    protected void onAttached() {
+        if (progress >= REQUIRED && !waiting && completionDelay == 0) {
+            completionDelay = 1;
+            context.manager().updateTicking(this);
+        }
+    }
+
     private void changed() {
         markDirty();
         updateDisplay();

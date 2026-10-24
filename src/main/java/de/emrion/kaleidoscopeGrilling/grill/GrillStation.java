@@ -333,6 +333,10 @@ public class GrillStation extends Station {
     }
 
     private boolean brushOil(Player player, ItemStack pot) {
+        if (!lit) {
+            player.sendActionBar(Lang.raw("message.kaleidoscope_grilling.grill_need_heat"));
+            return true;
+        }
         if (phase != 0 || isEmpty()) {
             player.sendActionBar(Lang.raw("message.kaleidoscope_grilling.no_brushable_skewers"));
             return true;
@@ -355,6 +359,10 @@ public class GrillStation extends Station {
 
     /** One bottle of a marinade drink covers all skewers on the grill; the empty bottle comes back */
     private boolean brushMarinade(Player player, EquipmentSlot hand, ItemStack drink) {
+        if (!lit) {
+            player.sendActionBar(Lang.raw("message.kaleidoscope_grilling.grill_need_heat"));
+            return true;
+        }
         Key id = de.emrion.kaleidoscopeCookery.item.CookeryItems.idOf(drink);
         if (id == null) {
             return false;
@@ -378,6 +386,10 @@ public class GrillStation extends Station {
     }
 
     private boolean season(Player player, EquipmentSlot hand, ItemStack bottle) {
+        if (!lit) {
+            player.sendActionBar(Lang.raw("message.kaleidoscope_grilling.grill_need_heat"));
+            return true;
+        }
         if (phase != 2 || seasoned || isEmpty()) {
             player.sendActionBar(Lang.raw("message.kaleidoscope_grilling.no_seasonable_skewers"));
             return true;
@@ -405,6 +417,11 @@ public class GrillStation extends Station {
     }
 
     private boolean useEmptyHand(Player player) {
+        // Grilling needs the fire: oiling, turning and seasoning only while it burns (taking off works always)
+        if (phase == 1 && !lit) {
+            player.sendActionBar(Lang.raw("message.kaleidoscope_grilling.grill_need_heat"));
+            return true;
+        }
         if (phase == 1) {
             if (flipCooldown > 0) {
                 return true;
