@@ -137,10 +137,13 @@ public class SkewerRecipeBook implements Listener {
     // ---- Use ----
 
     private List<Set<Key>> slots(ItemStack book) {
-        byte[] stored = book.getPersistentDataContainer().get(stackKey, PersistentDataType.BYTE_ARRAY);
-        if (stored != null) {
+        if (book.getPersistentDataContainer().has(stackKey)) {
+            ItemStack recorded = storedSkewer(book);
             List<Set<Key>> slots = new ArrayList<>();
-            for (Key ingredient : skewers.ingredientIds(ItemStack.deserializeBytes(stored))) {
+            if (recorded == null) {
+                return slots;
+            }
+            for (Key ingredient : skewers.ingredientIds(recorded)) {
                 slots.add(Set.of(ingredient));
             }
             return slots;
@@ -205,18 +208,17 @@ public class SkewerRecipeBook implements Listener {
             stick.subtract();
         }
         ItemStack output;
-        byte[] stored = book.getPersistentDataContainer().get(stackKey, PersistentDataType.BYTE_ARRAY);
-        if (stored != null) {
+        if (book.getPersistentDataContainer().has(stackKey)) {
             // A fresh raw secret skewer with only the recorded ingredients (no seasoning, marinade or other data of the original)
-            ItemStack recorded = ItemStack.deserializeBytes(stored);
-            output = create(Skewers.SECRET);
+            ItemStack recorded = storedSkewer(book);
+            output = recorded == null ? null : create(Skewers.SECRET);
             if (output != null) {
                 skewers.write(output, skewers.ingredients(recorded), skewers.variants(recorded));
                 skewers.setCreator(output, player);
             }
         } else {
             String result = book.getPersistentDataContainer().get(resultKey, PersistentDataType.STRING);
-            output = result == null ? null : create(Key.key(result));
+            output = result == null || !Key.parseable(result) ? null : create(Key.key(result));
         }
         if (output != null) {
             giveBack(player, output);
@@ -234,12 +236,21 @@ public class SkewerRecipeBook implements Listener {
 
     /** Recorded skewer for display (raw skewer or secret skewer), otherwise null */
     @Nullable ItemStack recordedStack(ItemStack book) {
-        byte[] stored = book.getPersistentDataContainer().get(stackKey, PersistentDataType.BYTE_ARRAY);
-        if (stored != null) {
-            return ItemStack.deserializeBytes(stored);
+        if (book.getPersistentDataContainer().has(stackKey)) {
+            return storedSkewer(book);
         }
         String result = book.getPersistentDataContainer().get(resultKey, PersistentDataType.STRING);
-        return result == null ? null : create(Key.key(result));
+        return result == null || !Key.parseable(result) ? null : create(Key.key(result));
+    }
+
+    /** The recorded secret skewer, null if its data is damaged (edited book) */
+    private @Nullable ItemStack storedSkewer(ItemStack book) {
+        byte[] stored = book.getPersistentDataContainer().get(stackKey, PersistentDataType.BYTE_ARRAY);
+        try {
+            return stored == null ? null : ItemStack.deserializeBytes(stored);
+        } catch (RuntimeException e) {
+            return null;
+        }
     }
 
     /** SkewerRecipeBookItem#useOn: hang a written recipe on the side of a block */

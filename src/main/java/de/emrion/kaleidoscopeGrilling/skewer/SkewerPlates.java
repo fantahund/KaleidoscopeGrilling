@@ -61,7 +61,11 @@ public class SkewerPlates implements Listener {
     public List<ItemStack> read(ItemStack plate) {
         List<ItemStack> result = new ArrayList<>();
         for (byte[] bytes : plate.getPersistentDataContainer().getOrDefault(key, PersistentDataType.LIST.byteArrays(), List.of())) {
-            result.add(ItemStack.deserializeBytes(bytes));
+            try {
+                result.add(ItemStack.deserializeBytes(bytes));
+            } catch (RuntimeException ignored) {
+                // damaged entry (edited plate): skip it
+            }
         }
         return result;
     }

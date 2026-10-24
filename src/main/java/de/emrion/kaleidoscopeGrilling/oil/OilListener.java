@@ -66,7 +66,9 @@ public class OilListener implements Listener {
                 // back into the slot after the ingredients are consumed (like getRemainingItems), otherwise into the inventory
                 oils.cookery().getServer().getScheduler().runTask(oils.cookery(), () -> {
                     ItemStack[] now = inventory.getMatrix();
-                    if (now[index] == null || now[index].isEmpty()) {
+                    // The crafting table may have been closed in between: then the grid is gone, the pot goes to the player
+                    boolean open = event.getWhoClicked().getOpenInventory().getTopInventory().equals(inventory);
+                    if (open && (now[index] == null || now[index].isEmpty())) {
                         now[index] = rest;
                         inventory.setMatrix(now);
                     } else if (event.getWhoClicked() instanceof Player player) {

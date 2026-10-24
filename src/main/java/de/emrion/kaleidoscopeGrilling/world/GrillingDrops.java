@@ -48,7 +48,8 @@ public class GrillingDrops implements Listener {
         });
     }
 
-    @EventHandler(priority = EventPriority.HIGH)
+    // ignoreCancelled: a protection plugin that denied the click also denies the powder
+    @EventHandler(priority = EventPriority.HIGH, ignoreCancelled = true)
     public void onDragonEgg(org.bukkit.event.player.PlayerInteractEvent event) {
         if (event.getAction() != org.bukkit.event.block.Action.RIGHT_CLICK_BLOCK || event.getHand() != EquipmentSlot.HAND
                 || event.getClickedBlock() == null || event.getClickedBlock().getType() != Material.DRAGON_EGG) {
