@@ -88,10 +88,10 @@ public class SkewerPlates implements Listener {
         plate.setData(DataComponentTypes.CONSUMABLE, Consumable.consumable().consumeSeconds(0.8f).animation(ItemUseAnimation.EAT).build());
         List<Component> lore = new ArrayList<>();
         lore.add(Text.noItalic(Lang.raw("tooltip.kaleidoscope_grilling.skewer_plate.count", skewers.size(), SkewerPlateStation.CAPACITY).color(NamedTextColor.GRAY)));
-        lore.add(Text.noItalic(Lang.raw("tooltip.kaleidoscope_grilling.skewer_plate.use").color(NamedTextColor.YELLOW)));
-        lore.add(Text.noItalic(Lang.raw("tooltip.kaleidoscope_grilling.skewer_plate.place").color(NamedTextColor.DARK_GRAY)));
+        Lang.lines("tooltip.kaleidoscope_grilling.skewer_plate.use").forEach(line -> lore.add(Text.noItalic(line.color(NamedTextColor.YELLOW))));
+        Lang.lines("tooltip.kaleidoscope_grilling.skewer_plate.place").forEach(line -> lore.add(Text.noItalic(line.color(NamedTextColor.DARK_GRAY))));
         if (!skewers.isEmpty()) {
-            lore.add(Text.noItalic(Lang.raw("tooltip.kaleidoscope_grilling.skewer_plate.contents").color(NamedTextColor.DARK_GRAY)));
+            Lang.lines("tooltip.kaleidoscope_grilling.skewer_plate.contents").forEach(line -> lore.add(Text.noItalic(line.color(NamedTextColor.DARK_GRAY))));
             for (ItemStack skewer : skewers) {
                 lore.add(Text.noItalic(Component.text("- ").append(skewer.effectiveName()).color(NamedTextColor.DARK_GRAY)));
             }

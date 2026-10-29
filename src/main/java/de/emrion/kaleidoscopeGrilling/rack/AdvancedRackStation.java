@@ -110,8 +110,7 @@ public class AdvancedRackStation extends Station implements PlacedFromItem, Inve
         if (rack != null && java.util.Arrays.stream(items).anyMatch(i -> i != null && !i.isEmpty())) {
             rack.editPersistentDataContainer(pdc -> pdc.set(itemsKey, PersistentDataType.LIST.byteArrays(), serialized()));
             List<net.kyori.adventure.text.Component> lore = new ArrayList<>();
-            lore.add(de.emrion.kaleidoscopeCookery.util.Text.noItalic(Lang.raw("tooltip.kaleidoscope_grilling.advanced_rack.saved_contents")
-                    .color(net.kyori.adventure.text.format.NamedTextColor.GRAY)));
+            Lang.lines("tooltip.kaleidoscope_grilling.advanced_rack.saved_contents").forEach(line -> lore.add(de.emrion.kaleidoscopeCookery.util.Text.noItalic(line.color(net.kyori.adventure.text.format.NamedTextColor.GRAY))));
             for (ItemStack item : items) {
                 if (item != null && !item.isEmpty()) {
                     lore.add(de.emrion.kaleidoscopeCookery.util.Text.noItalic(net.kyori.adventure.text.Component.text("- " + item.getAmount() + "× ")

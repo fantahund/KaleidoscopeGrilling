@@ -266,19 +266,19 @@ public final class Skewers {
             lines.add(Text.noItalic(Component.text("- ").append(ingredient.effectiveName()).color(NamedTextColor.GRAY)));
         }
         if (id.equals(UNFINISHED)) {
-            lines.add(Text.noItalic(Lang.raw("tooltip.kaleidoscope_grilling.skewer_remove_last").color(NamedTextColor.DARK_GRAY)));
+            Lang.lines("tooltip.kaleidoscope_grilling.skewer_remove_last").forEach(line -> lines.add(Text.noItalic(line.color(NamedTextColor.DARK_GRAY))));
             return lines;
         }
         String creator = creator(skewer);
-        lines.add(Lang.raw("tooltip.kaleidoscope_grilling.secret_skewer.creator_story",
+        Lang.lines("tooltip.kaleidoscope_grilling.secret_skewer.creator_story",
                         creator == null ? Lang.raw("tooltip.kaleidoscope_grilling.secret_skewer.someone") : Component.text(creator))
-                .color(NamedTextColor.DARK_GRAY).decoration(TextDecoration.ITALIC, true));
+                .forEach(line -> lines.add(line.color(NamedTextColor.DARK_GRAY).decoration(TextDecoration.ITALIC, true)));
         lines.add(Component.empty());
         boolean cooked = isCooked(skewer);
         lines.add(Text.noItalic(Lang.raw(cooked ? "tooltip.kaleidoscope_grilling.secret_skewer.cooked" : "tooltip.kaleidoscope_grilling.secret_skewer.raw")
                 .color(cooked ? NamedTextColor.GOLD : NamedTextColor.DARK_GRAY)));
         if (ingredients.stream().map(Skewers::idOf).distinct().count() < ingredients.size()) {
-            lines.add(Text.noItalic(Lang.raw("tooltip.kaleidoscope_grilling.secret_skewer.duplicate_penalty").color(NamedTextColor.DARK_GRAY)));
+            Lang.lines("tooltip.kaleidoscope_grilling.secret_skewer.duplicate_penalty").forEach(line -> lines.add(Text.noItalic(line.color(NamedTextColor.DARK_GRAY))));
         }
         return lines;
     }

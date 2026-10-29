@@ -112,7 +112,7 @@ public class SkewerRecipeBook implements Listener {
             lore.add(Text.noItalic(Component.text("- ").append(shown == null ? Component.text(slot.iterator().next().asString()) : shown.effectiveName())
                     .color(NamedTextColor.GRAY)));
         }
-        lore.add(Text.noItalic(Lang.raw("tooltip.kaleidoscope_grilling.recipe_book.usage").color(NamedTextColor.GRAY)));
+        Lang.lines("tooltip.kaleidoscope_grilling.recipe_book.usage").forEach(line -> lore.add(Text.noItalic(line.color(NamedTextColor.GRAY))));
         book.setData(DataComponentTypes.LORE, ItemLore.lore(lore));
         return book;
     }
