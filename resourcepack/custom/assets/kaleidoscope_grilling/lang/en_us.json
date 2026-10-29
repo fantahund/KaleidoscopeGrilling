@@ -1,5 +1,11 @@
 {
-  "message.kaleidoscope_grilling.marinated": "Brushed %s skewers with %s - now turn them",
+  "hud.kaleidoscope_grilling.grill.seasoning.none": "Not seasoned · takeout locked",
+  "hud.kaleidoscope_grilling.grill.state.2": "Cooked · season it",
+  "message.kaleidoscope_grilling.grill_need_heat": "Light the grill charcoal first",
+  "message.kaleidoscope_grilling.marinated": "Brushed %s skewers with %s - flip them",
+  "message.kaleidoscope_grilling.press_need_full_batch": "Load all 4 oil cakes first (%s/%s)",
+  "message.kaleidoscope_grilling.press_no_vat": "No vat nearby for canola oil; progress kept",
+  "message.kaleidoscope_grilling.press_vat_full": "Nearby vat is full; progress kept",
   "tooltip.kaleidoscope_grilling.braised_chicken_wings.maxim.line1": "You will not discard the bones before savoring them three times.",
   "tooltip.kaleidoscope_grilling.cold_houttuynia.maxim.line1": "One bite and the houttuynia slaps your soul awake.",
   "tooltip.kaleidoscope_grilling.dark_grilling.maxim.line1": "Oh, it tastes so good! Yuck.",
